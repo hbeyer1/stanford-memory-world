@@ -1,0 +1,17 @@
+{
+ "name": "stanford-volleyball",
+ "photo": "IMG_20260623_191104805.jpg (4080x3072, no orientation tag)",
+ "gps": [37.430108, -122.157375],
+ "taken": "2026-06-23 19:11:04",
+ "utc_offset": "-07:00",
+ "sun": {"azimuth_deg": 289.0, "elevation_deg": 14.0},
+ "crop_box": [0, 340, 4080, 2635],
+ "heading_deg": 136,
+ "heading_from": "no EXIF heading; NAIP: the spot is on the NW long edge of the sand courts (long axis ~46 deg), facing across them to the scoreboard; the sun at 289 deg is behind-right and the shadows fall forward-left",
+ "pitch_deg": 4.2,
+ "roll_deg": 0.15,
+ "roll_from": "light poles lean -0.58 / 0.00 / +1.02 deg (left, centre, right): `roll` gives their mean, 0.15",
+ "camera_height_m": 1.5,
+ "approach": {"frames": 10, "start_alt_m": 450, "start_pitch_deg": -70, "pitch_curve": 1.4, "min_glide_deg": 15},
+ "pass_by": {"subject_m": 10, "degrees": [-25, 25]}
+}

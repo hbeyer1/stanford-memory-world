@@ -1,0 +1,17 @@
+{
+ "name": "stanford-main-quad",
+ "photo": "Main Quad east entrance, iPhone 15 rear ultra-wide (3024x4032 portrait upright)",
+ "gps": [37.427094, -122.168633],
+ "taken": "2026-10-12 17:19:37",
+ "utc_offset": "-07:00",
+ "sun": {"azimuth_deg": 248.9, "elevation_deg": 13.7},
+ "crop_box": [0, 1250, 3024, 2951],
+ "heading_deg": 285,
+ "heading_from": "EXIF heading 9.3 deg is wrong; NAIP: the palm-lined east entrance walk starts at the spot and runs 284.8 deg, the quad's building edges ~286; the sun 36 deg left of centre fits the lit right arcade",
+ "pitch_deg": -11,
+ "roll_deg": -1.1,
+ "camera_height_m": 1.5,
+ "approach": {"frames": 10, "start_alt_m": 450, "start_pitch_deg": -70, "pitch_curve": 1.4, "min_glide_deg": 15},
+ "pass_by": {"subject_m": 10, "degrees": [-20, 20]},
+ "crane": {"frames": 6, "top_m": 30, "glide_deg": 38, "look_ahead_m": 5}
+}
