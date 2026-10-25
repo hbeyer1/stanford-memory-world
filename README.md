@@ -45,10 +45,10 @@ Any static web server works; `serve.py` only adds the right type for `.ply` file
 - `journeys/stanford/`: `journey.json` (the camera path and its segments), `world.json` (where each point cloud sits),
   `frames/` (the views with their depth, 960 × 540, log depth in 16 bits), `clouds/lite/` (the ground and the map as `.ply` point clouds, the volleyball cloud as `.spz`),
   `alignment-volleyball.json` (per-view depth corrections).
-- `vendor/`: three.js, Spark and lil-gui.
+- `vendor/`: three.js and Spark.
 
 ## Licence
 
 The code is MIT licensed (see `LICENSE`). The photo and the generated views are © the author and not licensed for
 reuse. USGS data is public domain. Vendored libraries keep their own licences: [three.js](https://github.com/mrdoob/three.js)
-(MIT), [Spark](https://github.com/sparkjsdev/spark) (MIT), [lil-gui](https://github.com/georgealways/lil-gui) (MIT).
+(MIT), [Spark](https://github.com/sparkjsdev/spark) (MIT).

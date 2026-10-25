@@ -3,66 +3,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Memory Dream</title>
+  <title>Stanford · a memory world</title>
   <style>
     html, body { margin: 0; height: 100%; background: #07080c; color: #ecebf2; font: 13px/1.45 -apple-system, system-ui, sans-serif; overflow: hidden; }
     canvas { display: block; touch-action: none; cursor: crosshair; }
-    #caption { position: fixed; left: 0; right: 0; top: 38%; text-align: center; pointer-events: none;
-               font: 300 26px/1.3 "Helvetica Neue", -apple-system, sans-serif; letter-spacing: 0.08em; opacity: 0;
-               transition: opacity 1.6s ease; text-shadow: 0 0 24px #000a; }
-    #caption small { display: block; font-size: 13px; letter-spacing: 0.3em; opacity: 0.7; margin-top: 6px; text-transform: uppercase; }
-    #timeline { position: fixed; left: 18px; right: 18px; bottom: 16px; height: 30px; cursor: pointer; opacity: 0.55; transition: opacity 0.4s; }
-    #timeline:hover { opacity: 1; }
-    #track { position: absolute; left: 0; right: 0; top: 14px; height: 3px; display: flex; gap: 3px; }
-    #track div { height: 100%; border-radius: 2px; }
-    #head { position: absolute; top: 9px; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: #fff; box-shadow: 0 0 12px #fff; }
-    #segnames { position: absolute; left: 0; right: 0; top: -2px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; pointer-events: none; text-shadow: 0 0 6px #000c, 0 0 2px #0008; }
-    #segnames span { position: absolute; white-space: nowrap; }
-    #help { position: fixed; left: 18px; top: 14px; font-size: 11px; opacity: 0.55; letter-spacing: 0.02em; text-shadow: 0 0 6px #000c, 0 0 2px #0008; }
+    #caption { display: none; }
+    /* liquid glass: a blurred, brightened view of what lies beneath, a bright rim (light catching the edge from the top
+       left), a soft specular sheen; in Chromium the edges also bend what they show (url(#lg), a lens displacement) */
+    .glass { position: relative; isolation: isolate; color: #fff; border-radius: 999px;
+             background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05) 42%, rgba(255, 255, 255, 0.09)),
+                         rgba(18, 22, 30, 0.16);   /* a faint shade keeps white text legible over sunlit sand */
+             -webkit-backdrop-filter: blur(12px) saturate(175%) brightness(1.06); backdrop-filter: blur(12px) saturate(175%) brightness(1.06);
+             box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.55), inset 0 -0.5px 1px rgba(255, 255, 255, 0.22), inset 0 0 14px rgba(255, 255, 255, 0.07),
+                         0 8px 26px rgba(0, 0, 0, 0.26), 0 1px 3px rgba(0, 0, 0, 0.18); }
+    .refract .glass { backdrop-filter: url(#lg) blur(7px) saturate(175%) brightness(1.06); }
+    .glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: -1;
+                     background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.12) 30%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.4) 100%);
+                     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+    .glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+                    background: radial-gradient(120% 90% at 18% -10%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 55%),
+                                radial-gradient(80% 60% at 90% 120%, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 60%); }
+    #loc { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px;
+           padding: 8px 18px 11px 14px; min-width: 230px; cursor: pointer; transition: opacity 0.6s; }
+    #locdot { width: 9px; height: 9px; border-radius: 50%; flex: none; box-shadow: 0 0 10px currentColor; transition: background 1.2s, color 1.2s; }
+    #loctext { position: relative; flex: 1; height: 32px; }
+    #loctext span { position: absolute; left: 0; top: 0; white-space: nowrap; transition: opacity 1.1s ease, transform 1.1s ease; }
+    #loctext b { display: block; font: 500 13.5px/1.25 -apple-system, "SF Pro Text", system-ui, sans-serif; letter-spacing: 0.01em; text-shadow: 0 1px 6px #0006; }
+    #loctext small { display: block; font-size: 11px; opacity: 0.78; letter-spacing: 0.02em; text-shadow: 0 1px 6px #0006; }
+    #loctext span.out { opacity: 0; transform: translateY(-4px); }
+    #loctext span.pre { opacity: 0; transform: translateY(4px); transition: none; }
+    #timeline { position: absolute; left: 16px; right: 16px; bottom: 5px; height: 10px; }
+    #track { position: absolute; left: 0; right: 0; top: 4px; height: 2px; display: flex; gap: 2px; opacity: 0.5; }
+    #track div { height: 100%; border-radius: 1px; }
+    #head { position: absolute; top: 2px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; }
+    #help { position: fixed; left: 18px; top: 14px; font-size: 11px; opacity: 0.5; letter-spacing: 0.02em; text-shadow: 0 0 6px #000c, 0 0 2px #0008; transition: opacity 1.5s; }
+    #help.quiet { opacity: 0; }
+    #help:hover { opacity: 0.8; }
     #help b { color: #fff; font-weight: 600; }
     #help a { color: #b9d4ff; }
-    #status { position: fixed; right: 18px; bottom: 46px; font-size: 11px; opacity: 0.5; font-variant-numeric: tabular-nums; text-shadow: 0 0 6px #000c; }
-    #map { position: fixed; left: 18px; bottom: 58px; width: 128px; pointer-events: none; display: none; padding: 8px 9px 7px;
-           background: rgba(8, 10, 16, 0.5); border-radius: 10px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    #status { position: fixed; right: 18px; bottom: 26px; font-size: 11px; opacity: 0.5; font-variant-numeric: tabular-nums; text-shadow: 0 0 6px #000c; }
+    #map { position: fixed; left: 18px; bottom: 18px; width: 84px; pointer-events: none; display: none; padding: 9px 10px 8px; border-radius: 18px; transition: opacity 0.8s; }
     #map svg { width: 100%; height: auto; overflow: visible; }
-    #map .when { font-size: 10.5px; line-height: 1.35; letter-spacing: 0.03em; margin-top: 5px; opacity: 0.92; }
-    #journeys a { color: #b9d4ff; }
+    #map .when { display: none; }
     #places { position: fixed; inset: 0; pointer-events: none; }
-    #places button { position: absolute; transform: translate(-6px, -50%); pointer-events: auto; cursor: pointer; display: none;
-                     background: rgba(8, 10, 16, 0.55); color: #ecebf2; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 14px;
-                     padding: 4px 10px 4px 8px; font: 12px/1.3 -apple-system, system-ui, sans-serif; text-align: left; white-space: nowrap;
-                     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: background 0.2s; }
-    #places button:hover { background: rgba(30, 36, 50, 0.8); }
-    #places button i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: -1px; box-shadow: 0 0 10px currentColor; }
-    #places button small { display: block; opacity: 0.7; font-size: 10.5px; margin-left: 16px; }
-    #maphint { position: fixed; left: 50%; bottom: 60px; transform: translateX(-50%); font-size: 12px; opacity: 0; transition: opacity 0.6s;
+    /* the stations: small glass boxes standing over each memory's spot, a pin of light down to it */
+    .station { position: absolute; left: 0; top: 0; pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 8px;
+               padding: 6px 13px 7px 10px; border: 0; border-radius: 16px; font: 12px/1.25 -apple-system, "SF Pro Text", system-ui, sans-serif;
+               text-align: left; white-space: nowrap; opacity: 0; will-change: transform, opacity; transition: opacity 0.7s ease, box-shadow 0.3s; }
+    .station.on { opacity: 1; }
+    .station:hover { box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.7), inset 0 0 18px rgba(255, 255, 255, 0.14), 0 10px 30px rgba(0, 0, 0, 0.3); }
+    .station i { width: 8px; height: 8px; border-radius: 50%; flex: none; box-shadow: 0 0 8px currentColor; }
+    .station b { display: block; font-weight: 500; text-shadow: 0 1px 5px #0006; }
+    .station small { display: block; font-size: 10.5px; opacity: 0.75; text-shadow: 0 1px 5px #0006; }
+    .station .pin { position: absolute; left: 50%; top: 100%; width: 1px; height: 18px; margin-left: -0.5px;
+                    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)); pointer-events: none; }
+    .station .pin::after { content: ""; position: absolute; left: -2.5px; bottom: -3px; width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; }
+    .station.here { box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.75), inset 0 0 16px rgba(255, 255, 255, 0.12), 0 8px 26px rgba(0, 0, 0, 0.26); }
+    #maphint { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); font-size: 12px; opacity: 0; transition: opacity 0.6s;
                pointer-events: none; text-shadow: 0 0 6px #000c; letter-spacing: 0.03em; }
-    #journeys b { color: #fff; }
-    .lil-gui.root { --width: 250px; max-height: calc(100vh - 80px); overflow-y: auto; opacity: 0.92; }
   </style>
   <script type="importmap">
     {
       "imports": {
         "three": "./vendor/three/build/three.module.js",
         "three/addons/": "./vendor/three/examples/jsm/",
-        "@sparkjsdev/spark": "./vendor/spark/spark.module.js",
-        "lil-gui": "./vendor/lil-gui/lil-gui.esm.min.js"
+        "@sparkjsdev/spark": "./vendor/spark/spark.module.js"
       }
     }
   </script>
 </head>
 <body>
-  <div id="help"><b>scroll</b> or <b>← →</b> move through time · <b>space</b> drift on · <b>drag</b> look · <b>WASD</b> wander · move the cursor to touch the memory · <span id="journeys"></span></div>
-  <div id="map"></div>
+  <div id="help"><b>space</b> play · <b>scroll</b> or <b>← →</b> move through time · <b>drag</b> look around · <b>W A S D</b> walk</div>
+  <div id="map" class="glass"></div>
   <div id="places"></div>
-  <div id="maphint">click the memory · or press 1</div>
+  <div id="maphint">choose a memory</div>
   <div id="caption"></div>
   <div id="status"></div>
-  <div id="timeline"><div id="segnames"></div><div id="track"></div><div id="head"></div></div>
+  <div id="loc" class="glass"><i id="locdot"></i><div id="loctext"></div><div id="timeline"><div id="track"></div><div id="head"></div></div></div>
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="lg" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage id="lgmap" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map"/>
+      <feDisplacementMap in="SourceGraphic" in2="map" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
   <script type="module">
     import * as THREE from "three";
     import { SparkRenderer, SplatMesh, PackedSplats, dyno } from "@sparkjsdev/spark";
-    import GUI from "lil-gui";
     import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
     import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
     import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
@@ -76,24 +102,18 @@
     const [world, journey, manifest, enc, liteIndex] = await Promise.all([
       get("world.json"), get("journey.json"), get("frames/frames.json"), get("frames/encoding.json"), get("clouds/lite/index.json")]);
     if (journey.title) document.title = journey.title;
-    document.getElementById("journeys").innerHTML = [["stanford", "Stanford"]]
-      .map(([j, label]) => j === JOURNEY ? `<b>${label}</b>` : `<a href="dream.html?journey=${j}">${label}</a>`).join(" / ");
     const statusEl = document.getElementById("status");
 
     // ---------------------------------------------------------------- settings
     const DEFAULTS = {
-      density: 0.85, detail: 0.7, discSize: 1.0, wobble: 0.3, fray: 0.7,
-      afterimage: 1.4, focus: 0.45, curvature: 0.4, curveVideo: 0.3,
-      ripple: 0.8, dust: 0.5, glow: 0.65, grain: 0.35, vignette: 0.55, vignetteTone: "memory haze", worldGlow: 0.6, parallax: 0.5,
+      density: 0.85, detail: 0.7, discSize: 1.0, wobble: 0.3, fray: 0.5,
+      afterimage: 0.7, focus: 0.45, curvature: 0.4, curveVideo: 0.3,
+      ripple: 0.8, dust: 0.3, glow: 0.65, grain: 0.35, vignette: 0.55, vignetteTone: "memory haze", worldGlow: 0.6, parallax: 0.5,
       nightCity: 0.85, terrain: 0.6, periphery: 1, worldAround: 1,
       playSpeed: 1, scrubSpeed: 2.5, settingsVersion: 2, springBack: true, resolution: 1.25,
     };
-    const STORAGE = "memory-dream-settings";
-    let saved = {};
-    try { saved = JSON.parse(localStorage.getItem(STORAGE) || "{}"); } catch {}
-    if ((saved.settingsVersion || 0) < 2) delete saved.scrubSpeed;   // arrow speed default changed (7 -> 2.5 frames/s)
-    const params = { ...DEFAULTS, ...saved, settingsVersion: DEFAULTS.settingsVersion };
-    const save = () => { try { localStorage.setItem(STORAGE, JSON.stringify(params)); } catch {} };
+    const params = { ...DEFAULTS };
+    const save = () => {};
 
     // ---------------------------------------------------------------- renderer, sky, post
     const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
@@ -563,7 +583,7 @@
           slots.push({ cam: c, dur: 1 / seg.fps, sources });
         });
       }
-      const meta = SEGMENTS[key] || { title: seg.title, sub: seg.sub, color: seg.color, day: seg.day, scene: seg.scene, gap: seg.kind === "gap" };
+      const meta = SEGMENTS[key] || { title: seg.title, sub: seg.sub, color: seg.color, day: seg.day, scene: seg.scene, gap: seg.kind === "gap", name: seg.name };
       if (seg.continues && segRanges.length) segRanges.at(-1).end = slots.length;   // same memory, slower
       else segRanges.push({ start, end: slots.length, ...meta });
     }
@@ -608,7 +628,7 @@
         <path d="${line(journey.map.coast)}" fill="none" stroke="#9fb4d0" stroke-opacity="0.55" stroke-width="1.2"/>
         <path d="${line(journey.map.bay || [])}" fill="none" stroke="#9fb4d0" stroke-opacity="0.4" stroke-width="1"/>
         <path d="M${route.map((q) => q.map((v) => v.toFixed(1)).join(" ")).join(" L")}" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-dasharray="3 3"/>
-        ${pl.map((p, i) => `<circle cx="${route[i][0].toFixed(1)}" cy="${route[i][1].toFixed(1)}" r="3.2" fill="${p.color}"/><text x="${(route[i][0] + (p.label === "left" ? -5 : 5)).toFixed(1)}" y="${(route[i][1] + 3).toFixed(1)}" font-size="8.5" fill="#ecebf2" opacity="0.9" text-anchor="${p.label === "left" ? "end" : "start"}">${p.name}</text>`).join("")}
+        ${pl.map((p, i) => `<circle cx="${route[i][0].toFixed(1)}" cy="${route[i][1].toFixed(1)}" r="3.2" fill="${p.color}"/>`).join("")}
         <circle id="mapdot" r="4.2" fill="#fff" stroke="#000" stroke-opacity="0.5"/>
       </svg><div class="when"></div>`;
       mapEl.style.display = "block";
@@ -638,53 +658,89 @@
     // ---------------------------------------------------------------- places on the map (choose a memory)
     const placesEl = document.getElementById("places"), hintEl = document.getElementById("maphint");
     const placeBtns = [];
+    // the lens of the glass (Chromium): near the rim it shows what lies a little further in, as a thick pane bends light
+    if (navigator.userAgentData?.brands?.some((b) => b.brand === "Chromium")) {
+      const W = 240, H = 64, c = document.createElement("canvas"); c.width = W; c.height = H;
+      const g = c.getContext("2d"), im = g.createImageData(W, H), R = H / 2;
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const cx = THREE.MathUtils.clamp(x + 0.5, R, W - R), cy = H / 2, dx = x + 0.5 - cx, dy = y + 0.5 - cy, d = Math.hypot(dx, dy) || 1;
+        const s = Math.pow(1 - THREE.MathUtils.smoothstep(R - d, 0, R * 0.55), 2);   // 1 at the rim, 0 in the middle
+        const o = 4 * (y * W + x);
+        im.data[o] = 128 - 127 * s * (dx / d); im.data[o + 1] = 128 - 127 * s * (dy / d); im.data[o + 2] = 128; im.data[o + 3] = 255;
+      }
+      g.putImageData(im, 0, 0);
+      document.getElementById("lgmap").setAttribute("href", c.toDataURL());
+      document.body.classList.add("refract");
+    }
+    const short = (sub) => (sub || "").split(" · ").slice(0, 2).join(" · ");   // "Tue 23 June · 19:11"
     (journey.map?.places || []).forEach((pl, i) => {
       if (!pl.world || !(pl.scene in firstSlotOf)) return;
       const b = document.createElement("button");
-      b.innerHTML = `<i style="background:${pl.color};color:${pl.color}"></i>${i + 1} · ${pl.name}<small>${pl.sub}</small>`;
+      b.className = "station glass";
+      b.innerHTML = `<i style="background:${pl.color};color:${pl.color}"></i><span><b>${pl.name}</b><small>${short(pl.sub)}</small></span><span class="pin"></span>`;
       b.addEventListener("pointerdown", (e) => e.stopPropagation());
       b.addEventListener("click", (e) => { e.stopPropagation(); travelTo(firstSlotOf[pl.scene]); });
       placesEl.appendChild(b);
-      placeBtns.push({ b, pos: new THREE.Vector3().fromArray(pl.world) });
+      placeBtns.push({ b, pos: new THREE.Vector3().fromArray(pl.world), scene: pl.scene, x: 0, y: 0 });
     });
     const projV = new THREE.Vector3();
     function updatePlaces(alt) {
-      const show = placeBtns.length && alt > 12000;
+      // over the campus (well above the views of a memory) and over the map; not down in a memory or while looking around in it
+      const above = alt - (world.places?.[segOf(Math.min(Math.floor(t), N - 1)).scene]?.offset[1] ?? 30);
+      const show = placeBtns.length && (above > 160 || !!travel) && walkIn < 0.5;
+      const here = segOf(Math.min(Math.floor(t), N - 1)).scene;
       const shown = [];
       for (const pb of placeBtns) {
-        pb.b.style.display = "none";
-        if (!show) continue;
-        projV.copy(pb.pos); projV.y *= MAPU.exag.value;   // on the (exaggerated) map surface
+        projV.copy(pb.pos); if (alt > 12000) projV.y *= MAPU.exag.value;   // on the (exaggerated) map surface
         projV.project(camera);
-        if (projV.z > 1 || projV.z < -1 || Math.abs(projV.x) > 1.05 || Math.abs(projV.y) > 1.05) continue;
+        const vis = show && projV.z < 1 && projV.z > -1 && Math.abs(projV.x) < 1.02 && Math.abs(projV.y) < 1.02;
+        pb.b.classList.toggle("on", vis);
+        pb.b.classList.toggle("here", pb.scene === here);
+        pb.b.style.pointerEvents = vis ? "auto" : "none";
+        if (!vis) continue;
         shown.push({ pb, x: (projV.x * 0.5 + 0.5) * innerWidth, y: (-projV.y * 0.5 + 0.5) * innerHeight });
       }
-      shown.sort((a, b) => a.y - b.y);
-      for (let i = 0; i < shown.length; i++)   // nudge overlapping labels apart (places a few km apart)
+      shown.sort((a, b) => b.y - a.y);
+      for (let i = 0; i < shown.length; i++)   // stations close together (on the map) stack upward
         for (let j = 0; j < i; j++)
-          if (Math.abs(shown[i].x - shown[j].x) < 170 && Math.abs(shown[i].y - shown[j].y) < 40) shown[i].y = shown[j].y + 42;
-      for (const v of shown) { v.pb.b.style.display = "block"; v.pb.b.style.left = `${v.x}px`; v.pb.b.style.top = `${v.y}px`; }
+          if (Math.abs(shown[i].x - shown[j].x) < 170 && Math.abs(shown[i].y - shown[j].y) < 46) shown[i].y = shown[j].y - 48;
+      for (const v of shown) {   // glide, never jump (the stacking changes as the view moves)
+        const pb = v.pb, k = pb.b.classList.contains("on") && pb.x ? 0.35 : 1;
+        pb.x += (v.x - pb.x) * k; pb.y += (v.y - pb.y) * k;
+        pb.b.style.transform = `translate(${(pb.x - pb.b.offsetWidth / 2).toFixed(1)}px, ${(pb.y - pb.b.offsetHeight - 20).toFixed(1)}px)`;
+      }
       hintEl.style.opacity = shown.length && alt > 300000 && !travel ? 0.8 : 0;
-      mapEl.style.opacity = alt > 12000 ? 0 : 1;   // above that the real map has the labels
+      mapEl.style.opacity = alt > 12000 || !show ? 0 : 0.95;   // above, the real map has the labels; down in a memory, the memory alone
     }
-    if (journey.map?.places) document.getElementById("help").insertAdjacentHTML("beforeend", " · <b>1–4</b> a memory · <b>M</b> the map");
+    if (journey.map?.places) document.getElementById("help").insertAdjacentHTML("beforeend", " · <b>1</b> <b>2</b> a memory · <b>M</b> the map");
 
-    const track = document.getElementById("track"), names = document.getElementById("segnames"), headEl = document.getElementById("head");
+    const track = document.getElementById("track"), headEl = document.getElementById("head");
     for (const r of segRanges) {
       const div = document.createElement("div");
       div.style.flex = `${r.end - r.start}`; div.style.background = r.color;
       track.appendChild(div);
-      const sp = document.createElement("span");
-      sp.style.left = `${(100 * r.start) / N}%`; sp.textContent = r.title || ""; names.appendChild(sp);
     }
-    const captionEl = document.getElementById("caption");
     let captionSeg = null, captionTimer = 0;
-    function showCaption(r) {
-      if (!r.title) { captionEl.style.opacity = 0; return; }
-      captionEl.innerHTML = `${r.title}<small>${r.sub}</small>`;
-      captionEl.style.opacity = 0.92; clearTimeout(captionTimer);
-      captionTimer = setTimeout(() => (captionEl.style.opacity = 0), 2600);
+    // the location bar: where you are, crossfading when it changes (a flight across campus or the state has its own)
+    const locText = document.getElementById("loctext"), locDot = document.getElementById("locdot");
+    const placeOf = Object.fromEntries((journey.map?.places || []).map((p) => [p.scene, p]));
+    function locationOf(r) {
+      if (!r.gap) { const p = placeOf[r.scene]; return { name: p?.name || r.title, sub: short(p?.sub || r.sub), color: p?.color || r.color }; }
+      const map = /map$/.test(r.name || "");
+      return { name: map ? "California" : "Stanford campus", sub: map ? journey.overview?.sub || r.sub || "" : "on the way", color: "#cfd6e4" };
     }
+    function showCaption(r) {
+      const L = locationOf(r);
+      for (const old of locText.children) { old.classList.add("out"); setTimeout(() => old.remove(), 1200); }
+      const sp = document.createElement("span");
+      sp.className = "pre"; sp.innerHTML = `<b>${L.name}</b><small>${L.sub}</small>`;
+      locText.appendChild(sp);
+      requestAnimationFrame(() => requestAnimationFrame(() => sp.classList.remove("pre")));
+      locDot.style.background = L.color; locDot.style.color = L.color;
+    }
+    const helpEl = document.getElementById("help");
+    let helpTimer = setTimeout(() => helpEl.classList.add("quiet"), 9000);
+    addEventListener("keydown", (e) => { if (e.code === "KeyH") { helpEl.classList.toggle("quiet"); clearTimeout(helpTimer); } });
 
     // ---------------------------------------------------------------- frames as dots
     const DW = enc.width, DH = enc.height, LMIN = Math.log(enc.depthMin), LMAX = Math.log(enc.depthMax);
@@ -901,12 +957,31 @@
     let t = 0, tTarget = 0, playing = false;
     const qa = new THREE.Quaternion(), qb = new THREE.Quaternion();
     const fovOf = (c) => THREE.MathUtils.radToDeg(2 * Math.atan(c.intrinsics.height / 2 / c.intrinsics.fy));
+    // the camera passes exactly through every view, on a smooth curve between them (centripetal Catmull-Rom: no
+    // overshoot where steps change size, as from the 400 m hop into a 10 m step of a descent), and turns smoothly too
+    const cpos = (i) => new THREE.Vector3().fromArray(slots[THREE.MathUtils.clamp(i, 0, N - 1)].cam.position);
+    const cfwd = (i) => new THREE.Vector3(0, 0, -1).applyQuaternion(new THREE.Quaternion().fromArray(slots[THREE.MathUtils.clamp(i, 0, N - 1)].cam.quaternion));
+    function catmull(p0, p1, p2, p3, f) {
+      const knot = (a, b) => Math.max(1e-4, Math.sqrt(a.distanceTo(b)));
+      const t1 = knot(p0, p1), t2 = t1 + knot(p1, p2), t3 = t2 + knot(p2, p3), u = t1 + (t2 - t1) * f;
+      const L = (a, b, ta, tb) => a.clone().multiplyScalar((tb - u) / (tb - ta)).add(b.clone().multiplyScalar((u - ta) / (tb - ta)));
+      const A1 = L(p0, p1, 0, t1), A2 = L(p1, p2, t1, t2), A3 = L(p2, p3, t2, t3);
+      return L(L(A1, A2, 0, t2), L(A2, A3, t1, t3), t1, t2);
+    }
     function pathPose(tt) {
       const k = Math.min(Math.floor(tt), N - 1), f = THREE.MathUtils.clamp(tt - k, 0, 1);
       const a = slots[k].cam, b = slots[Math.min(k + 1, N - 1)].cam;
       const tan = (c, w, fl) => c.intrinsics[w] / 2 / c.intrinsics[fl];
-      return { pos: new THREE.Vector3().fromArray(a.position).lerp(new THREE.Vector3().fromArray(b.position), f),
-               quat: qa.fromArray(a.quaternion).clone().slerp(qb.fromArray(b.quaternion), f), fov: THREE.MathUtils.lerp(fovOf(a), fovOf(b), f),
+      const pos = f > 0 && k < N - 1 ? catmull(cpos(k - 1), cpos(k), cpos(k + 1), cpos(k + 2), f) : cpos(k);
+      const quat = qa.fromArray(a.quaternion).clone().slerp(qb.fromArray(b.quaternion), f);
+      if (f > 0 && k < N - 1) {   // the look direction on a curve through the views' too, keeping the slerp's roll
+        const cr = (p0, p1, p2, p3) => 0.5 * ((2 * p1) + (-p0 + p2) * f + (2 * p0 - 5 * p1 + 4 * p2 - p3) * f * f + (-p0 + 3 * p1 - 3 * p2 + p3) * f * f * f);
+        const F = [cfwd(k - 1), cfwd(k), cfwd(k + 1), cfwd(k + 2)];
+        const want = new THREE.Vector3(cr(F[0].x, F[1].x, F[2].x, F[3].x), cr(F[0].y, F[1].y, F[2].y, F[3].y), cr(F[0].z, F[1].z, F[2].z, F[3].z)).normalize();
+        const have = new THREE.Vector3(0, 0, -1).applyQuaternion(quat);
+        quat.premultiply(new THREE.Quaternion().setFromUnitVectors(have, want));
+      }
+      return { pos, quat, fov: THREE.MathUtils.lerp(fovOf(a), fovOf(b), f),
                tanX: THREE.MathUtils.lerp(tan(a, "width", "fx"), tan(b, "width", "fx"), f), tanY: THREE.MathUtils.lerp(tan(a, "height", "fy"), tan(b, "height", "fy"), f) };
     }
     let yawOff = 0, pitchOff = 0, dragging = false, lx = 0, ly = 0;
@@ -929,7 +1004,6 @@
     addEventListener("keydown", (e) => {
       if (e.target instanceof HTMLInputElement && e.target.type !== "range") return;
       if (e.code === "Space") { playing = !playing; tTarget = t; e.preventDefault(); return; }
-      if (e.code === "KeyB") { params.worldOnly = !params.worldOnly; return; }
       if (journey.map?.places) {
         const n = Number(e.key);
         if (n >= 1 && n <= journey.map.places.length) { travelTo(firstSlotOf[journey.map.places[n - 1].scene]); return; }
@@ -947,8 +1021,8 @@
       if ((e.code === "ArrowLeft" || e.code === "ArrowRight") && performance.now() - tapStart < 180) tTarget = THREE.MathUtils.clamp(Math.round(tapFrom) + tapDir, 0, N - 1);
     });
     addEventListener("blur", () => held.clear());
-    document.getElementById("timeline").addEventListener("pointerdown", (e) => {
-      const r = document.getElementById("track").getBoundingClientRect();
+    document.getElementById("loc").addEventListener("pointerdown", (e) => {
+      const r = document.getElementById("timeline").getBoundingClientRect();
       tTarget = THREE.MathUtils.clamp((e.clientX - r.left) / r.width, 0, 1) * (N - 1); playing = false;
     });
     function localScale() {
@@ -997,7 +1071,8 @@
         if (performance.now() - tapStart > 180) tTarget += dir * params.scrubSpeed * shift * dt;
       } else if (playing) {
         const k = Math.min(Math.floor(tTarget), N - 1);
-        tTarget += dt * params.playSpeed / slots[k].dur;
+        const fk = tTarget - k, dur = THREE.MathUtils.lerp(slots[k].dur, slots[Math.min(k + 1, N - 1)].dur, fk * fk * (3 - 2 * fk));   // pace changes gently
+        tTarget += dt * params.playSpeed / dur;
         if (tTarget >= N - 1) { tTarget = N - 1; playing = false; }
       }
       tTarget = THREE.MathUtils.clamp(tTarget, 0, N - 1);
@@ -1026,7 +1101,7 @@
         .multiply(new THREE.Quaternion().setFromAxisAngle(right, pitchOff + mouseSm.y * par * 0.6 + swayP));
       camera.quaternion.copy(look).multiply(p.quat);
       camera.position.copy(p.pos).add(drift.clone().applyQuaternion(camera.quaternion));
-      const bub = inBubble && bubbles.find((b) => b.center.distanceTo(camera.position) < 40);
+      const bub = inBubble && drift.lengthSq() > 1e-4 && bubbles.find((b) => b.center.distanceTo(camera.position) < 40);   // only once you walk (on the path the views lead)
       if (bub) {   // a soft wall at the bubble's radius, and back toward eye level
         const d = camera.position.clone().sub(bub.center), dy = d.y; d.y = 0;
         const over = d.length() - bub.walkR, fix = new THREE.Vector3();
@@ -1047,8 +1122,8 @@
         bubbleIn = Math.max(bubbleIn, inside);
         walkIn = Math.max(walkIn, inside * (1 - THREE.MathUtils.smoothstep(h, 3, 6)));
       }
-      if (slots[Math.min(Math.floor(t), N - 1)].sources.length && !travel)   // on the path its own views (and the cut into the photo) show; the cloud once you look or wander away
-        bubbleIn *= THREE.MathUtils.smoothstep(offPath, 0.05, 0.5);
+      if (slots[Math.min(Math.floor(t), N - 1)].sources.length && !travel)   // on the path its own views (and the cut into the photo) show; the cloud once you walk off it
+        bubbleIn *= THREE.MathUtils.smoothstep(drift.length(), 0.15, 0.8);   // walking (W A S D), not just looking around
       camera.near = Math.max(0.02, Math.min(5, Math.abs(camera.position.y) / 800));
       camera.far = Math.max(20000, Math.abs(camera.position.y) * 12);
       camera.updateProjectionMatrix();
@@ -1243,43 +1318,10 @@
       updateMap(t);
       updatePlaces(camera.position.y);
       const r = segOf(k);
-      if (r !== captionSeg) { captionSeg = r; showCaption(r); }
+      const rk = r.gap ? (/map$/.test(r.name) ? "map" : "campus") : r.scene;   // the same place: no change
+      if (rk !== captionSeg) { captionSeg = rk; showCaption(r); }
       statusEl.textContent = pending || (mapLayers.length && !mapLayers[0].mesh.isInitialized) ? "gathering…" : "";
     }
-
-    // ---------------------------------------------------------------- panel
-    const gui = new GUI({ title: "Dream" });
-    const fd = gui.addFolder("Dots");
-    fd.add(params, "density", 0.2, 1, 0.01).name("density").onFinishChange(() => { save(); rebuildAll(); });
-    fd.add(params, "detail", 0, 1, 0.01).name("denser where detailed").onFinishChange(() => { save(); rebuildAll(); });
-    fd.add(params, "discSize", 0.3, 2.5, 0.01).name("size").onChange((v) => { U.discSize.value = v; save(); });
-    fd.add(params, "wobble", 0, 1.5, 0.01).name("breathing").onChange((v) => { U.wobble.value = v; save(); });
-    fd.add(params, "fray", 0, 1, 0.01).name("frayed edges").onChange((v) => { U.fray.value = v; save(); });
-    fd.add(params, "afterimage", 0.1, 4, 0.05).name("afterimage (s)").onChange(save);
-    const fs = gui.addFolder("Space");
-    fs.add(params, "curvature", 0, 2, 0.01).name("curvature").onChange(save);
-    fs.add(params, "curveVideo", 0, 1, 0.01).name("bend the video too").onChange((v) => { U.curveVideo.value = v; save(); });
-    fs.add(params, "focus", 0, 1.5, 0.01).name("depth of field").onChange((v) => { U.focusAmt.value = v; save(); });
-    fs.add(params, "worldGlow", 0, 1.5, 0.01).name("world brightness").onChange(save);
-    fs.add(params, "nightCity", 0, 1, 0.01).name("night city in the dark").onChange(save);
-    fs.add(params, "periphery", 0, 1.5, 0.01).name("memory beyond its edges").onChange((v) => { U.haloAmt.value = v; save(); });
-    fs.add(params, "worldAround", 0, 1, 0.01).name("real places around it").onChange(save);
-    fs.add(params, "terrain", 0, 1.5, 0.01).name("memory terrain").onChange(save);
-    fs.add(params, "dust", 0, 1.5, 0.01).name("memory dust").onChange((v) => { dustU.amount.value = v; save(); });
-    const fl = gui.addFolder("Light");
-    fl.add(params, "glow", 0, 2, 0.01).name("glow").onChange((v) => { bloom.strength = v; save(); });
-    fl.add(params, "grain", 0, 1, 0.01).name("grain").onChange((v) => { finish.uniforms.grain.value = v; save(); });
-    fl.add(params, "vignette", 0, 1, 0.01).name("vignette").onChange((v) => { finish.uniforms.vignette.value = v; save(); });
-    fl.add(params, "vignetteTone", ["memory haze", "white", "dark"]).name("vignette colour").onChange(save);
-    const fi = gui.addFolder("Touch & motion");
-    fi.add(params, "ripple", 0, 2, 0.01).name("touch").onChange(save);
-    fi.add(params, "parallax", 0, 1.5, 0.01).name("cursor parallax").onChange(save);
-    fi.add(params, "playSpeed", 0.25, 3, 0.05).name("drift speed").onChange(save);
-    fi.add(params, "scrubSpeed", 0.5, 20, 0.25).name("arrow speed").onChange(save);
-    fi.add(params, "springBack").name("ease back to the path").onChange(save);
-    gui.add(params, "resolution", 0.5, 2, 0.25).onChange((v) => { renderer.setPixelRatio(Math.min(devicePixelRatio, v)); composer.setPixelRatio(Math.min(devicePixelRatio, v)); save(); });
-    gui.add({ reset: () => { Object.assign(params, DEFAULTS); save(); location.reload(); } }, "reset").name("reset settings");
-    gui.close();
 
     // ---------------------------------------------------------------- go
     const firstFrames = slots.slice(0, 3).flatMap((s) => s.sources.map((x) => want(x.key).promise));
