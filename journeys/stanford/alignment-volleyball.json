@@ -1,0 +1,972 @@
+{
+ "take": "video-48",
+ "frames": [
+  {
+   "index": 1,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-00.png",
+   "scale": 1.0,
+   "stretch": -0.0,
+   "confirmed": 0.581,
+   "before": {
+    "ground": 2.28
+   },
+   "after": {
+    "ground": 2.41
+   },
+   "photo": null
+  },
+  {
+   "index": 2,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-01.png",
+   "scale": 1.001,
+   "stretch": -0.0,
+   "confirmed": 0.622,
+   "before": {
+    "ground": 2.28,
+    "overlap": 0.799,
+    "disagree": 0.0031
+   },
+   "after": {
+    "ground": 1.56,
+    "overlap": 0.799,
+    "disagree": 0.0041
+   },
+   "photo": null
+  },
+  {
+   "index": 3,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-02.png",
+   "scale": 1.001,
+   "stretch": -0.0,
+   "confirmed": 0.706,
+   "before": {
+    "ground": 3.48,
+    "overlap": 0.689,
+    "disagree": 0.0033
+   },
+   "after": {
+    "ground": 2.29,
+    "overlap": 0.686,
+    "disagree": 0.0034
+   },
+   "photo": null
+  },
+  {
+   "index": 4,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-03.png",
+   "scale": 0.995,
+   "stretch": -0.0,
+   "confirmed": 0.728,
+   "before": {
+    "ground": 4.7,
+    "overlap": 0.46,
+    "disagree": 0.0038
+   },
+   "after": {
+    "ground": 5.21,
+    "overlap": 0.461,
+    "disagree": 0.0049
+   },
+   "photo": null
+  },
+  {
+   "index": 5,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-04.png",
+   "scale": 0.992,
+   "stretch": -0.0,
+   "confirmed": 0.754,
+   "before": {
+    "ground": 5.65,
+    "overlap": 0.589,
+    "disagree": 0.0037
+   },
+   "after": {
+    "ground": 7.21,
+    "overlap": 0.586,
+    "disagree": 0.0036
+   },
+   "photo": null
+  },
+  {
+   "index": 6,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-05.png",
+   "scale": 0.993,
+   "stretch": -0.0,
+   "confirmed": 0.832,
+   "before": {
+    "ground": 1.86,
+    "overlap": 0.685,
+    "disagree": 0.0092
+   },
+   "after": {
+    "ground": 2.06,
+    "overlap": 0.677,
+    "disagree": 0.0102
+   },
+   "photo": null
+  },
+  {
+   "index": 7,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-06.png",
+   "scale": 0.991,
+   "stretch": -0.0,
+   "confirmed": 0.854,
+   "before": {
+    "ground": 0.77,
+    "overlap": 0.728,
+    "disagree": 0.0035
+   },
+   "after": {
+    "ground": 1.4,
+    "overlap": 0.724,
+    "disagree": 0.0036
+   },
+   "photo": null
+  },
+  {
+   "index": 8,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-07.png",
+   "scale": 0.991,
+   "stretch": -0.0,
+   "confirmed": 0.865,
+   "before": {
+    "ground": -0.11,
+    "overlap": 0.692,
+    "disagree": 0.0033
+   },
+   "after": {
+    "ground": 1.12,
+    "overlap": 0.689,
+    "disagree": 0.0036
+   },
+   "photo": null
+  },
+  {
+   "index": 9,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-08.png",
+   "scale": 0.99,
+   "stretch": -0.0,
+   "confirmed": 0.905,
+   "before": {
+    "ground": -0.6,
+    "overlap": 0.651,
+    "disagree": 0.003
+   },
+   "after": {
+    "ground": 0.64,
+    "overlap": 0.647,
+    "disagree": 0.0041
+   },
+   "photo": null
+  },
+  {
+   "index": 10,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-09.png",
+   "scale": 0.986,
+   "stretch": -0.0,
+   "confirmed": 0.906,
+   "before": {
+    "ground": -0.92,
+    "overlap": 0.759,
+    "disagree": 0.0032
+   },
+   "after": {
+    "ground": 0.32,
+    "overlap": 0.758,
+    "disagree": 0.0027
+   },
+   "photo": null
+  },
+  {
+   "index": 11,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-10.png",
+   "scale": 0.983,
+   "stretch": -0.0,
+   "confirmed": 0.905,
+   "before": {
+    "ground": -1.2,
+    "overlap": 0.772,
+    "disagree": 0.0033
+   },
+   "after": {
+    "ground": 0.01,
+    "overlap": 0.767,
+    "disagree": 0.0032
+   },
+   "photo": null
+  },
+  {
+   "index": 12,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-11.png",
+   "scale": 0.978,
+   "stretch": -0.0,
+   "confirmed": 0.892,
+   "before": {
+    "ground": -1.53,
+    "overlap": 0.775,
+    "disagree": 0.0038
+   },
+   "after": {
+    "ground": -0.24,
+    "overlap": 0.773,
+    "disagree": 0.0036
+   },
+   "photo": null
+  },
+  {
+   "index": 13,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-12.png",
+   "scale": 0.974,
+   "stretch": -0.001,
+   "confirmed": 0.886,
+   "before": {
+    "ground": -1.57,
+    "overlap": 0.771,
+    "disagree": 0.0035
+   },
+   "after": {
+    "ground": -0.23,
+    "overlap": 0.765,
+    "disagree": 0.0037
+   },
+   "photo": null
+  },
+  {
+   "index": 14,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-13.png",
+   "scale": 0.971,
+   "stretch": -0.02,
+   "confirmed": 0.892,
+   "before": {
+    "ground": -1.58,
+    "overlap": 0.768,
+    "disagree": 0.009
+   },
+   "after": {
+    "ground": -0.3,
+    "overlap": 0.767,
+    "disagree": 0.0068
+   },
+   "photo": null
+  },
+  {
+   "index": 15,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-14.png",
+   "scale": 0.968,
+   "stretch": -0.044,
+   "confirmed": 0.908,
+   "before": {
+    "ground": -1.33,
+    "overlap": 0.781,
+    "disagree": 0.0035
+   },
+   "after": {
+    "ground": -0.12,
+    "overlap": 0.771,
+    "disagree": 0.0039
+   },
+   "photo": null
+  },
+  {
+   "index": 16,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-15.png",
+   "scale": 0.965,
+   "stretch": -0.07,
+   "confirmed": 0.909,
+   "before": {
+    "ground": -1.15,
+    "overlap": 0.781,
+    "disagree": 0.0034
+   },
+   "after": {
+    "ground": 0.06,
+    "overlap": 0.774,
+    "disagree": 0.0035
+   },
+   "photo": null
+  },
+  {
+   "index": 17,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-16.png",
+   "scale": 0.959,
+   "stretch": -0.084,
+   "confirmed": 0.908,
+   "before": {
+    "ground": -1.13,
+    "overlap": 0.756,
+    "disagree": 0.0033
+   },
+   "after": {
+    "ground": 0.21,
+    "overlap": 0.755,
+    "disagree": 0.0037
+   },
+   "photo": null
+  },
+  {
+   "index": 18,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-17.png",
+   "scale": 0.953,
+   "stretch": -0.096,
+   "confirmed": 0.909,
+   "before": {
+    "ground": -1.11,
+    "overlap": 0.772,
+    "disagree": 0.0032
+   },
+   "after": {
+    "ground": 0.26,
+    "overlap": 0.77,
+    "disagree": 0.0033
+   },
+   "photo": null
+  },
+  {
+   "index": 19,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-18.png",
+   "scale": 0.945,
+   "stretch": -0.111,
+   "confirmed": 0.911,
+   "before": {
+    "ground": -1.16,
+    "overlap": 0.777,
+    "disagree": 0.0033
+   },
+   "after": {
+    "ground": 0.22,
+    "overlap": 0.779,
+    "disagree": 0.0034
+   },
+   "photo": null
+  },
+  {
+   "index": 20,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-19.png",
+   "scale": 0.932,
+   "stretch": -0.123,
+   "confirmed": 0.908,
+   "before": {
+    "ground": -1.21,
+    "overlap": 0.775,
+    "disagree": 0.0034
+   },
+   "after": {
+    "ground": 0.22,
+    "overlap": 0.778,
+    "disagree": 0.0045
+   },
+   "photo": null
+  },
+  {
+   "index": 21,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-20.png",
+   "scale": 0.912,
+   "stretch": -0.126,
+   "confirmed": 0.91,
+   "before": {
+    "ground": -1.15,
+    "overlap": 0.782,
+    "disagree": 0.0034
+   },
+   "after": {
+    "ground": 0.24,
+    "overlap": 0.793,
+    "disagree": 0.0039
+   },
+   "photo": null
+  },
+  {
+   "index": 22,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-21.png",
+   "scale": 0.911,
+   "stretch": -0.126,
+   "confirmed": 0.921,
+   "before": {
+    "ground": -1.11,
+    "overlap": 0.844,
+    "disagree": 0.0051
+   },
+   "after": {
+    "ground": 0.12,
+    "overlap": 0.851,
+    "disagree": 0.006
+   },
+   "photo": null
+  },
+  {
+   "index": 23,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-22.png",
+   "scale": 0.896,
+   "stretch": -0.132,
+   "confirmed": 0.929,
+   "before": {
+    "ground": -1.05,
+    "overlap": 0.862,
+    "disagree": 0.0039
+   },
+   "after": {
+    "ground": -0.0,
+    "overlap": 0.85,
+    "disagree": 0.0043
+   },
+   "photo": null
+  },
+  {
+   "index": 24,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-23.png",
+   "scale": 0.872,
+   "stretch": -0.128,
+   "confirmed": 0.938,
+   "before": {
+    "ground": -1.0,
+    "overlap": 0.836,
+    "disagree": 0.0046
+   },
+   "after": {
+    "ground": 0.04,
+    "overlap": 0.833,
+    "disagree": 0.0073
+   },
+   "photo": null
+  },
+  {
+   "index": 25,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-24.png",
+   "scale": 0.839,
+   "stretch": -0.116,
+   "confirmed": 0.949,
+   "before": {
+    "ground": -0.95,
+    "overlap": 0.79,
+    "disagree": 0.0044
+   },
+   "after": {
+    "ground": 0.03,
+    "overlap": 0.768,
+    "disagree": 0.011
+   },
+   "photo": null
+  },
+  {
+   "index": 26,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-25.png",
+   "scale": 0.804,
+   "stretch": -0.1,
+   "confirmed": 0.956,
+   "before": {
+    "ground": -0.82,
+    "overlap": 0.732,
+    "disagree": 0.0047
+   },
+   "after": {
+    "ground": 0.13,
+    "overlap": 0.712,
+    "disagree": 0.0102
+   },
+   "photo": null
+  },
+  {
+   "index": 27,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-26.png",
+   "scale": 0.759,
+   "stretch": -0.082,
+   "confirmed": 0.96,
+   "before": {
+    "ground": -0.62,
+    "overlap": 0.681,
+    "disagree": 0.0046
+   },
+   "after": {
+    "ground": 0.34,
+    "overlap": 0.642,
+    "disagree": 0.008
+   },
+   "photo": null
+  },
+  {
+   "index": 28,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-27.png",
+   "scale": 0.722,
+   "stretch": -0.063,
+   "confirmed": 0.968,
+   "before": {
+    "ground": -0.47,
+    "overlap": 0.657,
+    "disagree": 0.0047
+   },
+   "after": {
+    "ground": 0.46,
+    "overlap": 0.612,
+    "disagree": 0.0086
+   },
+   "photo": null
+  },
+  {
+   "index": 29,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-28.png",
+   "scale": 0.679,
+   "stretch": -0.035,
+   "confirmed": 0.974,
+   "before": {
+    "ground": -0.41,
+    "overlap": 0.68,
+    "disagree": 0.005
+   },
+   "after": {
+    "ground": 0.56,
+    "overlap": 0.624,
+    "disagree": 0.011
+   },
+   "photo": null
+  },
+  {
+   "index": 30,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-29.png",
+   "scale": 0.628,
+   "stretch": -0.003,
+   "confirmed": 0.963,
+   "before": {
+    "ground": -0.31,
+    "overlap": 0.679,
+    "disagree": 0.0162
+   },
+   "after": {
+    "ground": 0.72,
+    "overlap": 0.623,
+    "disagree": 0.0199
+   },
+   "photo": null
+  },
+  {
+   "index": 31,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-30.png",
+   "scale": 0.596,
+   "stretch": 0.027,
+   "confirmed": 0.959,
+   "before": {
+    "ground": 0.53,
+    "overlap": 0.756,
+    "disagree": 0.0082
+   },
+   "after": {
+    "ground": 0.77,
+    "overlap": 0.676,
+    "disagree": 0.0137
+   },
+   "photo": null
+  },
+  {
+   "index": 32,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-32.png",
+   "scale": 0.581,
+   "stretch": 0.057,
+   "confirmed": 0.965,
+   "before": {
+    "ground": -0.17,
+    "overlap": 0.823,
+    "disagree": 0.0074
+   },
+   "after": {
+    "ground": 0.76,
+    "overlap": 0.778,
+    "disagree": 0.0121
+   },
+   "photo": null
+  },
+  {
+   "index": 33,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-33.png",
+   "scale": 0.582,
+   "stretch": 0.057,
+   "confirmed": 0.966,
+   "before": {
+    "ground": -0.1,
+    "overlap": 0.958,
+    "disagree": 0.0062
+   },
+   "after": {
+    "ground": 0.76,
+    "overlap": 0.952,
+    "disagree": 0.0066
+   },
+   "photo": null
+  },
+  {
+   "index": 34,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-34.png",
+   "scale": 0.584,
+   "stretch": 0.057,
+   "confirmed": 0.967,
+   "before": {
+    "ground": 0.21,
+    "overlap": 0.943,
+    "disagree": 0.0058
+   },
+   "after": {
+    "ground": 0.76,
+    "overlap": 0.932,
+    "disagree": 0.0071
+   },
+   "photo": null
+  },
+  {
+   "index": 35,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-35.png",
+   "scale": 0.591,
+   "stretch": 0.057,
+   "confirmed": 0.966,
+   "before": {
+    "ground": 0.58,
+    "overlap": 0.932,
+    "disagree": 0.0057
+   },
+   "after": {
+    "ground": 0.77,
+    "overlap": 0.921,
+    "disagree": 0.0073
+   },
+   "photo": null
+  },
+  {
+   "index": 36,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-36.png",
+   "scale": 0.574,
+   "stretch": 0.058,
+   "confirmed": 0.97,
+   "before": {
+    "ground": -0.42,
+    "overlap": 0.857,
+    "disagree": 0.0061
+   },
+   "after": {
+    "ground": 0.73,
+    "overlap": 0.848,
+    "disagree": 0.0077
+   },
+   "photo": null
+  },
+  {
+   "index": 37,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-37.png",
+   "scale": 0.579,
+   "stretch": 0.062,
+   "confirmed": 0.972,
+   "before": {
+    "ground": -0.43,
+    "overlap": 0.826,
+    "disagree": 0.012
+   },
+   "after": {
+    "ground": 0.73,
+    "overlap": 0.824,
+    "disagree": 0.0124
+   },
+   "photo": null
+  },
+  {
+   "index": 38,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-38.png",
+   "scale": 0.591,
+   "stretch": 0.062,
+   "confirmed": 0.972,
+   "before": {
+    "ground": -0.07,
+    "overlap": 0.902,
+    "disagree": 0.0071
+   },
+   "after": {
+    "ground": 0.74,
+    "overlap": 0.893,
+    "disagree": 0.0086
+   },
+   "photo": null
+  },
+  {
+   "index": 39,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-39.png",
+   "scale": 0.579,
+   "stretch": 0.063,
+   "confirmed": 0.972,
+   "before": {
+    "ground": -0.42,
+    "overlap": 0.881,
+    "disagree": 0.0074
+   },
+   "after": {
+    "ground": 0.73,
+    "overlap": 0.87,
+    "disagree": 0.0092
+   },
+   "photo": null
+  },
+  {
+   "index": 40,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-40.png",
+   "scale": 0.601,
+   "stretch": 0.062,
+   "confirmed": 0.972,
+   "before": {
+    "ground": 1.24,
+    "overlap": 0.913,
+    "disagree": 0.0073
+   },
+   "after": {
+    "ground": 0.98,
+    "overlap": 0.908,
+    "disagree": 0.0089
+   },
+   "photo": null
+  },
+  {
+   "index": 41,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-41.png",
+   "scale": 0.604,
+   "stretch": 0.061,
+   "confirmed": 0.969,
+   "before": {
+    "ground": 4.88,
+    "overlap": 0.913,
+    "disagree": 0.0078
+   },
+   "after": {
+    "ground": 3.61,
+    "overlap": 0.903,
+    "disagree": 0.0093
+   },
+   "photo": null
+  },
+  {
+   "index": 42,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-42.png",
+   "scale": 0.608,
+   "stretch": 0.061,
+   "confirmed": 0.962,
+   "before": {
+    "ground": 12.9,
+    "overlap": 0.924,
+    "disagree": 0.008
+   },
+   "after": {
+    "ground": 8.61,
+    "overlap": 0.916,
+    "disagree": 0.0093
+   },
+   "photo": null
+  },
+  {
+   "index": 43,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-43.png",
+   "scale": 0.606,
+   "stretch": 0.058,
+   "confirmed": 0.961,
+   "before": {
+    "ground": 15.63,
+    "overlap": 0.949,
+    "disagree": 0.0096
+   },
+   "after": {
+    "ground": 9.91,
+    "overlap": 0.947,
+    "disagree": 0.0092
+   },
+   "photo": null
+  },
+  {
+   "index": 44,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-44.png",
+   "scale": 0.605,
+   "stretch": 0.057,
+   "confirmed": 0.964,
+   "before": {
+    "ground": 16.85,
+    "overlap": 0.945,
+    "disagree": 0.0095
+   },
+   "after": {
+    "ground": 10.75,
+    "overlap": 0.944,
+    "disagree": 0.0101
+   },
+   "photo": null
+  },
+  {
+   "index": 45,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-45.png",
+   "scale": 0.604,
+   "stretch": 0.055,
+   "confirmed": 0.962,
+   "before": {
+    "ground": 16.45,
+    "overlap": 0.962,
+    "disagree": 0.0088
+   },
+   "after": {
+    "ground": 10.51,
+    "overlap": 0.96,
+    "disagree": 0.0099
+   },
+   "photo": null
+  },
+  {
+   "index": 46,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-46.png",
+   "scale": 0.602,
+   "stretch": 0.054,
+   "confirmed": 0.959,
+   "before": {
+    "ground": 15.62,
+    "overlap": 0.975,
+    "disagree": 0.0069
+   },
+   "after": {
+    "ground": 10.07,
+    "overlap": 0.977,
+    "disagree": 0.0081
+   },
+   "photo": null
+  },
+  {
+   "index": 47,
+   "kind": "atlas",
+   "origin": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-47.png",
+   "scale": 0.599,
+   "stretch": 0.054,
+   "confirmed": 0.958,
+   "before": {
+    "ground": 15.36,
+    "overlap": 0.977,
+    "disagree": 0.0022
+   },
+   "after": {
+    "ground": 9.82,
+    "overlap": 0.978,
+    "disagree": 0.0072
+   },
+   "photo": null
+  },
+  {
+   "index": 48,
+   "kind": "photo",
+   "origin": "stanford-volleyball/work/scene/stanford-volleyball/context/photo.png",
+   "scale": 1.0,
+   "stretch": 0.0,
+   "confirmed": 0.894,
+   "before": {
+    "ground": 0.62,
+    "overlap": 0.354,
+    "disagree": 0.9205
+   },
+   "after": {
+    "ground": 0.65,
+    "overlap": 0.385,
+    "disagree": 0.0818
+   },
+   "photo": {
+    "posed": 0.821,
+    "from_frames": 0.133,
+    "posed_far": 0.04,
+    "bare_earth": 0.006
+   }
+  }
+ ],
+ "bubble": {
+  "dots": 1730930,
+  "radius": 260.0,
+  "fromFrames": [
+   108279,
+   104425,
+   122926,
+   63707,
+   66292,
+   89076,
+   94497,
+   82509,
+   55992,
+   63332,
+   67820,
+   71619,
+   76894,
+   67358,
+   51962,
+   48896,
+   38808,
+   32937,
+   34664,
+   29478,
+   25179,
+   28379,
+   35932,
+   31551,
+   25853,
+   22333,
+   21208,
+   19505,
+   16501,
+   11510,
+   6240,
+   10099,
+   7471,
+   6365,
+   6420,
+   6309,
+   5149,
+   4871,
+   4484,
+   4675,
+   4750,
+   4616,
+   4857,
+   5030,
+   5346,
+   7426,
+   9898,
+   17502
+  ]
+ }
+}

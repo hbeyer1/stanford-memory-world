@@ -1,6 +1,7 @@
 {
  "order": [
-  "stanford-terrain"
+  "stanford-terrain",
+  "volleyball-bubble"
  ],
  "scenes": {
   "stanford-terrain": {
@@ -15,7 +16,26 @@
     0,
     1
    ],
-   "scale": 1.0
+   "scale": 1.0,
+   "holes": [
+    "volleyball-bubble"
+   ]
+  },
+  "volleyball-bubble": {
+   "position": [
+    6421.141762804538,
+    19.558719635009766,
+    -5341.645649999761
+   ],
+   "quaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": 1.0,
+   "radius": 260.0,
+   "url": "clouds/lite/volleyball-bubble.spz"
   }
  },
  "places": {
@@ -30,6 +50,18 @@
     -122.167189
    ],
    "when": "Mon 2026-10-13 08:36:30 PDT"
+  },
+  "volleyball": {
+   "offset": [
+    6421.141762804538,
+    19.558719635009766,
+    -5341.645649999761
+   ],
+   "gps": [
+    37.43010833333333,
+    -122.157375
+   ],
+   "when": "Tue 2026-06-23 19:11:04 PDT"
   }
  },
  "map": {
@@ -75,6 +107,11 @@
    }
   ],
   "places": [
+   [
+    6421.141762804538,
+    19.558719635009766,
+    -5341.645649999761
+   ],
    [
     5553.490065222764,
     27.981277465820312,

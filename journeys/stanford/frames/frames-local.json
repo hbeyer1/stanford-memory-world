@@ -348,5 +348,1447 @@
    "kind": "swivel",
    "scaleFrom": "photo depth"
   }
+ ],
+ "video-volleyball": [
+  {
+   "index": 1,
+   "image": "frames/video-volleyball/01.jpg",
+   "depth": "frames/video-volleyball/01-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -113.77573642392284,
+     451.49999999999994,
+     -117.818224040818
+    ],
+    "quaternion": [
+     0.21486551488510397,
+     0.7595045499001313,
+     0.5318108111446445,
+     -0.3068597568007794
+    ]
+   },
+   "depthMedian": 480.572,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-00.png"
+  },
+  {
+   "index": 2,
+   "image": "frames/video-volleyball/02.jpg",
+   "depth": "frames/video-volleyball/02-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -104.05190208184497,
+     402.46764292945863,
+     -107.74889881331859
+    ],
+    "quaternion": [
+     0.21219597298273127,
+     0.7640884913024093,
+     0.5252034630774378,
+     -0.3087117893449914
+    ]
+   },
+   "depthMedian": 431.457,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-01.png"
+  },
+  {
+   "index": 3,
+   "image": "frames/video-volleyball/03.jpg",
+   "depth": "frames/video-volleyball/03-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -90.11016228858271,
+     332.17556270774116,
+     -93.31180463041524
+    ],
+    "quaternion": [
+     0.20951017568880184,
+     0.7686154421598829,
+     0.5185558815042921,
+     -0.31054079621447755
+    ]
+   },
+   "depthMedian": 356.959,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-02.png"
+  },
+  {
+   "index": 4,
+   "image": "frames/video-volleyball/04.jpg",
+   "depth": "frames/video-volleyball/04-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -76.43592764862709,
+     263.49808915097566,
+     -79.15172014285609
+    ],
+    "quaternion": [
+     0.20680872759660077,
+     0.7730843749559744,
+     0.5118695628460987,
+     -0.3123463622655934
+    ]
+   },
+   "depthMedian": 299.331,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-03.png"
+  },
+  {
+   "index": 5,
+   "image": "frames/video-volleyball/05.jpg",
+   "depth": "frames/video-volleyball/05-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -66.71120177922954,
+     215.11298137777266,
+     -69.0814717117916
+    ],
+    "quaternion": [
+     0.2031236548913752,
+     0.7790466334212446,
+     0.5027486878395118,
+     -0.3147552710507703
+    ]
+   },
+   "depthMedian": 250.756,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-04.png"
+  },
+  {
+   "index": 6,
+   "image": "frames/video-volleyball/06.jpg",
+   "depth": "frames/video-volleyball/06-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -59.39962367539144,
+     178.97384587324225,
+     -61.51011094361986
+    ],
+    "quaternion": [
+     0.19862861138811913,
+     0.7861149167686787,
+     0.49162306475906825,
+     -0.3176110428947676
+    ]
+   },
+   "depthMedian": 200.759,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-05.png"
+  },
+  {
+   "index": 7,
+   "image": "frames/video-volleyball/07.jpg",
+   "depth": "frames/video-volleyball/07-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -53.35690080707857,
+     149.828488110846,
+     -55.252688235646374
+    ],
+    "quaternion": [
+     0.1940934248503623,
+     0.7930243255310024,
+     0.48039808418167573,
+     -0.32040262523976154
+    ]
+   },
+   "depthMedian": 170.029,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-06.png"
+  },
+  {
+   "index": 8,
+   "image": "frames/video-volleyball/08.jpg",
+   "depth": "frames/video-volleyball/08-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -47.78621326399237,
+     124.2820502851542,
+     -49.48407241612512
+    ],
+    "quaternion": [
+     0.18940143877137808,
+     0.799944068993233,
+     0.46878501112116966,
+     -0.3231983830745541
+    ]
+   },
+   "depthMedian": 143.766,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-07.png"
+  },
+  {
+   "index": 9,
+   "image": "frames/video-volleyball/09.jpg",
+   "depth": "frames/video-volleyball/09-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -42.72362526019989,
+     102.88079401396986,
+     -44.241609071965506
+    ],
+    "quaternion": [
+     0.18371978728770166,
+     0.8080206752408375,
+     0.454722430228229,
+     -0.32646154381433046
+    ]
+   },
+   "depthMedian": 121.256,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-08.png"
+  },
+  {
+   "index": 10,
+   "image": "frames/video-volleyball/10.jpg",
+   "depth": "frames/video-volleyball/10-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -38.34253609294995,
+     85.99818398246634,
+     -39.70485843185871
+    ],
+    "quaternion": [
+     0.17798193277370847,
+     0.8158500941213241,
+     0.440520741953829,
+     -0.329624834375096
+    ]
+   },
+   "depthMedian": 103.275,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-09.png"
+  },
+  {
+   "index": 11,
+   "image": "frames/video-volleyball/11.jpg",
+   "depth": "frames/video-volleyball/11-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -34.41641832381871,
+     71.81364449305593,
+     -35.63924446641151
+    ],
+    "quaternion": [
+     0.1721896305373922,
+     0.8234299304813281,
+     0.42618429083770876,
+     -0.33268728705207645
+    ]
+   },
+   "depthMedian": 88.394,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-10.png"
+  },
+  {
+   "index": 12,
+   "image": "frames/video-volleyball/12.jpg",
+   "depth": "frames/video-volleyball/12-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -30.81127459094846,
+     59.25970393115224,
+     -31.906008845452277
+    ],
+    "quaternion": [
+     0.16577700649834173,
+     0.831452681290916,
+     0.4103124893827536,
+     -0.33592868878249027
+    ]
+   },
+   "depthMedian": 76.276,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-11.png"
+  },
+  {
+   "index": 13,
+   "image": "frames/video-volleyball/13.jpg",
+   "depth": "frames/video-volleyball/13-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -27.65319459141262,
+     49.35918129791745,
+     -28.635721272557202
+    ],
+    "quaternion": [
+     0.15901675815383678,
+     0.8395025058915613,
+     0.3935802875794402,
+     -0.33918102903452396
+    ]
+   },
+   "depthMedian": 66.147,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-12.png"
+  },
+  {
+   "index": 14,
+   "image": "frames/video-volleyball/14.jpg",
+   "depth": "frames/video-volleyball/14-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -24.848799505642205,
+     41.31888654598617,
+     -25.73168514939663
+    ],
+    "quaternion": [
+     0.15219273694499416,
+     0.8472156522701063,
+     0.3766902423979998,
+     -0.34229734245516164
+    ]
+   },
+   "depthMedian": 58.018,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-13.png"
+  },
+  {
+   "index": 15,
+   "image": "frames/video-volleyball/15.jpg",
+   "depth": "frames/video-volleyball/15-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -22.289051170159812,
+     34.21591006730913,
+     -23.080988152329663
+    ],
+    "quaternion": [
+     0.14514461351290298,
+     0.854758768961419,
+     0.3592455247499755,
+     -0.3453449594229868
+    ]
+   },
+   "depthMedian": 49.03,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-14.png"
+  },
+  {
+   "index": 16,
+   "image": "frames/video-volleyball/16.jpg",
+   "depth": "frames/video-volleyball/16-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -20.01683488109122,
+     28.361751404352052,
+     -20.728039305510418
+    ],
+    "quaternion": [
+     0.13745972953249685,
+     0.8625062355883553,
+     0.3402247694400428,
+     -0.3484751391240517
+    ]
+   },
+   "depthMedian": 41.728,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-15.png"
+  },
+  {
+   "index": 17,
+   "image": "frames/video-volleyball/17.jpg",
+   "depth": "frames/video-volleyball/17-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -18.02082189813112,
+     23.721890266332025,
+     -18.66110735493569
+    ],
+    "quaternion": [
+     0.1297073984837272,
+     0.8698304981450267,
+     0.3210370767779021,
+     -0.3514343332818493
+    ]
+   },
+   "depthMedian": 36.824,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-16.png"
+  },
+  {
+   "index": 18,
+   "image": "frames/video-volleyball/18.jpg",
+   "depth": "frames/video-volleyball/18-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -16.227712805487098,
+     19.784154235427167,
+     -16.8042885335693
+    ],
+    "quaternion": [
+     0.12189142418611272,
+     0.8767279628513559,
+     0.3016918615472368,
+     -0.35422108991497886
+    ]
+   },
+   "depthMedian": 31.836,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-17.png"
+  },
+  {
+   "index": 19,
+   "image": "frames/video-volleyball/19.jpg",
+   "depth": "frames/video-volleyball/19-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -14.60748635944128,
+     16.327439239716604,
+     -15.126494933483702
+    ],
+    "quaternion": [
+     0.11350060562684278,
+     0.8836015430195111,
+     0.28092385684178633,
+     -0.35699819656829396
+    ]
+   },
+   "depthMedian": 27.726,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-18.png"
+  },
+  {
+   "index": 20,
+   "image": "frames/video-volleyball/20.jpg",
+   "depth": "frames/video-volleyball/20-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -13.198068620520173,
+     13.613743002180502,
+     -13.667000140036729
+    ],
+    "quaternion": [
+     0.10489834526183227,
+     0.8900903646073958,
+     0.2596325153026847,
+     -0.35961985066456464
+    ]
+   },
+   "depthMedian": 25.258,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-19.png"
+  },
+  {
+   "index": 21,
+   "image": "frames/video-volleyball/21.jpg",
+   "depth": "frames/video-volleyball/21-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -11.95784795541318,
+     11.393190268160064,
+     -12.382714045528935
+    ],
+    "quaternion": [
+     0.09623563219195161,
+     0.8960662289128266,
+     0.2381915480685055,
+     -0.362034256565991
+    ]
+   },
+   "depthMedian": 23.841,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-20.png"
+  },
+  {
+   "index": 22,
+   "image": "frames/video-volleyball/22.jpg",
+   "depth": "frames/video-volleyball/22-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -10.860535427610817,
+     9.42103916675439,
+     -11.246413659287429
+    ],
+    "quaternion": [
+     0.0873157290655591,
+     0.9016455143282613,
+     0.21611401310662456,
+     -0.36428843419524615
+    ]
+   },
+   "depthMedian": 19.374,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-21.png"
+  },
+  {
+   "index": 23,
+   "image": "frames/video-volleyball/23.jpg",
+   "depth": "frames/video-volleyball/23-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -10.037000878897375,
+     7.815334044212452,
+     -10.393618669640825
+    ],
+    "quaternion": [
+     0.07793737036072432,
+     0.9068951487692986,
+     0.19290176076966567,
+     -0.3664094241854726
+    ]
+   },
+   "depthMedian": 17.282,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-22.png"
+  },
+  {
+   "index": 24,
+   "image": "frames/video-volleyball/24.jpg",
+   "depth": "frames/video-volleyball/24-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -9.309618989102546,
+     6.536489391176209,
+     -9.64039267305601
+    ],
+    "quaternion": [
+     0.06850766499411243,
+     0.9115473029738894,
+     0.1695624209851755,
+     -0.3682890164907566
+    ]
+   },
+   "depthMedian": 15.622,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-23.png"
+  },
+  {
+   "index": 25,
+   "image": "frames/video-volleyball/25.jpg",
+   "depth": "frames/video-volleyball/25-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -8.409700423620723,
+     5.447214688246023,
+     -8.70849971855666
+    ],
+    "quaternion": [
+     0.0590328254397892,
+     0.9155989120119833,
+     0.1461113701660414,
+     -0.3699259727989773
+    ]
+   },
+   "depthMedian": 14.819,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-24.png"
+  },
+  {
+   "index": 26,
+   "image": "frames/video-volleyball/26.jpg",
+   "depth": "frames/video-volleyball/26-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -7.139603583291914,
+     4.521144013306501,
+     -7.393275938946553
+    ],
+    "quaternion": [
+     0.04901942690738048,
+     0.9192113886131568,
+     0.12132733910045852,
+     -0.37138550808606724
+    ]
+   },
+   "depthMedian": 13.181,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-25.png"
+  },
+  {
+   "index": 27,
+   "image": "frames/video-volleyball/27.jpg",
+   "depth": "frames/video-volleyball/27-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -5.643481642302632,
+     3.8131775852090937,
+     -5.843996315924966
+    ],
+    "quaternion": [
+     0.03890759467360365,
+     0.9221693296554794,
+     0.09629967607468634,
+     -0.3725805938416398
+    ]
+   },
+   "depthMedian": 13.442,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-26.png"
+  },
+  {
+   "index": 28,
+   "image": "frames/video-volleyball/28.jpg",
+   "depth": "frames/video-volleyball/28-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -4.165876427077366,
+     3.2281534553095153,
+     -4.313891323744164
+    ],
+    "quaternion": [
+     0.0287670170920716,
+     0.9244459621180102,
+     0.07120086581658831,
+     -0.37350041306308995
+    ]
+   },
+   "depthMedian": 12.882,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-27.png"
+  },
+  {
+   "index": 29,
+   "image": "frames/video-volleyball/29.jpg",
+   "depth": "frames/video-volleyball/29-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -2.9051717419791996,
+     2.678537068181926,
+     -3.0083934055872175
+    ],
+    "quaternion": [
+     0.018526124367693766,
+     0.9260702673170154,
+     0.045412740344819416,
+     -0.37415013794154717
+    ]
+   },
+   "depthMedian": 12.016,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-28.png"
+  },
+  {
+   "index": 30,
+   "image": "frames/video-volleyball/30.jpg",
+   "depth": "frames/video-volleyball/30-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -1.7242940210469908,
+     2.1823172038662473,
+     -1.785558728681994
+    ],
+    "quaternion": [
+     0.008171782758511948,
+     0.9269965251357585,
+     0.018792904453359738,
+     -0.37450966755877446
+    ]
+   },
+   "depthMedian": 15.161,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-29.png"
+  },
+  {
+   "index": 31,
+   "image": "frames/video-volleyball/31.jpg",
+   "depth": "frames/video-volleyball/31-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.7059458459909083,
+     1.7789501205889087,
+     -0.7310283234181139
+    ],
+    "quaternion": [
+     -0.002189233687594887,
+     0.9271655980392579,
+     -0.007842281769389994,
+     -0.3745632919614736
+    ]
+   },
+   "depthMedian": 16.366,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-30.png"
+  },
+  {
+   "index": 32,
+   "image": "frames/video-volleyball/32.jpg",
+   "depth": "frames/video-volleyball/32-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.030093611425334288,
+     1.5,
+     0.029183208435326513
+    ],
+    "quaternion": [
+     -0.012620685690053023,
+     0.9257907571001576,
+     -0.03444468501070571,
+     -0.3762522505383101
+    ]
+   },
+   "depthMedian": 22.451,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-32.png"
+  },
+  {
+   "index": 33,
+   "image": "frames/video-volleyball/33.jpg",
+   "depth": "frames/video-volleyball/33-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.11849674581687353,
+     1.5,
+     0.11634789551819225
+    ],
+    "quaternion": [
+     -0.012834254967423405,
+     0.9234373670523371,
+     -0.03436567956850282,
+     -0.3819917683650702
+    ]
+   },
+   "depthMedian": 23.438,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-33.png"
+  },
+  {
+   "index": 34,
+   "image": "frames/video-volleyball/34.jpg",
+   "depth": "frames/video-volleyball/34-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.2597297175715525,
+     1.5,
+     0.2602135358005926
+    ],
+    "quaternion": [
+     -0.013180015410672508,
+     0.919539901759911,
+     -0.034234561871714954,
+     -0.39128078286391665
+    ]
+   },
+   "depthMedian": 24.002,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-34.png"
+  },
+  {
+   "index": 35,
+   "image": "frames/video-volleyball/35.jpg",
+   "depth": "frames/video-volleyball/35-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.44516390472096656,
+     1.5,
+     0.45826123564036436
+    ],
+    "quaternion": [
+     -0.013643210378137538,
+     0.9141473846531917,
+     -0.034052618744403844,
+     -0.40371876485860264
+    ]
+   },
+   "depthMedian": 29.922,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-35.png"
+  },
+  {
+   "index": 36,
+   "image": "frames/video-volleyball/36.jpg",
+   "depth": "frames/video-volleyball/36-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.6637488292581155,
+     1.5,
+     0.7062693069404986
+    ],
+    "quaternion": [
+     -0.014204213106968601,
+     0.907349298363812,
+     -0.033822453529950565,
+     -0.4187738443670095
+    ]
+   },
+   "depthMedian": 17.101,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-36.png"
+  },
+  {
+   "index": 37,
+   "image": "frames/video-volleyball/37.jpg",
+   "depth": "frames/video-volleyball/37-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -0.9029598714069218,
+     1.5,
+     0.9978620581654782
+    ],
+    "quaternion": [
+     -0.014839507893499268,
+     0.8992907499413643,
+     -0.03354857729103601,
+     -0.4358100836799496
+    ]
+   },
+   "depthMedian": 19.748,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-37.png"
+  },
+  {
+   "index": 38,
+   "image": "frames/video-volleyball/38.jpg",
+   "depth": "frames/video-volleyball/38-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -1.1498775151552971,
+     1.5,
+     1.3242144385999275
+    ],
+    "quaternion": [
+     -0.015522865499047554,
+     0.890185008926466,
+     -0.0332379102753516,
+     -0.4541199531509421
+    ]
+   },
+   "depthMedian": 27.638,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-38.png"
+  },
+  {
+   "index": 39,
+   "image": "frames/video-volleyball/39.jpg",
+   "depth": "frames/video-volleyball/39-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -1.3922745160817085,
+     1.5,
+     1.6740281502659267
+    ],
+    "quaternion": [
+     -0.016226634945697305,
+     0.8803200203212134,
+     -0.0329000661262697,
+     -0.4729597697361634
+    ]
+   },
+   "depthMedian": 19.682,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-39.png"
+  },
+  {
+   "index": 40,
+   "image": "frames/video-volleyball/40.jpg",
+   "depth": "frames/video-volleyball/40-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -1.619567681760084,
+     1.5,
+     2.0338388724012866
+    ],
+    "quaternion": [
+     -0.01692305589915072,
+     0.87005636460466,
+     -0.03254732265191815,
+     -0.4915853988659031
+    ]
+   },
+   "depthMedian": 37.054,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-40.png"
+  },
+  {
+   "index": 41,
+   "image": "frames/video-volleyball/41.jpg",
+   "depth": "frames/video-volleyball/41-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -1.823498222300036,
+     1.5,
+     2.388643795767017
+    ],
+    "quaternion": [
+     -0.017585489805362998,
+     0.8598154805680381,
+     -0.032194232108862575,
+     -0.509285402640582
+    ]
+   },
+   "depthMedian": 41.813,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-41.png"
+  },
+  {
+   "index": 42,
+   "image": "frames/video-volleyball/42.jpg",
+   "depth": "frames/video-volleyball/42-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -1.998443564588281,
+     1.5,
+     2.7227730858098376
+    ],
+    "quaternion": [
+     -0.01818947846519873,
+     0.8500585263960007,
+     -0.03185688161038233,
+     -0.5254091583410836
+    ]
+   },
+   "depthMedian": 48.288,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-42.png"
+  },
+  {
+   "index": 43,
+   "image": "frames/video-volleyball/43.jpg",
+   "depth": "frames/video-volleyball/43-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -2.1413282636802906,
+     1.5,
+     3.0208860433113687
+    ],
+    "quaternion": [
+     -0.018713566046963108,
+     0.8412577363344182,
+     -0.03155186965268134,
+     -0.5393882674147785
+    ]
+   },
+   "depthMedian": 48.933,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-43.png"
+  },
+  {
+   "index": 44,
+   "image": "frames/video-volleyball/44.jpg",
+   "depth": "frames/video-volleyball/44-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -2.251177223392511,
+     1.5,
+     3.268962513831512
+    ],
+    "quaternion": [
+     -0.01913985987831452,
+     0.8338632755713509,
+     -0.031295108189816664,
+     -0.5507506873537639
+    ]
+   },
+   "depthMedian": 49.571,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-44.png"
+  },
+  {
+   "index": 45,
+   "image": "frames/video-volleyball/45.jpg",
+   "depth": "frames/video-volleyball/45-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -2.328422125083905,
+     1.5,
+     3.4551809337775774
+    ],
+    "quaternion": [
+     -0.019454348020301965,
+     0.8282692396113597,
+     -0.031100584815704307,
+     -0.5591282041543301
+    ]
+   },
+   "depthMedian": 49.433,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-45.png"
+  },
+  {
+   "index": 46,
+   "image": "frames/video-volleyball/46.jpg",
+   "depth": "frames/video-volleyball/46-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -2.3741157861305515,
+     1.5,
+     3.5706144045937016
+    ],
+    "quaternion": [
+     -0.019647027423770128,
+     0.8247825416238677,
+     -0.030979224428372462,
+     -0.5642588421989496
+    ]
+   },
+   "depthMedian": 49.32,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-46.png"
+  },
+  {
+   "index": 47,
+   "image": "frames/video-volleyball/47.jpg",
+   "depth": "frames/video-volleyball/47-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     -2.389220560382044,
+     1.5,
+     3.6097185079335086
+    ],
+    "quaternion": [
+     -0.019711916697380153,
+     0.8235980438024224,
+     -0.030937976224850092,
+     -0.5659863463123905
+    ]
+   },
+   "depthMedian": 48.741,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/gen/stanford-volleyball-video-48/frame-47.png"
+  },
+  {
+   "index": 48,
+   "image": "frames/video-volleyball/48.jpg",
+   "depth": "frames/video-volleyball/48-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 754.2344970703125,
+     "fy": 754.2344970703125,
+     "cx": 640.0,
+     "cy": 360.0,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     0.0,
+     1.5,
+     0.0
+    ],
+    "quaternion": [
+     -0.012548461934200228,
+     0.9265773479261842,
+     -0.03447106229665358,
+     -0.3743109673484136
+    ]
+   },
+   "depthMedian": 6.892,
+   "kind": "photo",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-volleyball/work/scene/stanford-volleyball/context/photo.png"
+  }
  ]
 }
