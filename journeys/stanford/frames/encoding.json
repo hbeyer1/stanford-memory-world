@@ -1,0 +1,1 @@
+{"depthMin": 0.05, "depthMax": 20000.0, "width": 960, "height": 540, "about": "log depth in 16 bits: R high byte, G low byte; B = confidence"}
