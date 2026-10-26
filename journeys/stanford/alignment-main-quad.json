@@ -1,0 +1,741 @@
+{
+ "views": [
+  [
+   "dense-air",
+   [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    15,
+    16,
+    17,
+    18,
+    19
+   ]
+  ],
+  [
+   "dense-eye",
+   [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+   ]
+  ],
+  [
+   "crane-2",
+   [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  ]
+ ],
+ "frames": [
+  {
+   "index": 1,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-00.png",
+   "scale": 0.995,
+   "stretch": -0.0,
+   "confirmed": 0.526,
+   "before": {
+    "ground": -1.31
+   },
+   "after": {
+    "ground": 0.95
+   },
+   "photo": null
+  },
+  {
+   "index": 2,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-01.png",
+   "scale": 0.994,
+   "stretch": -0.0,
+   "confirmed": 0.665,
+   "before": {
+    "ground": -1.21,
+    "overlap": 0.563,
+    "disagree": 0.0099
+   },
+   "after": {
+    "ground": 0.49,
+    "overlap": 0.562,
+    "disagree": 0.0061
+   },
+   "photo": null
+  },
+  {
+   "index": 3,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-02.png",
+   "scale": 0.998,
+   "stretch": -0.0,
+   "confirmed": 0.738,
+   "before": {
+    "ground": -0.58,
+    "overlap": 0.576,
+    "disagree": 0.0071
+   },
+   "after": {
+    "ground": -0.25,
+    "overlap": 0.575,
+    "disagree": 0.0044
+   },
+   "photo": null
+  },
+  {
+   "index": 4,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-03.png",
+   "scale": 1.0,
+   "stretch": -0.0,
+   "confirmed": 0.78,
+   "before": {
+    "ground": 0.03,
+    "overlap": 0.58,
+    "disagree": 0.0038
+   },
+   "after": {
+    "ground": 0.06,
+    "overlap": 0.58,
+    "disagree": 0.0039
+   },
+   "photo": null
+  },
+  {
+   "index": 5,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-04.png",
+   "scale": 1.013,
+   "stretch": -0.0,
+   "confirmed": 0.81,
+   "before": {
+    "ground": 1.95,
+    "overlap": 0.58,
+    "disagree": 0.0145
+   },
+   "after": {
+    "ground": 0.22,
+    "overlap": 0.579,
+    "disagree": 0.0062
+   },
+   "photo": null
+  },
+  {
+   "index": 6,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-05.png",
+   "scale": 1.0,
+   "stretch": -0.0,
+   "confirmed": 0.821,
+   "before": {
+    "ground": 0.82,
+    "overlap": 0.59,
+    "disagree": 0.018
+   },
+   "after": {
+    "ground": 0.84,
+    "overlap": 0.592,
+    "disagree": 0.0059
+   },
+   "photo": null
+  },
+  {
+   "index": 7,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-06.png",
+   "scale": 1.021,
+   "stretch": -0.0,
+   "confirmed": 0.849,
+   "before": {
+    "ground": 2.52,
+    "overlap": 0.592,
+    "disagree": 0.0274
+   },
+   "after": {
+    "ground": 1.12,
+    "overlap": 0.594,
+    "disagree": 0.0102
+   },
+   "photo": null
+  },
+  {
+   "index": 8,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-07.png",
+   "scale": 1.007,
+   "stretch": -0.0,
+   "confirmed": 0.849,
+   "before": {
+    "ground": 1.17,
+    "overlap": 0.593,
+    "disagree": 0.0195
+   },
+   "after": {
+    "ground": 0.85,
+    "overlap": 0.601,
+    "disagree": 0.0108
+   },
+   "photo": null
+  },
+  {
+   "index": 9,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-08.png",
+   "scale": 1.017,
+   "stretch": -0.0,
+   "confirmed": 0.868,
+   "before": {
+    "ground": 1.55,
+    "overlap": 0.6,
+    "disagree": 0.0096
+   },
+   "after": {
+    "ground": 0.96,
+    "overlap": 0.602,
+    "disagree": 0.0107
+   },
+   "photo": null
+  },
+  {
+   "index": 10,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-09.png",
+   "scale": 1.074,
+   "stretch": 0.0,
+   "confirmed": 0.993,
+   "before": {
+    "ground": 1.88,
+    "overlap": 0.328,
+    "disagree": 0.0193
+   },
+   "after": {
+    "ground": 0.02,
+    "overlap": 0.33,
+    "disagree": 0.0156
+   },
+   "photo": null
+  },
+  {
+   "index": 11,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-10.png",
+   "scale": 1.128,
+   "stretch": 0.0,
+   "confirmed": 0.99,
+   "before": {
+    "ground": 2.42,
+    "overlap": 0.487,
+    "disagree": 0.0211
+   },
+   "after": {
+    "ground": 0.03,
+    "overlap": 0.504,
+    "disagree": 0.0115
+   },
+   "photo": null
+  },
+  {
+   "index": 12,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-11.png",
+   "scale": 1.214,
+   "stretch": 0.0,
+   "confirmed": 0.988,
+   "before": {
+    "ground": 2.98,
+    "overlap": 0.484,
+    "disagree": 0.0198
+   },
+   "after": {
+    "ground": 0.22,
+    "overlap": 0.523,
+    "disagree": 0.0195
+   },
+   "photo": null
+  },
+  {
+   "index": 13,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-15.png",
+   "scale": 1.236,
+   "stretch": -0.157,
+   "confirmed": 0.884,
+   "before": {
+    "ground": 1.27,
+    "overlap": 0.009,
+    "disagree": 0.4689
+   },
+   "after": {
+    "ground": 0.3,
+    "overlap": 0.017,
+    "disagree": 0.2053
+   },
+   "photo": null
+  },
+  {
+   "index": 14,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-16.png",
+   "scale": 1.142,
+   "stretch": -0.115,
+   "confirmed": 0.9,
+   "before": {
+    "ground": 0.67,
+    "overlap": 0.62,
+    "disagree": 0.1494
+   },
+   "after": {
+    "ground": 0.21,
+    "overlap": 0.67,
+    "disagree": 0.0309
+   },
+   "photo": null
+  },
+  {
+   "index": 15,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-17.png",
+   "scale": 0.974,
+   "stretch": -0.046,
+   "confirmed": 0.885,
+   "before": {
+    "ground": 0.21,
+    "overlap": 0.549,
+    "disagree": 0.1588
+   },
+   "after": {
+    "ground": 0.27,
+    "overlap": 0.586,
+    "disagree": 0.0341
+   },
+   "photo": null
+  },
+  {
+   "index": 16,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-18.png",
+   "scale": 0.819,
+   "stretch": 0.05,
+   "confirmed": 0.873,
+   "before": {
+    "ground": -0.07,
+    "overlap": 0.581,
+    "disagree": 0.1563
+   },
+   "after": {
+    "ground": 0.36,
+    "overlap": 0.574,
+    "disagree": 0.0461
+   },
+   "photo": null
+  },
+  {
+   "index": 17,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-19.png",
+   "scale": 0.748,
+   "stretch": 0.129,
+   "confirmed": 0.855,
+   "before": {
+    "ground": -0.12,
+    "overlap": 0.603,
+    "disagree": 0.0829
+   },
+   "after": {
+    "ground": 0.3,
+    "overlap": 0.544,
+    "disagree": 0.0802
+   },
+   "photo": null
+  },
+  {
+   "index": 18,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-00.png",
+   "scale": 0.666,
+   "stretch": 0.086,
+   "confirmed": 0.885,
+   "before": {
+    "ground": -0.43,
+    "overlap": 0.513,
+    "disagree": 0.1121
+   },
+   "after": {
+    "ground": 0.21,
+    "overlap": 0.443,
+    "disagree": 0.1102
+   },
+   "photo": null
+  },
+  {
+   "index": 19,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-01.png",
+   "scale": 0.716,
+   "stretch": 0.019,
+   "confirmed": 0.889,
+   "before": {
+    "ground": -0.02,
+    "overlap": 0.661,
+    "disagree": 0.0844
+   },
+   "after": {
+    "ground": 0.4,
+    "overlap": 0.614,
+    "disagree": 0.0428
+   },
+   "photo": null
+  },
+  {
+   "index": 20,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-02.png",
+   "scale": 0.703,
+   "stretch": -0.003,
+   "confirmed": 0.873,
+   "before": {
+    "ground": 0.43,
+    "overlap": 0.779,
+    "disagree": 0.0329
+   },
+   "after": {
+    "ground": 0.74,
+    "overlap": 0.735,
+    "disagree": 0.0384
+   },
+   "photo": null
+  },
+  {
+   "index": 21,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-03.png",
+   "scale": 0.706,
+   "stretch": -0.014,
+   "confirmed": 0.88,
+   "before": {
+    "ground": 0.39,
+    "overlap": 0.74,
+    "disagree": 0.0285
+   },
+   "after": {
+    "ground": 0.72,
+    "overlap": 0.711,
+    "disagree": 0.0383
+   },
+   "photo": null
+  },
+  {
+   "index": 22,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-04.png",
+   "scale": 0.694,
+   "stretch": -0.009,
+   "confirmed": 0.877,
+   "before": {
+    "ground": 0.36,
+    "overlap": 0.807,
+    "disagree": 0.0361
+   },
+   "after": {
+    "ground": 0.73,
+    "overlap": 0.772,
+    "disagree": 0.038
+   },
+   "photo": null
+  },
+  {
+   "index": 23,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-05.png",
+   "scale": 0.69,
+   "stretch": 0.002,
+   "confirmed": 0.862,
+   "before": {
+    "ground": 0.33,
+    "overlap": 0.793,
+    "disagree": 0.0284
+   },
+   "after": {
+    "ground": 0.72,
+    "overlap": 0.751,
+    "disagree": 0.0386
+   },
+   "photo": null
+  },
+  {
+   "index": 24,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-06.png",
+   "scale": 0.704,
+   "stretch": 0.004,
+   "confirmed": 0.877,
+   "before": {
+    "ground": 0.32,
+    "overlap": 0.547,
+    "disagree": 0.0677
+   },
+   "after": {
+    "ground": 0.67,
+    "overlap": 0.538,
+    "disagree": 0.1216
+   },
+   "photo": null
+  },
+  {
+   "index": 25,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-07.png",
+   "scale": 0.68,
+   "stretch": -0.037,
+   "confirmed": 0.852,
+   "before": {
+    "ground": 0.01,
+    "overlap": 0.561,
+    "disagree": 0.0613
+   },
+   "after": {
+    "ground": 0.49,
+    "overlap": 0.566,
+    "disagree": 0.0632
+   },
+   "photo": null
+  },
+  {
+   "index": 26,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-08.png",
+   "scale": 0.693,
+   "stretch": -0.081,
+   "confirmed": 0.87,
+   "before": {
+    "ground": 0.64,
+    "overlap": 0.594,
+    "disagree": 0.0794
+   },
+   "after": {
+    "ground": 0.88,
+    "overlap": 0.598,
+    "disagree": 0.066
+   },
+   "photo": null
+  },
+  {
+   "index": 27,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-09.png",
+   "scale": 0.666,
+   "stretch": -0.101,
+   "confirmed": 0.844,
+   "before": {
+    "ground": 0.21,
+    "overlap": 0.639,
+    "disagree": 0.0561
+   },
+   "after": {
+    "ground": 0.63,
+    "overlap": 0.644,
+    "disagree": 0.0621
+   },
+   "photo": null
+  },
+  {
+   "index": 28,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-00.png",
+   "scale": 0.684,
+   "stretch": -0.04,
+   "confirmed": 0.882,
+   "before": {
+    "ground": -1.05,
+    "overlap": 0.441,
+    "disagree": 0.1471
+   },
+   "after": {
+    "ground": 0.07,
+    "overlap": 0.46,
+    "disagree": 0.0625
+   },
+   "photo": null
+  },
+  {
+   "index": 29,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-01.png",
+   "scale": 0.93,
+   "stretch": -0.092,
+   "confirmed": 0.899,
+   "before": {
+    "ground": -0.2,
+    "overlap": 0.62,
+    "disagree": 0.1855
+   },
+   "after": {
+    "ground": 0.06,
+    "overlap": 0.651,
+    "disagree": 0.03
+   },
+   "photo": null
+  },
+  {
+   "index": 30,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-02.png",
+   "scale": 1.171,
+   "stretch": -0.265,
+   "confirmed": 0.898,
+   "before": {
+    "ground": 1.17,
+    "overlap": 0.189,
+    "disagree": 0.2091
+   },
+   "after": {
+    "ground": 0.21,
+    "overlap": 0.158,
+    "disagree": 0.0468
+   },
+   "photo": null
+  },
+  {
+   "index": 31,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-03.png",
+   "scale": 1.166,
+   "stretch": -0.068,
+   "confirmed": 0.794,
+   "before": {
+    "ground": 3.09,
+    "overlap": 0.12,
+    "disagree": 0.2583
+   },
+   "after": {
+    "ground": 1.9,
+    "overlap": 0.123,
+    "disagree": 0.0765
+   },
+   "photo": null
+  },
+  {
+   "index": 32,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-04.png",
+   "scale": 2.431,
+   "stretch": -0.506,
+   "confirmed": 0.85,
+   "before": {
+    "ground": 11.57,
+    "overlap": 0.853,
+    "disagree": 0.9591
+   },
+   "after": {
+    "ground": 1.54,
+    "overlap": 0.89,
+    "disagree": 0.0446
+   },
+   "photo": null
+  },
+  {
+   "index": 33,
+   "kind": "atlas",
+   "origin": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-05.png",
+   "scale": 3.625,
+   "stretch": -0.523,
+   "confirmed": 0.848,
+   "before": {
+    "ground": 22.71,
+    "overlap": 0.785,
+    "disagree": 1.4276
+   },
+   "after": {
+    "ground": 1.7,
+    "overlap": 0.844,
+    "disagree": 0.0222
+   },
+   "photo": null
+  },
+  {
+   "index": 34,
+   "kind": "photo",
+   "origin": "stanford-main-quad/work/scene/stanford-main-quad/context/photo.png",
+   "scale": 1.0,
+   "stretch": 0.0,
+   "confirmed": 0.838,
+   "before": {
+    "ground": 0.38,
+    "overlap": 0.002,
+    "disagree": 3.5017
+   },
+   "after": {
+    "ground": 0.61,
+    "overlap": 0.096,
+    "disagree": 2.0228
+   },
+   "photo": {
+    "posed": 0.884,
+    "from_frames": 0.077,
+    "posed_far": 0.033,
+    "bare_earth": 0.006
+   }
+  }
+ ],
+ "bubble": {
+  "dots": 2311042,
+  "radius": 280.0,
+  "fromFrames": [
+   159982,
+   146721,
+   135232,
+   142434,
+   132164,
+   137043,
+   144976,
+   147483,
+   150107,
+   81744,
+   82803,
+   90117,
+   54163,
+   42826,
+   33066,
+   25293,
+   19208,
+   14580,
+   12335,
+   15859,
+   14127,
+   15414,
+   17570,
+   18021,
+   17261,
+   16619,
+   18805,
+   25216,
+   31827,
+   41264,
+   22912,
+   143470,
+   141466,
+   18934
+  ]
+ }
+}

@@ -1,7 +1,9 @@
 {
  "order": [
   "stanford-terrain",
-  "volleyball-bubble"
+  "volleyball-bubble",
+  "main-quad-bubble",
+  "bench-night-bubble"
  ],
  "scenes": {
   "stanford-terrain": {
@@ -18,7 +20,9 @@
    ],
    "scale": 1.0,
    "holes": [
-    "volleyball-bubble"
+    "volleyball-bubble",
+    "main-quad-bubble",
+    "bench-night-bubble"
    ]
   },
   "volleyball-bubble": {
@@ -36,6 +40,38 @@
    "scale": 1.0,
    "radius": 260.0,
    "url": "clouds/lite/volleyball-bubble.spz"
+  },
+  "main-quad-bubble": {
+   "position": [
+    5425.707894637186,
+    26.850950241088867,
+    -5008.38789999996
+   ],
+   "quaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": 1.0,
+   "radius": 280.0,
+   "url": "clouds/lite/main-quad-bubble.spz"
+  },
+  "bench-night-bubble": {
+   "position": [
+    6401.644135694873,
+    20.508604049682617,
+    -4484.238925214343
+   ],
+   "quaternion": [
+    0,
+    0,
+    0,
+    1
+   ],
+   "scale": 1.0,
+   "radius": 95.0,
+   "url": "clouds/lite/bench-night-bubble.spz"
   }
  },
  "places": {
@@ -62,6 +98,30 @@
     -122.157375
    ],
    "when": "Tue 2026-06-23 19:11:04 PDT"
+  },
+  "main-quad": {
+   "offset": [
+    5425.707894637186,
+    26.850950241088867,
+    -5008.38789999996
+   ],
+   "gps": [
+    37.42709444444444,
+    -122.16863333333333
+   ],
+   "when": "Mon 2026-10-12 17:19:37 PDT"
+  },
+  "bench-night": {
+   "offset": [
+    6401.644135694873,
+    20.508604049682617,
+    -4484.238925214343
+   ],
+   "gps": [
+    37.4223541892779,
+    -122.15759923936457
+   ],
+   "when": "night (EXIF time 2026-10-25 15:37 PDT is a re-save, not the capture time)"
   }
  },
  "map": {
@@ -113,9 +173,19 @@
     -5341.645649999761
    ],
    [
+    5425.707894637186,
+    26.850950241088867,
+    -5008.38789999996
+   ],
+   [
     5553.490065222764,
     27.981277465820312,
     -4825.670507999824
+   ],
+   [
+    6401.644135694873,
+    20.508604049682617,
+    -4484.238925214343
    ]
   ],
   "fadeRadius": 11500.0

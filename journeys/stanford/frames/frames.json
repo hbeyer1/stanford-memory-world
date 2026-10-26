@@ -1791,5 +1791,2379 @@
    "scaleFrom": "atlas depth, aligned",
    "from": "stanford-volleyball/work/scene/stanford-volleyball/context/photo.png"
   }
+ ],
+ "video-main-quad": [
+  {
+   "index": 1,
+   "image": "frames/video-main-quad/01.jpg",
+   "depth": "frames/video-main-quad/01-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5583.913894637186,
+     478.35095024108887,
+     -4965.99689999996
+    ],
+    "quaternion": [
+     -0.4550487816914453,
+     0.49866816905678163,
+     0.34917121103879245,
+     0.6498770105430653
+    ]
+   },
+   "depthMedian": 480.016,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-00.png"
+  },
+  {
+   "index": 2,
+   "image": "frames/video-main-quad/02.jpg",
+   "depth": "frames/video-main-quad/02-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5554.5638946371855,
+     361.20495024108885,
+     -4973.86089999996
+    ],
+    "quaternion": [
+     -0.4477159820483262,
+     0.5025610564981663,
+     0.34354455597518463,
+     0.6549503202302926
+    ]
+   },
+   "depthMedian": 357.186,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-01.png"
+  },
+  {
+   "index": 3,
+   "image": "frames/video-main-quad/03.jpg",
+   "depth": "frames/video-main-quad/03-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5525.213894637186,
+     274.4539502410889,
+     -4981.72489999996
+    ],
+    "quaternion": [
+     -0.44032652180730153,
+     0.5063905126029866,
+     0.33787442370564885,
+     0.6599409645902762
+    ]
+   },
+   "depthMedian": 268.12,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-02.png"
+  },
+  {
+   "index": 4,
+   "image": "frames/video-main-quad/04.jpg",
+   "depth": "frames/video-main-quad/04-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5507.636894637186,
+     210.21095024108888,
+     -4986.434899999959
+    ],
+    "quaternion": [
+     -0.42862831205191826,
+     0.512266079214805,
+     0.3288980716493047,
+     0.6675981520786165
+    ]
+   },
+   "depthMedian": 201.402,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-03.png"
+  },
+  {
+   "index": 5,
+   "image": "frames/video-main-quad/05.jpg",
+   "depth": "frames/video-main-quad/05-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5491.530894637186,
+     162.63695024108887,
+     -4990.75089999996
+    ],
+    "quaternion": [
+     -0.41625807998015174,
+     0.5182376357361005,
+     0.3194060587330753,
+     0.6753804360525243
+    ]
+   },
+   "depthMedian": 151.273,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-04.png"
+  },
+  {
+   "index": 6,
+   "image": "frames/video-main-quad/06.jpg",
+   "depth": "frames/video-main-quad/06-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5480.044894637186,
+     127.40595024108887,
+     -4993.8288999999595
+    ],
+    "quaternion": [
+     -0.40149067798025473,
+     0.5250528527441767,
+     0.3080746326362198,
+     0.684262199778868
+    ]
+   },
+   "depthMedian": 114.002,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-05.png"
+  },
+  {
+   "index": 7,
+   "image": "frames/video-main-quad/07.jpg",
+   "depth": "frames/video-main-quad/07-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5469.878894637186,
+     101.31595024108887,
+     -4996.55289999996
+    ],
+    "quaternion": [
+     -0.38588043387875526,
+     0.531899762437945,
+     0.2960964710481998,
+     0.6931852662173394
+    ]
+   },
+   "depthMedian": 86.622,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-06.png"
+  },
+  {
+   "index": 8,
+   "image": "frames/video-main-quad/08.jpg",
+   "depth": "frames/video-main-quad/08-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5462.047894637186,
+     81.99495024108887,
+     -4998.65089999996
+    ],
+    "quaternion": [
+     -0.3685338786730954,
+     0.5390942039122134,
+     0.28278599109043007,
+     0.7025612448900269
+    ]
+   },
+   "depthMedian": 65.031,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-07.png"
+  },
+  {
+   "index": 9,
+   "image": "frames/video-main-quad/09.jpg",
+   "depth": "frames/video-main-quad/09-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5455.384894637185,
+     67.68795024108887,
+     -5000.4358999999595
+    ],
+    "quaternion": [
+     -0.350180167727902,
+     0.5462502540354456,
+     0.26870269335261837,
+     0.7118871909799463
+    ]
+   },
+   "depthMedian": 49.155,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-08.png"
+  },
+  {
+   "index": 10,
+   "image": "frames/video-main-quad/10.jpg",
+   "depth": "frames/video-main-quad/10-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5449.967894637186,
+     57.09195024108887,
+     -5001.8868999999595
+    ],
+    "quaternion": [
+     -0.3304876922432328,
+     0.5534270605571345,
+     0.2535921254531176,
+     0.7212401873349836
+    ]
+   },
+   "depthMedian": 34.822,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-09.png"
+  },
+  {
+   "index": 11,
+   "image": "frames/video-main-quad/11.jpg",
+   "depth": "frames/video-main-quad/11-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5445.547894637186,
+     49.24595024108886,
+     -5003.07189999996
+    ],
+    "quaternion": [
+     -0.30965197273998385,
+     0.5604771776566404,
+     0.2376043155643151,
+     0.7304280788205616
+    ]
+   },
+   "depthMedian": 25.902,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-10.png"
+  },
+  {
+   "index": 12,
+   "image": "frames/video-main-quad/12.jpg",
+   "depth": "frames/video-main-quad/12-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5441.774894637186,
+     43.43495024108887,
+     -5004.082899999959
+    ],
+    "quaternion": [
+     -0.28777134714497704,
+     0.5673018036500179,
+     0.2208147210314032,
+     0.7393221045752827
+    ]
+   },
+   "depthMedian": 20.344,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-11.png"
+  },
+  {
+   "index": 13,
+   "image": "frames/video-main-quad/13.jpg",
+   "depth": "frames/video-main-quad/13-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5432.165894637185,
+     31.838950241088867,
+     -5006.65789999996
+    ],
+    "quaternion": [
+     -0.18958542377508372,
+     0.591124174117477,
+     0.1454740121900499,
+     0.7703680222096981
+    ]
+   },
+   "depthMedian": 12.443,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-15.png"
+  },
+  {
+   "index": 14,
+   "image": "frames/video-main-quad/14.jpg",
+   "depth": "frames/video-main-quad/14-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5430.609894637186,
+     30.544950241088866,
+     -5007.073899999959
+    ],
+    "quaternion": [
+     -0.16233925687959824,
+     0.5958804133048522,
+     0.12456729301216495,
+     0.7765664737979873
+    ]
+   },
+   "depthMedian": 10.266,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-16.png"
+  },
+  {
+   "index": 15,
+   "image": "frames/video-main-quad/15.jpg",
+   "depth": "frames/video-main-quad/15-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5429.041894637186,
+     29.585950241088867,
+     -5007.49489999996
+    ],
+    "quaternion": [
+     -0.13504814600296577,
+     0.5998785831711214,
+     0.10297684056865082,
+     0.7818589732299991
+    ]
+   },
+   "depthMedian": 9.981,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-17.png"
+  },
+  {
+   "index": 16,
+   "image": "frames/video-main-quad/16.jpg",
+   "depth": "frames/video-main-quad/16-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5427.374894637186,
+     28.876950241088867,
+     -5007.94089999996
+    ],
+    "quaternion": [
+     -0.10883002075248605,
+     0.6029306821478336,
+     0.07701758878596901,
+     0.7865741606011202
+    ]
+   },
+   "depthMedian": 8.831,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-18.png"
+  },
+  {
+   "index": 17,
+   "image": "frames/video-main-quad/17.jpg",
+   "depth": "frames/video-main-quad/17-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.707894637186,
+     28.350950241088867,
+     -5008.38789999996
+    ],
+    "quaternion": [
+     -0.08246031474790516,
+     0.6051430065215566,
+     0.05095106527709891,
+     0.7901937908493438
+    ]
+   },
+   "depthMedian": 7.783,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-air/frame-19.png"
+  },
+  {
+   "index": 18,
+   "image": "frames/video-main-quad/18.jpg",
+   "depth": "frames/video-main-quad/18-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5424.577894637186,
+     28.350950241088867,
+     -5006.10289999996
+    ],
+    "quaternion": [
+     -0.07209871911521881,
+     0.5597106726140298,
+     0.048968338708197466,
+     0.8240921304490502
+    ]
+   },
+   "depthMedian": 7.436,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-00.png"
+  },
+  {
+   "index": 19,
+   "image": "frames/video-main-quad/19.jpg",
+   "depth": "frames/video-main-quad/19-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5424.836894637186,
+     28.350950241088867,
+     -5007.068899999959
+    ],
+    "quaternion": [
+     -0.070950829054315,
+     0.5785575160396652,
+     0.05061722385118865,
+     0.8109716870150995
+    ]
+   },
+   "depthMedian": 7.876,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-01.png"
+  },
+  {
+   "index": 20,
+   "image": "frames/video-main-quad/20.jpg",
+   "depth": "frames/video-main-quad/20-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.095894637186,
+     28.350950241088867,
+     -5008.033899999959
+    ],
+    "quaternion": [
+     -0.06975744427964646,
+     0.5972158534490128,
+     0.05224961685474822,
+     0.7973312366233191
+    ]
+   },
+   "depthMedian": 8.229,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-02.png"
+  },
+  {
+   "index": 21,
+   "image": "frames/video-main-quad/21.jpg",
+   "depth": "frames/video-main-quad/21-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.3538946371855,
+     28.350950241088867,
+     -5008.99989999996
+    ],
+    "quaternion": [
+     -0.06852380945096027,
+     0.615591996651704,
+     0.05385732106431267,
+     0.783230726008928
+    ]
+   },
+   "depthMedian": 8.381,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-03.png"
+  },
+  {
+   "index": 22,
+   "image": "frames/video-main-quad/22.jpg",
+   "depth": "frames/video-main-quad/22-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.6128946371855,
+     28.350950241088867,
+     -5009.96589999996
+    ],
+    "quaternion": [
+     -0.06725590959798809,
+     0.6335967930388277,
+     0.0554325366372785,
+     0.7687385643747925
+    ]
+   },
+   "depthMedian": 8.313,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-04.png"
+  },
+  {
+   "index": 23,
+   "image": "frames/video-main-quad/23.jpg",
+   "depth": "frames/video-main-quad/23-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.8718946371855,
+     28.350950241088867,
+     -5010.93189999996
+    ],
+    "quaternion": [
+     -0.06596030466323437,
+     0.651148090222665,
+     0.05696807617103874,
+     0.7539297322068418
+    ]
+   },
+   "depthMedian": 8.701,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-05.png"
+  },
+  {
+   "index": 24,
+   "image": "frames/video-main-quad/24.jpg",
+   "depth": "frames/video-main-quad/24-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.8628946371855,
+     28.350950241088867,
+     -5008.23189999996
+    ],
+    "quaternion": [
+     -0.06527579213047317,
+     0.6600985788818143,
+     0.05775114246173165,
+     0.7461057181554858
+    ]
+   },
+   "depthMedian": 9.157,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-06.png"
+  },
+  {
+   "index": 25,
+   "image": "frames/video-main-quad/25.jpg",
+   "depth": "frames/video-main-quad/25-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.869894637186,
+     28.350950241088867,
+     -5008.37089999996
+    ],
+    "quaternion": [
+     -0.06108826752876814,
+     0.7105363158589517,
+     0.06216387266113349,
+     0.6982420929388975
+    ]
+   },
+   "depthMedian": 9.211,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-07.png"
+  },
+  {
+   "index": 26,
+   "image": "frames/video-main-quad/26.jpg",
+   "depth": "frames/video-main-quad/26-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.857894637185,
+     28.350950241088867,
+     -5008.50989999996
+    ],
+    "quaternion": [
+     -0.056603127028234154,
+     0.7575123913280852,
+     0.06627374672162091,
+     0.6469767024325606
+    ]
+   },
+   "depthMedian": 10.691,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-08.png"
+  },
+  {
+   "index": 27,
+   "image": "frames/video-main-quad/27.jpg",
+   "depth": "frames/video-main-quad/27-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5425.835894637185,
+     28.350950241088867,
+     -5008.61189999996
+    ],
+    "quaternion": [
+     -0.053057054501380825,
+     0.7903343913115047,
+     0.06914529963441819,
+     0.6064449079812422
+    ]
+   },
+   "depthMedian": 10.62,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-dense-eye/frame-09.png"
+  },
+  {
+   "index": 28,
+   "image": "frames/video-main-quad/28.jpg",
+   "depth": "frames/video-main-quad/28-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5426.695894637186,
+     29.321950241088867,
+     -5008.64789999996
+    ],
+    "quaternion": [
+     -0.141585831063011,
+     0.7429733902541704,
+     0.16626477500657091,
+     0.6326926729530182
+    ]
+   },
+   "depthMedian": 7.05,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-00.png"
+  },
+  {
+   "index": 29,
+   "image": "frames/video-main-quad/29.jpg",
+   "depth": "frames/video-main-quad/29-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5428.284894637186,
+     30.922950241088866,
+     -5008.5518999999595
+    ],
+    "quaternion": [
+     -0.2112396623088129,
+     0.6920554703014582,
+     0.22390096132233364,
+     0.652920661805415
+    ]
+   },
+   "depthMedian": 8.335,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-01.png"
+  },
+  {
+   "index": 30,
+   "image": "frames/video-main-quad/30.jpg",
+   "depth": "frames/video-main-quad/30-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5431.1888946371855,
+     33.558950241088866,
+     -5008.077899999959
+    ],
+    "quaternion": [
+     -0.24069648686032696,
+     0.6519957234284045,
+     0.23041675926113392,
+     0.6810836181378644
+    ]
+   },
+   "depthMedian": 10.208,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-02.png"
+  },
+  {
+   "index": 31,
+   "image": "frames/video-main-quad/31.jpg",
+   "depth": "frames/video-main-quad/31-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5436.442894637185,
+     37.90295024108887,
+     -5006.65789999996
+    ],
+    "quaternion": [
+     -0.2522093887252939,
+     0.6164646009343236,
+     0.21795748700437423,
+     0.7133416810284093
+    ]
+   },
+   "depthMedian": 23.463,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-03.png"
+  },
+  {
+   "index": 32,
+   "image": "frames/video-main-quad/32.jpg",
+   "depth": "frames/video-main-quad/32-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5445.841894637186,
+     45.05995024108887,
+     -5003.059899999959
+    ],
+    "quaternion": [
+     -0.2537139017671051,
+     0.5818684840495755,
+     0.19762943933707589,
+     0.7469945970536024
+    ]
+   },
+   "depthMedian": 29.765,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-04.png"
+  },
+  {
+   "index": 33,
+   "image": "frames/video-main-quad/33.jpg",
+   "depth": "frames/video-main-quad/33-depth.png",
+   "camera": {
+    "intrinsics": {
+     "width": 1280,
+     "height": 720,
+     "fx": 827.9433170050526,
+     "fy": 827.9433170050526,
+     "cx": 640,
+     "cy": 360
+    },
+    "position": [
+     5462.457894637186,
+     56.85095024108887,
+     -4994.67289999996
+    ],
+    "quaternion": [
+     -0.24887735606130043,
+     0.5464625870152204,
+     0.17426580080382453,
+     0.7804294544049264
+    ]
+   },
+   "depthMedian": 52.431,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/gen/stanford-main-quad-crane-2/frame-05.png"
+  },
+  {
+   "index": 34,
+   "image": "frames/video-main-quad/34.jpg",
+   "depth": "frames/video-main-quad/34-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 748.0480346679688,
+     "fy": 748.0480346679688,
+     "cx": 640.0,
+     "cy": 360.0,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     5425.707894637186,
+     28.350950241088867,
+     -5008.38789999996
+    ],
+    "quaternion": [
+     -0.08246031474790515,
+     0.6051430065215566,
+     0.0509510652770989,
+     0.7901937908493439
+    ]
+   },
+   "depthMedian": 4.805,
+   "kind": "photo",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-main-quad/work/scene/stanford-main-quad/context/photo.png"
+  }
+ ],
+ "video-bench-night": [
+  {
+   "index": 1,
+   "image": "frames/video-bench-night/01.jpg",
+   "depth": "frames/video-bench-night/01-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6276.176316755721,
+     472.00860404968256,
+     -4589.518925810803
+    ],
+    "quaternion": [
+     0.24240387650610395,
+     0.7424038765061041,
+     0.5198367907256845,
+     -0.3461886130587541
+    ]
+   },
+   "depthMedian": 486.338,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-00.png"
+  },
+  {
+   "index": 2,
+   "image": "frames/video-bench-night/02.jpg",
+   "depth": "frames/video-bench-night/02-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6287.4030956742145,
+     422.97624697914125,
+     -4580.098539760987
+    ],
+    "quaternion": [
+     0.23990180980204603,
+     0.7461322275540512,
+     0.5144710913632556,
+     -0.347927171704702
+    ]
+   },
+   "depthMedian": 438.094,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-01.png"
+  },
+  {
+   "index": 3,
+   "image": "frames/video-bench-night/03.jpg",
+   "depth": "frames/video-bench-night/03-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6303.4995613011115,
+     352.6841667574238,
+     -4566.592001390199
+    ],
+    "quaternion": [
+     0.23738708511200357,
+     0.7498220745049414,
+     0.5090782468622835,
+     -0.349647775595322
+    ]
+   },
+   "depthMedian": 363.407,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-02.png"
+  },
+  {
+   "index": 4,
+   "image": "frames/video-bench-night/04.jpg",
+   "depth": "frames/video-bench-night/04-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6319.282742338758,
+     284.0066932006583,
+     -4553.348340002705
+    ],
+    "quaternion": [
+     0.2348600937054328,
+     0.7534728392946174,
+     0.5036590963028241,
+     -0.3513501551748705
+    ]
+   },
+   "depthMedian": 303.904,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-03.png"
+  },
+  {
+   "index": 5,
+   "image": "frames/video-bench-night/05.jpg",
+   "depth": "frames/video-bench-night/05-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6330.503001705648,
+     235.62158542745527,
+     -4543.933424506235
+    ],
+    "quaternion": [
+     0.23141667432981208,
+     0.7583569522729687,
+     0.49627465962158884,
+     -0.35362765445997
+    ]
+   },
+   "depthMedian": 255.572,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-04.png"
+  },
+  {
+   "index": 6,
+   "image": "frames/video-bench-night/06.jpg",
+   "depth": "frames/video-bench-night/06-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6338.946226835285,
+     199.48244992292487,
+     -4536.848717414009
+    ],
+    "quaternion": [
+     0.2272219485818774,
+     0.7641681364893618,
+     0.48727904122550336,
+     -0.35633745416302354
+    ]
+   },
+   "depthMedian": 202.984,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-05.png"
+  },
+  {
+   "index": 7,
+   "image": "frames/video-bench-night/07.jpg",
+   "depth": "frames/video-bench-night/07-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6345.905427923999,
+     170.3370921605286,
+     -4531.009254347181
+    ],
+    "quaternion": [
+     0.22299549588987333,
+     0.7698726200992448,
+     0.47821538417829423,
+     -0.3589974985561317
+    ]
+   },
+   "depthMedian": 171.029,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-06.png"
+  },
+  {
+   "index": 8,
+   "image": "frames/video-bench-night/08.jpg",
+   "depth": "frames/video-bench-night/08-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6352.267859434509,
+     144.7906543348368,
+     -4525.670540413322
+    ],
+    "quaternion": [
+     0.21862854458121117,
+     0.7756114246593337,
+     0.46885042687533995,
+     -0.361673547071156
+    ]
+   },
+   "depthMedian": 144.262,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-07.png"
+  },
+  {
+   "index": 9,
+   "image": "frames/video-bench-night/09.jpg",
+   "depth": "frames/video-bench-night/09-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6357.975809010911,
+     123.38939806365248,
+     -4520.881002028985
+    ],
+    "quaternion": [
+     0.21334753775793275,
+     0.7823454678469722,
+     0.4575252711955613,
+     -0.36481368297989836
+    ]
+   },
+   "depthMedian": 121.276,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-08.png"
+  },
+  {
+   "index": 10,
+   "image": "frames/video-bench-night/10.jpg",
+   "depth": "frames/video-bench-night/10-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6362.852531652222,
+     106.50678803214896,
+     -4516.788945859306
+    ],
+    "quaternion": [
+     0.20802143865770875,
+     0.7889141576451407,
+     0.4461034148158111,
+     -0.3678767133368289
+    ]
+   },
+   "depthMedian": 102.724,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-09.png"
+  },
+  {
+   "index": 11,
+   "image": "frames/video-bench-night/11.jpg",
+   "depth": "frames/video-bench-night/11-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6367.188514930168,
+     92.32224854273855,
+     -4513.150623889991
+    ],
+    "quaternion": [
+     0.20265137298340952,
+     0.7953161057220001,
+     0.4345872718136857,
+     -0.370861990752179
+    ]
+   },
+   "depthMedian": 86.997,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-10.png"
+  },
+  {
+   "index": 12,
+   "image": "frames/video-bench-night/12.jpg",
+   "depth": "frames/video-bench-night/12-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6371.154920968552,
+     79.76830798083486,
+     -4509.822414046083
+    ],
+    "quaternion": [
+     0.196713088447255,
+     0.8021435071028121,
+     0.4218525795299474,
+     -0.3740456603013498
+    ]
+   },
+   "depthMedian": 73.893,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-11.png"
+  },
+  {
+   "index": 13,
+   "image": "frames/video-bench-night/13.jpg",
+   "depth": "frames/video-bench-night/13-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6374.589389123646,
+     69.86778534760006,
+     -4506.940553083855
+    ],
+    "quaternion": [
+     0.1904597946335383,
+     0.8090541721496276,
+     0.40844234767045223,
+     -0.3772681563356238
+    ]
+   },
+   "depthMedian": 63.823,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-12.png"
+  },
+  {
+   "index": 14,
+   "image": "frames/video-bench-night/14.jpg",
+   "depth": "frames/video-bench-night/14-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6377.614689724591,
+     61.827490595668785,
+     -4504.4020244654
+    ],
+    "quaternion": [
+     0.18415372826294438,
+     0.8157406646491678,
+     0.394918944697521,
+     -0.38038611899435537
+    ]
+   },
+   "depthMedian": 53.965,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-13.png"
+  },
+  {
+   "index": 15,
+   "image": "frames/video-bench-night/15.jpg",
+   "depth": "frames/video-bench-night/15-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6380.373789055197,
+     54.72451411699175,
+     -4502.086865234707
+    ],
+    "quaternion": [
+     0.1776461328207224,
+     0.8223507294574449,
+     0.38096336123579944,
+     -0.3834684428353558
+    ]
+   },
+   "depthMedian": 46.218,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-14.png"
+  },
+  {
+   "index": 16,
+   "image": "frames/video-bench-night/16.jpg",
+   "depth": "frames/video-bench-night/16-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6382.8112066752365,
+     48.870355454034666,
+     -4500.041629008708
+    ],
+    "quaternion": [
+     0.17055591249864646,
+     0.8292253285145949,
+     0.3657583346871702,
+     -0.38667412102245
+    ]
+   },
+   "depthMedian": 39.479,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-15.png"
+  },
+  {
+   "index": 17,
+   "image": "frames/video-bench-night/17.jpg",
+   "depth": "frames/video-bench-night/17-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6384.9409036405,
+     44.23049431601464,
+     -4498.2546010706355
+    ],
+    "quaternion": [
+     0.16340787362989526,
+     0.8358188197364395,
+     0.3504293158650618,
+     -0.3897487164731739
+    ]
+   },
+   "depthMedian": 33.737,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-16.png"
+  },
+  {
+   "index": 18,
+   "image": "frames/video-bench-night/18.jpg",
+   "depth": "frames/video-bench-night/18-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6386.857412491284,
+     40.292758285109784,
+     -4496.646459200795
+    ],
+    "quaternion": [
+     0.15620443940351514,
+     0.8421289679258843,
+     0.33498150131515436,
+     -0.39269118689800486
+    ]
+   },
+   "depthMedian": 28.805,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-17.png"
+  },
+  {
+   "index": 19,
+   "image": "frames/video-bench-night/19.jpg",
+   "depth": "frames/video-bench-night/19-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6388.597350320182,
+     36.83604328939922,
+     -4495.186478010295
+    ],
+    "quaternion": [
+     0.14847356939310008,
+     0.8485361459704371,
+     0.3184025970762594,
+     -0.39567890308734244
+    ]
+   },
+   "depthMedian": 24.809,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-18.png"
+  },
+  {
+   "index": 20,
+   "image": "frames/video-bench-night/20.jpg",
+   "depth": "frames/video-bench-night/20-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6390.11124747224,
+     34.122347051863116,
+     -4493.916167468363
+    ],
+    "quaternion": [
+     0.14054901881009607,
+     0.8547203140831408,
+     0.30140834350907914,
+     -0.3985626280376141
+    ]
+   },
+   "depthMedian": 21.303,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-19.png"
+  },
+  {
+   "index": 21,
+   "image": "frames/video-bench-night/21.jpg",
+   "depth": "frames/video-bench-night/21-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6391.4603466699455,
+     31.90179431784268,
+     -4492.784138829146
+    ],
+    "quaternion": [
+     0.13256850681358523,
+     0.8605641642246911,
+     0.2842940803033521,
+     -0.40128766011172917
+    ]
+   },
+   "depthMedian": 18.308,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-20.png"
+  },
+  {
+   "index": 22,
+   "image": "frames/video-bench-night/22.jpg",
+   "depth": "frames/video-bench-night/22-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6392.7026763307695,
+     29.930034760911674,
+     -4491.741700468949
+    ],
+    "quaternion": [
+     0.12434929746171355,
+     0.8661882130943845,
+     0.2666679289671464,
+     -0.4039101971695052
+    ]
+   },
+   "depthMedian": 15.826,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-21.png"
+  },
+  {
+   "index": 23,
+   "image": "frames/video-bench-night/23.jpg",
+   "depth": "frames/video-bench-night/23-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6393.800303393454,
+     28.32818914819147,
+     -4490.820682005479
+    ],
+    "quaternion": [
+     0.11570410435504698,
+     0.8716800876148684,
+     0.24812825252075846,
+     -0.4064711003160331
+    ]
+   },
+   "depthMedian": 13.899,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-22.png"
+  },
+  {
+   "index": 24,
+   "image": "frames/video-bench-night/24.jpg",
+   "depth": "frames/video-bench-night/24-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6394.777201479872,
+     27.051945469165524,
+     -4490.000967181469
+    ],
+    "quaternion": [
+     0.10700624529976947,
+     0.8767751926434193,
+     0.22947563358309914,
+     -0.40884698680995046
+    ]
+   },
+   "depthMedian": 12.553,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-23.png"
+  },
+  {
+   "index": 25,
+   "image": "frames/video-bench-night/25.jpg",
+   "depth": "frames/video-bench-night/25-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6395.687289314037,
+     25.957217111052458,
+     -4489.237312815481
+    ],
+    "quaternion": [
+     0.09825967936890259,
+     0.8814712090009461,
+     0.21071856241366196,
+     -0.4110367752002864
+    ]
+   },
+   "depthMedian": 11.447,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-24.png"
+  },
+  {
+   "index": 26,
+   "image": "frames/video-bench-night/26.jpg",
+   "depth": "frames/video-bench-night/26-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6396.520745677199,
+     25.00785886235765,
+     -4488.53795988855
+    ],
+    "quaternion": [
+     0.08900638763899908,
+     0.8859800280615527,
+     0.19087481426139002,
+     -0.4131392720574825
+    ]
+   },
+   "depthMedian": 10.481,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-25.png"
+  },
+  {
+   "index": 27,
+   "image": "frames/video-bench-night/27.jpg",
+   "depth": "frames/video-bench-night/27-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6397.261080778749,
+     24.26361863542845,
+     -4487.916744977892
+    ],
+    "quaternion": [
+     0.07965020096285139,
+     0.8900660703794009,
+     0.17081040718481194,
+     -0.41504462488184046
+    ]
+   },
+   "depthMedian": 9.503,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-26.png"
+  },
+  {
+   "index": 28,
+   "image": "frames/video-bench-night/28.jpg",
+   "depth": "frames/video-bench-night/28-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6398.00518179372,
+     23.649620214403402,
+     -4487.292370090671
+    ],
+    "quaternion": [
+     0.07025335725806042,
+     0.89369778312519,
+     0.150658810828941,
+     -0.4167381203474212
+    ]
+   },
+   "depthMedian": 8.57,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-27.png"
+  },
+  {
+   "index": 29,
+   "image": "frames/video-bench-night/29.jpg",
+   "depth": "frames/video-bench-night/29-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6398.865350214645,
+     23.098120684802407,
+     -4486.570603085923
+    ],
+    "quaternion": [
+     0.0604573500437299,
+     0.8969454809507252,
+     0.13003634691816804,
+     -0.41823947865779015
+    ]
+   },
+   "depthMedian": 7.551,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-28.png"
+  },
+  {
+   "index": 30,
+   "image": "frames/video-bench-night/30.jpg",
+   "depth": "frames/video-bench-night/30-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6399.919235053967,
+     22.62880551938895,
+     -4485.686288705944
+    ],
+    "quaternion": [
+     0.05017407728705475,
+     0.8997905869771898,
+     0.1088501429744755,
+     -0.4195367778038932
+    ]
+   },
+   "depthMedian": 6.503,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-29.png"
+  },
+  {
+   "index": 31,
+   "image": "frames/video-bench-night/31.jpg",
+   "depth": "frames/video-bench-night/31-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6400.93618731915,
+     22.26190800718074,
+     -4484.832964435304
+    ],
+    "quaternion": [
+     0.03986248735741748,
+     0.9021278704973151,
+     0.08760250634497739,
+     -0.4205972993918739
+    ]
+   },
+   "depthMedian": 5.506,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-30.png"
+  },
+  {
+   "index": 32,
+   "image": "frames/video-bench-night/32.jpg",
+   "depth": "frames/video-bench-night/32-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6401.644135694873,
+     22.008604049682617,
+     -4484.238925214343
+    ],
+    "quaternion": [
+     0.029528399894985572,
+     0.903956012398418,
+     0.06630542874001491,
+     -0.42142044488609687
+    ]
+   },
+   "depthMedian": 4.878,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-31.png"
+  },
+  {
+   "index": 33,
+   "image": "frames/video-bench-night/33.jpg",
+   "depth": "frames/video-bench-night/33-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6401.605789689534,
+     22.008604049682617,
+     -4484.193260157692
+    ],
+    "quaternion": [
+     0.029760789235211523,
+     0.9024722896263417,
+     0.0662014479060141,
+     -0.4245885422097884
+    ]
+   },
+   "depthMedian": 4.885,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-32.png"
+  },
+  {
+   "index": 34,
+   "image": "frames/video-bench-night/34.jpg",
+   "depth": "frames/video-bench-night/34-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6401.493364890412,
+     22.008604049682617,
+     -4484.059376985884
+    ],
+    "quaternion": [
+     0.030439783847500262,
+     0.8980597248796203,
+     0.06589200133607145,
+     -0.4338437440696656
+    ]
+   },
+   "depthMedian": 4.891,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-33.png"
+  },
+  {
+   "index": 35,
+   "image": "frames/video-bench-night/35.jpg",
+   "depth": "frames/video-bench-night/35-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6401.314522861776,
+     22.008604049682617,
+     -4483.846399615827
+    ],
+    "quaternion": [
+     0.03151145189715664,
+     0.8908572910258251,
+     0.06538627287197644,
+     -0.44844726640417065
+    ]
+   },
+   "depthMedian": 4.9,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-34.png"
+  },
+  {
+   "index": 36,
+   "image": "frames/video-bench-night/36.jpg",
+   "depth": "frames/video-bench-night/36-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6401.081451392327,
+     22.008604049682617,
+     -4483.568842103327
+    ],
+    "quaternion": [
+     0.03288887855677649,
+     0.8811621261432939,
+     0.06470438893949147,
+     -0.467209772125835
+    ]
+   },
+   "depthMedian": 4.837,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-35.png"
+  },
+  {
+   "index": 37,
+   "image": "frames/video-bench-night/37.jpg",
+   "depth": "frames/video-bench-night/37-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6400.810033917539,
+     22.008604049682617,
+     -4483.2456195341765
+    ],
+    "quaternion": [
+     0.03445925471096195,
+     0.8694893031232677,
+     0.06388189137400697,
+     -0.48858982334209444
+    ]
+   },
+   "depthMedian": 4.756,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-36.png"
+  },
+  {
+   "index": 38,
+   "image": "frames/video-bench-night/38.jpg",
+   "depth": "frames/video-bench-night/38-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6400.51876708978,
+     22.008604049682617,
+     -4482.898758992312
+    ],
+    "quaternion": [
+     0.036096300937481195,
+     0.8565913005452815,
+     0.06297136920367996,
+     -0.5108649601894691
+    ]
+   },
+   "depthMedian": 4.637,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-37.png"
+  },
+  {
+   "index": 39,
+   "image": "frames/video-bench-night/39.jpg",
+   "depth": "frames/video-bench-night/39-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6400.227500262023,
+     22.008604049682617,
+     -4482.551898450447
+    ],
+    "quaternion": [
+     0.03767601625458551,
+     0.8434085813098786,
+     0.062039133455743786,
+     -0.5323472820369262
+    ]
+   },
+   "depthMedian": 4.573,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-38.png"
+  },
+  {
+   "index": 40,
+   "image": "frames/video-bench-night/40.jpg",
+   "depth": "frames/video-bench-night/40-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6399.956082787235,
+     22.008604049682617,
+     -4482.228675881296
+    ],
+    "quaternion": [
+     0.03909107714914921,
+     0.8309583718626964,
+     0.06115737051308406,
+     -0.5515794121887995
+    ]
+   },
+   "depthMedian": 4.54,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-39.png"
+  },
+  {
+   "index": 41,
+   "image": "frames/video-bench-night/41.jpg",
+   "depth": "frames/video-bench-night/41-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6399.723011317786,
+     22.008604049682617,
+     -4481.951118368796
+    ],
+    "quaternion": [
+     0.04025940208322573,
+     0.8202025687964155,
+     0.06039467546610826,
+     -0.5674499183707812
+    ]
+   },
+   "depthMedian": 4.552,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-40.png"
+  },
+  {
+   "index": 42,
+   "image": "frames/video-bench-night/42.jpg",
+   "depth": "frames/video-bench-night/42-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6399.544169289149,
+     22.008604049682617,
+     -4481.738140998739
+    ],
+    "quaternion": [
+     0.041125427798808546,
+     0.811941243064362,
+     0.05980832274124033,
+     -0.5792090136818862
+    ]
+   },
+   "depthMedian": 4.583,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-41.png"
+  },
+  {
+   "index": 43,
+   "image": "frames/video-bench-night/43.jpg",
+   "depth": "frames/video-bench-night/43-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6399.431744490027,
+     22.008604049682617,
+     -4481.604257826932
+    ],
+    "quaternion": [
+     0.04165602717838199,
+     0.8067547752986453,
+     0.05943998385320508,
+     -0.586411456446817
+    ]
+   },
+   "depthMedian": 4.566,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-42.png"
+  },
+  {
+   "index": 44,
+   "image": "frames/video-bench-night/44.jpg",
+   "depth": "frames/video-bench-night/44-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 834.0642386183716,
+     "fy": 834.0642386183716,
+     "cx": 640,
+     "cy": 360,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6399.393398484689,
+     22.008604049682617,
+     -4481.5585927702805
+    ],
+    "quaternion": [
+     0.041834546244703626,
+     0.8049880729696437,
+     0.05931447564680256,
+     -0.5888343282247261
+    ]
+   },
+   "depthMedian": 4.554,
+   "kind": "atlas",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/gen/stanford-bench-night-video-44/frame-43.png"
+  },
+  {
+   "index": 45,
+   "image": "frames/video-bench-night/45.jpg",
+   "depth": "frames/video-bench-night/45-depth.png",
+   "camera": {
+    "intrinsics": {
+     "fx": 1378.275390625,
+     "fy": 1377.4439697265625,
+     "cx": 640.5,
+     "cy": 360.0,
+     "width": 1280,
+     "height": 720
+    },
+    "position": [
+     6401.644135694873,
+     22.008604049682617,
+     -4484.238925214343
+    ],
+    "quaternion": [
+     0.029528399894985572,
+     0.903956012398418,
+     0.06630542874001491,
+     -0.4214204448860968
+    ]
+   },
+   "depthMedian": 4.137,
+   "kind": "photo",
+   "scaleFrom": "atlas depth, aligned",
+   "from": "stanford-bench-night/work/scene/stanford-bench-night/context/photo.png"
+  }
  ]
 }

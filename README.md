@@ -1,10 +1,9 @@
 # Stanford: a memory world
 
-Photos turned into places you can fly into: beach volleyball at sunset on Tuesday 23 June 2026 at 19:11, then a picnic
-breakfast with a bike at Meyer Green on Tuesday 13 October 2026 at 08:36. The journey starts above California,
-descends onto the courts, lands in the photo, rises and hops across campus (about 1 km, a few hundred metres up) down
-onto Meyer Green, lands in that photo, and rises back out. Everything is drawn as points of light: the campus around the spot, the views
-of the descent, and the photo itself, at true scale and in the morning light of that day.
+Photos turned into places you can fly into, at Stanford: beach volleyball at sunset (23 June 2026, 19:11), the Main
+Quad on a bike (12 October, 17:19), a picnic breakfast at Meyer Green (13 October, 08:36) and a night on a bench with
+friends. The journey starts above California, descends onto each spot, lands in its photo, and hops across campus (a
+few hundred metres up) to the next, then rises back out.
 
 ## Run it
 
@@ -20,7 +19,7 @@ Any static web server works; `serve.py` only adds the right type for `.ply` file
 | space | drift on |
 | drag | look around |
 | W A S D | wander |
-| 1, 2 | fly to a memory (volleyball, Meyer Green) |
+| 1–4 | fly to a memory (volleyball, Main Quad, Meyer Green, the bench) |
 | M | back up to the map |
 
 ## How it was made
@@ -30,6 +29,8 @@ Any static web server works; `serve.py` only adds the right type for `.ply` file
 - **Descent:** ten views from 450 m down to eye level, generated with World Labs Atlas from the photo and the aerial
   imagery around it (relit to the morning sun), then two views drifting around the picnic. Depth for every view was
   estimated with VGGT and scaled against the real terrain and the photo's own posed depth.
+- **Volleyball, Main Quad, the bench:** built the same way (`october/tools/build_stanford_world.py`); the path shows a
+  thinned set of each take's views so each one holds clearly. The Main Quad leaves by its own crane-out.
 - **Beach volleyball:** a 48-view Atlas take (a descent from 451 m and an arc at eye level; one view left out where the
   setter jumps), using Atlas metric depth. One smooth depth correction per view makes all views agree with each other,
   the USGS ground and the photo's posed depth; the views are toned toward the photo's light and fused into one dot

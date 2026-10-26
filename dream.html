@@ -108,7 +108,7 @@
     const DEFAULTS = {
       density: 0.85, detail: 0.7, discSize: 1.0, wobble: 0.3, fray: 0.5,
       afterimage: 0.7, focus: 0.45, curvature: 0.4, curveVideo: 0.3,
-      ripple: 0.8, dust: 0.3, glow: 0.65, grain: 0.35, vignette: 0.55, vignetteTone: "memory haze", worldGlow: 0.6, parallax: 0.5,
+      ripple: 0.8, dust: 0.3, glow: 0.65, grain: 0.35, vignette: 0.55, vignetteTone: "dark", worldGlow: 0.6, parallax: 0.5,
       nightCity: 0.85, terrain: 0.6, periphery: 1, worldAround: 1,
       playSpeed: 1, scrubSpeed: 2.5, settingsVersion: 2, springBack: true, resolution: 1.25,
     };
@@ -527,7 +527,8 @@
       m.worldModifier = tf.trained ? trainedModifier(own) : worldModifier(own);
       m.updateGenerator();
       scene.add(m);
-      worldMeshes.push({ mesh: m, own, name, bubble, trained: !!tf.trained, hole: own.holeR.value });
+      const holes = (tf.holes || []).map((h) => world.scenes[h]?.position).filter(Boolean).map((q) => new THREE.Vector3().fromArray(q));   // clouds standing on this ground
+      worldMeshes.push({ mesh: m, own, name, bubble, trained: !!tf.trained, hole: own.holeR.value, holes });
     }
     function loadWorld() {
       if (world.map) {
@@ -712,7 +713,7 @@
       hintEl.style.opacity = shown.length && alt > 300000 && !travel ? 0.8 : 0;
       mapEl.style.opacity = alt > 12000 || !show ? 0 : 0.95;   // above, the real map has the labels; down in a memory, the memory alone
     }
-    if (journey.map?.places) document.getElementById("help").insertAdjacentHTML("beforeend", " · <b>1</b> <b>2</b> a memory · <b>M</b> the map");
+    if (journey.map?.places) document.getElementById("help").insertAdjacentHTML("beforeend", " · <b>1–4</b> a memory · <b>M</b> the map");
 
     const track = document.getElementById("track"), headEl = document.getElementById("head");
     for (const r of segRanges) {
@@ -1262,7 +1263,11 @@
       const glowUp = mapLayers.length ? Math.max(THREE.MathUtils.smoothstep(camera.position.y, 1500, 8000), under) : 0;
       for (const wm of worldMeshes) {
         wm.own.weight.value = Math.round((wm.bubble ? bubbleIn : fade) * 30) / 30; wm.own.bright.value = wm.bubble ? 1 : params.worldGlow + (1.06 - params.worldGlow) * glowUp;
-        if (wm.hole) wm.own.holeR.value = wm.hole * bubbleIn;   // the ground opens under a cloud only while it shows
+        if (wm.holes.length > 1) {   // the ground opens under the nearest of the clouds standing on it
+          const near = wm.holes.reduce((a, b) => (a.distanceToSquared(camera.position) <= b.distanceToSquared(camera.position) ? a : b));
+          wm.own.holeC.value.copy(near);
+        }
+        if (wm.hole) wm.own.holeR.value = wm.hole * bubbleIn;   // ... only while it shows
         if (wm.bubble) { wm.own.aroundMul.value = bubbleIn; wm.own.shimmer.value = 1 - bubbleIn; wm.own.grow.value = 1 + 0.7 * bubbleIn; }   // a bubble only exists from inside
         wm.mesh.visible = wm.bubble ? bubbleIn > 0.02 : fade > 0.02 || params.worldAround > 0.01;
         if (wm.mesh.visible) wm.mesh.updateVersion();
