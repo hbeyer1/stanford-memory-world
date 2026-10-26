@@ -1,5 +1,9 @@
 # Stanford: a memory world
 
+<a href="media/showcase.mp4"><img src="media/showcase.gif" alt="Atlas showcase: posing the photo with Argon 4, adding USGS terrain context, fusing it all into one memory world" width="100%"></a>
+
+<p align="center"><a href="media/showcase.mp4">▶ Watch the full-quality video (15 s)</a></p>
+
 Photos turned into places you can fly into, at Stanford: beach volleyball at sunset (23 June 2026, 19:11), the Main
 Quad on a bike (12 October, 17:19), a picnic breakfast at Meyer Green (13 October, 08:36) and a night on a bench with
 friends. The journey starts above California, descends onto each spot, lands in its photo, and hops across campus (a
