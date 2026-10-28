@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stanford · a memory world</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #07080c; color: #ecebf2; font: 13px/1.45 -apple-system, system-ui, sans-serif; overflow: hidden; }
+    canvas { display: block; touch-action: none; cursor: crosshair; }
+    #caption { display: none; }
+    /* liquid glass: a blurred, brightened view of what lies beneath, a bright rim (light catching the edge from the top
+       left), a soft specular sheen; in Chromium the edges also bend what they show (url(#lg), a lens displacement) */
+    .glass { position: relative; isolation: isolate; color: #fff; border-radius: 999px;
+             background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05) 42%, rgba(255, 255, 255, 0.09)),
+                         rgba(18, 22, 30, 0.16);   /* a faint shade keeps white text legible over sunlit sand */
+             -webkit-backdrop-filter: blur(12px) saturate(175%) brightness(1.06); backdrop-filter: blur(12px) saturate(175%) brightness(1.06);
+             box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.55), inset 0 -0.5px 1px rgba(255, 255, 255, 0.22), inset 0 0 14px rgba(255, 255, 255, 0.07),
+                         0 8px 26px rgba(0, 0, 0, 0.26), 0 1px 3px rgba(0, 0, 0, 0.18); }
+    .refract .glass { backdrop-filter: url(#lg) blur(7px) saturate(175%) brightness(1.06); }
+    .glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: -1;
+                     background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.12) 30%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.4) 100%);
+                     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+    .glass::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: -1;
+                    background: radial-gradient(120% 90% at 18% -10%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 55%),
+                                radial-gradient(80% 60% at 90% 120%, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 60%); }
+    #loc { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px;
+           padding: 8px 18px 11px 14px; min-width: 230px; cursor: pointer; transition: opacity 0.6s; }
+    #locdot { width: 9px; height: 9px; border-radius: 50%; flex: none; box-shadow: 0 0 10px currentColor; transition: background 1.2s, color 1.2s; }
+    #loctext { position: relative; flex: 1; height: 32px; }
+    #loctext span { position: absolute; left: 0; top: 0; white-space: nowrap; transition: opacity 1.1s ease, transform 1.1s ease; }
+    #loctext b { display: block; font: 500 13.5px/1.25 -apple-system, "SF Pro Text", system-ui, sans-serif; letter-spacing: 0.01em; text-shadow: 0 1px 6px #0006; }
+    #loctext small { display: block; font-size: 11px; opacity: 0.78; letter-spacing: 0.02em; text-shadow: 0 1px 6px #0006; }
+    #loctext span.out { opacity: 0; transform: translateY(-4px); }
+    #loctext span.pre { opacity: 0; transform: translateY(4px); transition: none; }
+    #timeline { position: absolute; left: 16px; right: 16px; bottom: 5px; height: 10px; }
+    #track { position: absolute; left: 0; right: 0; top: 4px; height: 2px; display: flex; gap: 2px; opacity: 0.5; }
+    #track div { height: 100%; border-radius: 1px; }
+    #head { position: absolute; top: 2px; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; }
+    #help { position: fixed; left: 18px; top: 14px; font-size: 11px; opacity: 0.5; letter-spacing: 0.02em; text-shadow: 0 0 6px #000c, 0 0 2px #0008; transition: opacity 1.5s; }
+    #help.quiet { opacity: 0; }
+    #help:hover { opacity: 0.8; }
+    #help b { color: #fff; font-weight: 600; }
+    #help a { color: #b9d4ff; }
+    #status { position: fixed; right: 18px; bottom: 26px; font-size: 11px; opacity: 0.5; font-variant-numeric: tabular-nums; text-shadow: 0 0 6px #000c; }
+    #map { position: fixed; left: 18px; bottom: 18px; width: 84px; pointer-events: none; display: none; padding: 9px 10px 8px; border-radius: 18px; transition: opacity 0.8s; }
+    #map svg { width: 100%; height: auto; overflow: visible; }
+    #map .when { display: none; }
+    #places { position: fixed; inset: 0; pointer-events: none; }
+    /* the stations: small glass boxes standing over each memory's spot, a pin of light down to it */
+    .station { position: absolute; left: 0; top: 0; pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 8px;
+               padding: 6px 13px 7px 10px; border: 0; border-radius: 16px; font: 12px/1.25 -apple-system, "SF Pro Text", system-ui, sans-serif;
+               text-align: left; white-space: nowrap; opacity: 0; will-change: transform, opacity; transition: opacity 0.7s ease, box-shadow 0.3s; }
+    .station.on { opacity: 1; }
+    .station:hover { box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.7), inset 0 0 18px rgba(255, 255, 255, 0.14), 0 10px 30px rgba(0, 0, 0, 0.3); }
+    .station i { width: 8px; height: 8px; border-radius: 50%; flex: none; box-shadow: 0 0 8px currentColor; }
+    .station b { display: block; font-weight: 500; text-shadow: 0 1px 5px #0006; }
+    .station small { display: block; font-size: 10.5px; opacity: 0.75; text-shadow: 0 1px 5px #0006; }
+    .station .pin { position: absolute; left: 50%; top: 100%; width: 1px; height: 18px; margin-left: -0.5px;
+                    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)); pointer-events: none; }
+    .station .pin::after { content: ""; position: absolute; left: -2.5px; bottom: -3px; width: 6px; height: 6px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px #fff; }
+    .station.here { box-shadow: inset 0 1px 0.5px rgba(255, 255, 255, 0.75), inset 0 0 16px rgba(255, 255, 255, 0.12), 0 8px 26px rgba(0, 0, 0, 0.26); }
+    #maphint { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%); font-size: 12px; opacity: 0; transition: opacity 0.6s;
+               pointer-events: none; text-shadow: 0 0 6px #000c; letter-spacing: 0.03em; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/build/three.module.js",
+        "three/addons/": "./vendor/three/examples/jsm/",
+        "@sparkjsdev/spark": "./vendor/spark/spark.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="help"><b>space</b> play · <b>scroll</b> or <b>← →</b> move through time · <b>drag</b> look around · <b>W A S D</b> walk</div>
+  <div id="map" class="glass"></div>
+  <div id="places"></div>
+  <div id="maphint">choose a memory · or press space</div>
+  <div id="caption"></div>
+  <div id="status"></div>
+  <div id="loc" class="glass"><i id="locdot"></i><div id="loctext"></div><div id="timeline"><div id="track"></div><div id="head"></div></div></div>
+  <svg width="0" height="0" style="position:absolute">
+    <filter id="lg" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feImage id="lgmap" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map"/>
+      <feDisplacementMap in="SourceGraphic" in2="map" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  <script type="module">
+    import * as THREE from "three";
+    import { SparkRenderer, SplatMesh, PackedSplats, dyno } from "@sparkjsdev/spark";
+    import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+    import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+    import { UnrealBloomPass } from "three/addons/postprocessing/UnrealBloomPass.js";
+    import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
+    import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+
+    // ?journey=<name> loads a memory world from journeys/<name>/; default: stanford
+    const JOURNEY = new URLSearchParams(location.search).get("journey") || "stanford";
+    const BASE = JOURNEY ? `journeys/${JOURNEY}/` : "";
+    const get = async (u) => (await fetch(BASE + u)).json();
+    const [world, journey, manifest, enc, liteIndex] = await Promise.all([
+      get("world.json"), get("journey-polished.json"), get("frames/frames.json"), get("frames/encoding.json"), get("clouds/lite/index.json")]);
+    if (journey.title) document.title = journey.title;
+    const statusEl = document.getElementById("status");
+
+    // ---------------------------------------------------------------- settings
+    const DEFAULTS = {
+      density: 0.85, detail: 0.7, discSize: 0.85, wobble: 0.3, fray: 0.5,
+      afterimage: 0.7, focus: 0.45, curvature: 0.15, curveVideo: 0.3,
+      ripple: 0.8, dust: 0.3, glow: 0.45, grain: 0.25, vignette: 0.55, vignetteTone: "dark", worldGlow: 0.8, parallax: 0.5,
+      nightCity: 0.85, terrain: 0.6, periphery: 1, worldAround: 1,
+      playSpeed: 1, scrubSpeed: 2.5, settingsVersion: 2, springBack: true, resolution: 1.25,
+    };
+    const params = { ...DEFAULTS };
+    const save = () => {};
+
+    // ---------------------------------------------------------------- renderer, sky, post
+    const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, params.resolution));
+    renderer.setSize(innerWidth, innerHeight);
+    document.body.prepend(renderer.domElement);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.05, 80000);
+    // a world the size of a state needs full 32-bit positions when splats are gathered (16-bit ones run out ~65 km
+    // from the camera, so the map and far memories would vanish)
+    const spark = new SparkRenderer({ renderer, accumExtSplats: !!world.map });
+    spark.falloff = 0;  // hard-edged round dots
+    scene.add(spark);
+
+    // Sky: a dome around the camera, tinted from the colours of the memory you are in, so there is
+    // never a black void behind the dots. All around the picture the dome carries the picture itself,
+    // wrapped round you: its edges continue outward ever more blurred (mipmaps) and dimmer, and behind
+    // you the two sides meet. (Two frames at once, weighted by how present each one is.)
+    const blank = new THREE.DataTexture(new Uint8Array([0, 0, 0, 255]), 1, 1); blank.needsUpdate = true;
+    const skyU = { top: { value: new THREE.Color(0x0b1020) }, horizon: { value: new THREE.Color(0x2a2a3a) }, bottom: { value: new THREE.Color(0x0a0a0e) }, time: { value: 0 },
+                   picA: { value: blank }, picB: { value: blank }, toCamA: { value: new THREE.Matrix3() }, toCamB: { value: new THREE.Matrix3() },
+                   tanA: { value: new THREE.Vector2(1, 0.6) }, tanB: { value: new THREE.Vector2(1, 0.6) }, wA: { value: 0 }, wB: { value: 0 }, wrapAmt: { value: params.periphery } };
+    const sky = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 24), new THREE.ShaderMaterial({
+      uniforms: skyU, side: THREE.BackSide, depthWrite: false, depthTest: false,
+      vertexShader: `varying vec3 vDir; void main() { vDir = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `
+        uniform vec3 top, horizon, bottom; uniform float time; varying vec3 vDir;
+        uniform sampler2D picA, picB; uniform mat3 toCamA, toCamB; uniform vec2 tanA, tanB; uniform float wA, wB, wrapAmt;
+        float h(vec3 p) { return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
+        // the picture seen from its own camera, continued past its edges; o = angle outside it (radians)
+        vec3 wrapPic(sampler2D pic, mat3 toCam, vec2 tn, vec3 d, out float o) {
+          vec3 l = toCam * d;
+          float yaw = atan(l.x, -l.z), pitch = asin(clamp(l.y, -1.0, 1.0));
+          float hx = atan(tn.x), hy = atan(tn.y);
+          float ox = abs(yaw) - hx, oy = abs(pitch) - hy;
+          o = (ox > 0.0 || oy > 0.0) ? length(vec2(max(ox, 0.0), max(oy, 0.0))) : max(ox, oy);
+          vec2 uv = vec2(0.5 + 0.5 * clamp(yaw / hx, -1.0, 1.0), 0.5 + 0.5 * clamp(pitch / hy, -1.0, 1.0));
+          float lod = clamp(1.5 + max(o, 0.0) * 20.0, 1.5, 9.0);          // about one level blurrier every 3 degrees
+          vec3 c = textureLod(pic, uv, lod).rgb;
+          float behind = max(0.0, ox) / (3.14159265 - hx);
+          float wb = 0.5 * smoothstep(0.35, 1.0, behind);
+          if (wb > 0.0) c = mix(c, textureLod(pic, vec2(1.0 - uv.x, uv.y), lod).rgb, wb);
+          float fall = exp(-max(o, 0.0) / 0.7);
+          float lum = dot(c, vec3(0.3, 0.59, 0.11));
+          return mix(vec3(lum), c, 0.7 + 0.3 * fall) * (0.5 + 0.4 * fall);
+        }
+        void main() {
+          vec3 d = normalize(vDir);
+          float y = d.y;
+          vec3 c = y > 0.0 ? mix(horizon, top, pow(smoothstep(0.0, 0.8, y), 0.7)) : mix(horizon, bottom, smoothstep(0.0, -0.5, y));
+          c += horizon * 0.35 * exp(-abs(y) * 9.0);                       // glow along the horizon
+          float wsum = wA + wB;
+          if (wsum > 0.001 && wrapAmt > 0.0) {
+            float oA, oB;
+            vec3 mA = wrapPic(picA, toCamA, tanA, d, oA), mB = mA;
+            oB = oA;
+            if (wB > 0.001) mB = wrapPic(picB, toCamB, tanB, d, oB);
+            vec3 m = (mA * wA + mB * wB) / wsum;
+            float o = (oA * wA + oB * wB) / wsum;
+            c = mix(c, m, smoothstep(-0.035, 0.1, o) * clamp(wrapAmt, 0.0, 1.0) * clamp(wsum, 0.0, 1.0));
+          }
+          // faint far motes, slowly breathing
+          vec3 g = floor(d * 140.0);
+          float m = step(0.9965, h(g)) * (0.5 + 0.5 * sin(time * 0.7 + h(g + 3.1) * 6.2831));
+          c += vec3(m) * 0.35 * (0.4 + 0.6 * smoothstep(-0.1, 0.6, y));
+          gl_FragColor = vec4(c, 1.0);
+        }`,
+    }));
+    sky.renderOrder = -10;
+    sky.frustumCulled = false;
+    scene.add(sky);
+
+    const composer = new EffectComposer(renderer);
+    composer.setPixelRatio(Math.min(devicePixelRatio, params.resolution));
+    composer.setSize(innerWidth, innerHeight);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloom = new UnrealBloomPass(new THREE.Vector2(innerWidth, innerHeight), params.glow, 0.55, 0.62);
+    composer.addPass(bloom);
+    const finish = new ShaderPass({
+      uniforms: { tDiffuse: { value: null }, time: { value: 0 }, grain: { value: params.grain }, vignette: { value: params.vignette }, aspect: { value: innerWidth / innerHeight },
+                  vigLight: { value: params.vignetteTone === "dark" ? 0 : 1 }, vigColor: { value: new THREE.Color(1, 0.97, 0.93) }, mist: { value: 0 } },
+      vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `
+        uniform sampler2D tDiffuse; uniform float time, grain, vignette, aspect, vigLight, mist; uniform vec3 vigColor; varying vec2 vUv;
+        float h(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
+        void main() {
+          vec2 d = vUv - 0.5; d.x *= aspect;
+          float r = length(d);
+          vec2 off = (vUv - 0.5) * 0.004 * r;                                 // a touch of lens fringing at the edges
+          vec3 c = vec3(texture2D(tDiffuse, vUv + off).r, texture2D(tDiffuse, vUv).g, texture2D(tDiffuse, vUv - off).b);
+          // the rim breathes and is never a perfect oval; it darkens at night and turns into a pale
+          // haze in daylight (vigLight), like an overexposed edge of a remembered picture
+          float ang = atan(d.y, d.x);
+          float e = smoothstep(0.25, 1.05, r + 0.02 * sin(ang * 3.0 + time * 0.13) + 0.012 * sin(ang * 7.0 - time * 0.21));
+          c *= 1.0 - e * vignette * (1.0 - vigLight);
+          c = mix(c, vigColor, pow(e, 1.5) * vignette * vigLight);
+          // between memories: a pale mist, thickest at the edges, that clears as the next memory comes
+          float drift = 0.5 + 0.5 * sin(d.x * 3.1 + time * 0.4) * sin(d.y * 2.3 - time * 0.3);
+          c = mix(c, mix(vigColor, vec3(1.0), 0.35), clamp(mist * (0.75 + 0.25 * e + 0.12 * drift), 0.0, 0.94));
+          c += (h(vUv * 911.0 + fract(time * 7.13)) - 0.5) * 0.06 * grain;
+          gl_FragColor = vec4(c, 1.0);
+        }`,
+    });
+    composer.addPass(finish);
+    composer.addPass(new OutputPass());
+    addEventListener("resize", () => {
+      camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight);
+      bloom.setSize(innerWidth, innerHeight); finish.uniforms.aspect.value = innerWidth / innerHeight;
+    });
+
+    // ---------------------------------------------------------------- shared shader inputs
+    const f1 = (x = 0) => dyno.dynoFloat(x);
+    const v3 = () => dyno.dynoVec3(new THREE.Vector3());
+    const U = {
+      time: f1(), cam: v3(), rayO: v3(), rayD: v3(), rippleAmt: f1(params.ripple), curvK: f1(0),
+      focusDist: f1(50), focusAmt: f1(params.focus), wobble: f1(params.wobble), discSize: f1(params.discSize),
+      fray: f1(params.fray), curveVideo: f1(params.curveVideo), speed: f1(0), moveDir: v3(), haloAmt: f1(params.periphery),
+    };
+    // the picture you are in (the path camera, without looking around): the world keeps out of it, except while you
+    // are high above the ground (under: the real terrain stays beneath an aerial picture, which then emerges from it)
+    const KEY = { keyPos: v3(), keyR: v3(), keyU: v3(), keyF: v3(), keyTanX: f1(1), keyTanY: f1(0.6), around: f1(params.worldAround), under: f1(0) };
+    const typeOf = (v) => (v.value instanceof THREE.Vector3 ? "vec3" : "float");
+    const HASH = `
+      float dHash(uint x) {
+        x ^= x >> 16u; x *= 0x7feb352du; x ^= x >> 15u; x *= 0x846ca68bu; x ^= x >> 16u;
+        return float(x & 0xFFFFFFu) / 16777215.0;
+      }
+      // the 'touch': dots near the cursor's ray are pushed aside in rings and light up
+      vec4 touch(vec3 p, vec3 o, vec3 d, float amt, float t) {
+        vec3 v = p - o;
+        float along = dot(v, d);
+        if (along <= 0.0 || amt <= 0.0) return vec4(0.0);
+        vec3 perp = v - d * along;
+        float dp = length(perp);
+        float R = 0.075 * along;
+        float f = exp(-(dp * dp) / (R * R));
+        float wave = 0.5 + 0.5 * sin(dp / R * 7.0 - t * 5.0);
+        vec3 push = perp / max(dp, 1e-5) * R * 0.45 * f * amt * (0.6 + 0.4 * wave);
+        return vec4(push, f * amt * (0.4 + 0.6 * wave));
+      }`;
+    function makeDyno(inputs, body, space) {
+      const types = Object.fromEntries(Object.entries(inputs).map(([k, v]) => [k, typeOf(v)]));
+      return dyno.dynoBlock({ gsplat: dyno.Gsplat }, { gsplat: dyno.Gsplat }, ({ gsplat }) => {
+        const d = new dyno.Dyno({
+          inTypes: { gsplat: dyno.Gsplat, ...types }, outTypes: { gsplat: dyno.Gsplat },
+          inputs: { gsplat, ...inputs }, globals: () => [HASH],
+          statements: ({ inputs: i, outputs: o }) => body(i, o).split("\n"),
+        });
+        return { gsplat: d.outputs.gsplat };
+      });
+    }
+
+    // Video frames. Positions are stored relative to the frame's camera (origin), so they keep their
+    // precision. Each dot's (invisible) rotation carries how close it is to the frame's edge (angle)
+    // and what it is (axis): x = the scene, y = sky, z = the periphery beyond the picture's edges
+    // (for those the angle says how far out).
+    function frameModifier(own) {
+      return makeDyno({ ...U, ...own }, (i, o) => `
+        ${o.gsplat} = ${i.gsplat};
+        uint s = uint(${i.gsplat}.index);
+        vec4 h = vec4(dHash(s), dHash(s ^ 0x9e3779b9u), dHash(s ^ 0x85ebca6bu), dHash(s ^ 0xc2b2ae35u));
+        vec4 q = ${i.gsplat}.quaternion;
+        float edge = clamp((2.0 * acos(clamp(abs(q.w), 0.0, 1.0)) / 3.14159265 - 0.1) / 0.8, 0.0, 1.0);
+        float halo = step(max(abs(q.x), abs(q.y)) + 1e-4, abs(q.z));
+        float isSky = (1.0 - halo) * step(abs(q.x), abs(q.y));
+        float t = ${i.time};
+        vec3 p = ${i.gsplat}.center + ${i.origin};
+        float r = ${i.gsplat}.scales.x;
+        float pres = ${i.presence};
+        float fading = ${i.fading};
+
+        // arriving: dots appear one by one; leaving: all stay, fading and drifting off (an afterimage)
+        float vis = fading > 0.5 ? 1.0 : smoothstep(h.w - 0.07, h.w + 0.07, pres * 1.14 - 0.07);
+        float alpha = fading > 0.5 ? pres * pres : 1.0;
+        vec3 rnd = normalize(vec3(h.x, h.y, h.z) - 0.5 + 1e-4);
+        float gone = fading * (1.0 - pres);
+        p += (vec3(0.0, 0.35, 0.0) + rnd) * r * 10.0 * gone * gone;
+        // arriving dots condense into place each as it appears (so a picture that arrives slowly is sharp where it already is)
+        float coming = (1.0 - fading) * (1.0 - smoothstep(h.w, h.w + 0.1, pres * 1.2 - 0.1));
+        p += rnd * r * 14.0 * coming * coming;
+
+        // breathing: each dot loops gently; the frayed edges wander further and flicker
+        vec3 loop = vec3(sin(t * (0.6 + 0.5 * h.x) + 6.2831 * h.y), sin(t * (0.5 + 0.6 * h.y) + 6.2831 * h.z), sin(t * (0.55 + 0.4 * h.z) + 6.2831 * h.x));
+        if (halo > 0.5) {
+          // the periphery is big soft dots already: they sway slowly and thin out the further out they are
+          p += loop * r * (0.5 * ${i.wobble} + 0.6 * edge * ${i.fray});
+          float tw = sin(t * (0.35 + 0.4 * h.y) + 6.2831 * h.x);
+          alpha *= ${i.haloAmt} * (0.55 - 0.3 * edge) * mix(0.85 + 0.15 * tw, 0.5 + 0.5 * tw, smoothstep(0.1, 0.3, edge));   // far out they fade in and out
+        } else {
+          p += loop * r * (1.2 * ${i.wobble} + 5.0 * edge * ${i.fray});
+          alpha *= 1.0 - edge * ${i.fray} * (0.7 + 0.3 * sin(t * 1.7 + 6.2831 * h.x));
+        }
+
+        // depth of field: dots away from the focus distance grow and soften
+        vec3 v = p - ${i.cam};
+        float dist = length(v);
+        float coc = (1.0 - halo) * clamp(abs(dist - ${i.focusDist}) / max(${i.focusDist}, 1e-3), 0.0, 1.5) * ${i.focusAmt};
+        float size = r * ${i.discSize} * (1.0 + 0.7 * coc) * (0.85 + 0.3 * h.z) * mix(1.0, 0.35 + 0.65 * pres, fading);
+        alpha *= 1.0 / (1.0 + 0.45 * coc);
+        if (isSky > 0.5) { size *= 1.5; alpha *= 0.5 + 0.2 * sin(t * 0.9 + 6.2831 * h.y); }
+        size = min(size, dist * mix(0.012, 0.006, halo));   // nothing swells past ~a dozen pixels, however close
+
+        // curvature of space: far away, the world bends down and away
+        // (capped: the far parts of a shot bend away by at most a few degrees, so the picture stays whole)
+        float r2 = dot(v.xz, v.xz);
+        p.y -= min(${i.curvK} * r2 * 0.5, 0.25 * sqrt(r2)) * ${i.curveVideo};
+
+        // touch
+        vec4 tc = touch(p, ${i.rayO}, ${i.rayD}, ${i.rippleAmt}, t);
+        p += tc.xyz;
+        vec3 rgb = ${i.gsplat}.rgba.rgb * (1.0 + 0.6 * tc.w);
+
+        // moving fast through time stretches the dots along the motion
+        vec3 md = ${i.moveDir};
+        float sp = ${i.speed};
+        vec4 qs = vec4(0.0, 0.0, 0.0, 1.0);
+        vec3 sc = vec3(size);
+        if (sp > 0.01 && length(md) > 0.5) {
+          vec3 a = normalize(cross(vec3(1.0, 0.0, 0.0), md));
+          float ang = acos(clamp(dot(vec3(1.0, 0.0, 0.0), normalize(md)), -1.0, 1.0));
+          if (length(cross(vec3(1.0, 0.0, 0.0), md)) > 1e-4) qs = vec4(a * sin(ang * 0.5), cos(ang * 0.5));
+          sc = vec3(size * (1.0 + 3.0 * sp), size, size);
+        }
+        ${o.gsplat}.center = p - ${i.origin};
+        ${o.gsplat}.scales = sc;
+        ${o.gsplat}.quaternion = qs;
+        ${o.gsplat}.rgba = vec4(rgb, ${i.gsplat}.rgba.a * alpha * vis);
+      `);
+    }
+
+    // The world around: dissolves in disc by disc, bends with the same curvature, answers the touch,
+    // and no dot may look bigger than a few pixels.
+    const pxAngle = f1(0.0022);
+    function worldModifier(own) {
+      return makeDyno({ ...U, ...own, ...KEY, pxAngle, night }, (i, o) => `
+        ${o.gsplat} = ${i.gsplat};
+        uint s = uint(${i.gsplat}.index);
+        float hw = dHash(s ^ 0xc2b2ae35u), hx = dHash(s);
+        float t = ${i.time};
+        // the world sits a little further back than it is, so the memory itself is always in front (not a bubble you stand in)
+        vec3 p = ${i.cam} + (${i.gsplat}.center - ${i.cam}) * ${i.push};
+        vec3 v = p - ${i.cam};
+        float dist = length(v);
+        // all around the picture the world is always there, so looking aside finds real places; inside
+        // the picture it only comes when you wander off (weight), since there the memory is in front
+        vec3 kv = p - ${i.keyPos};
+        float kz = dot(kv, ${i.keyF});
+        float inPic = 0.0;
+        if (kz > 0.0) {
+          float m = max(abs(dot(kv, ${i.keyR})) / (kz * ${i.keyTanX}), abs(dot(kv, ${i.keyU})) / (kz * ${i.keyTanY}));
+          inPic = 1.0 - smoothstep(0.84, 1.02, m);
+        }
+        float w = max(max(${i.weight}, (1.0 - inPic) * ${i.around} * ${i.aroundMul}), inPic * ${i.under} * ${i.aroundMul});
+        float vis = smoothstep(hw - 0.06, hw + 0.06, w * 1.12 - 0.06);
+        // a hole where a bubble stands (its own views replace the coarse ground there)
+        vis *= smoothstep(${i.holeR}, ${i.holeR} * 1.5, distance(${i.gsplat}.center.xz, ${i.holeC}.xz));
+        float r2 = dot(v.xz, v.xz);
+        p.y -= min(${i.curvK} * r2 * 0.5, 0.6 * sqrt(r2));
+        vec4 tc = touch(p, ${i.rayO}, ${i.rayD}, ${i.rippleAmt}, t);
+        p += tc.xyz;
+        float tw = 1.0 - ${i.shimmer} * (0.25 - 0.25 * sin(t * (0.4 + hx) + 6.2831 * hw));   // a slow shimmer (still once you have landed in a place)
+        vec3 rgb = ${i.gsplat}.rgba.rgb * ${i.bright} * tw;
+        // at night the city goes deep blue and its windows light up, twinkling
+        float lum = dot(${i.gsplat}.rgba.rgb, vec3(0.3, 0.59, 0.11));
+        float lit = step(0.955, dHash(s ^ 0x51ed2701u)) * (0.55 + 0.45 * sin(t * (0.7 + 1.3 * hx) + 6.2831 * hw));
+        vec3 warm = mix(vec3(1.0, 0.72, 0.42), vec3(0.75, 0.85, 1.0), step(0.75, hx));
+        vec3 nightRgb = vec3(0.035, 0.05, 0.11) * (0.4 + 1.6 * lum) + warm * lit * 1.6;
+        rgb = mix(rgb, nightRgb, ${i.night});
+        ${o.gsplat}.center = p;
+        ${o.gsplat}.scales = min(${i.gsplat}.scales, vec3(dist * ${i.pxAngle} * (0.7 + 0.6 * hx) * (1.0 + 0.3 * lit * ${i.night})))
+                           * ${i.grow};   // soft splats (once landed) need to be a bit wider than hard discs to close up
+        ${o.gsplat}.rgba = vec4(rgb * (1.0 + 0.5 * tc.w), ${i.gsplat}.rgba.a * vis);
+      `);
+    }
+
+    // The map below everything (journeys that have one): relief exaggerated from high up, fading near each memory
+    // (its own detailed terrain is there) and near the ground, bending with the same curvature of space.
+    // Layers: the whole state (coarse) and finer regional tiles; a regional tile takes over inside its box when you
+    // are low enough, crossfading over a 4 km band at its edge.
+    const MAPU = { exag: f1(1), fadeR: f1(11500), hole: f1(1), mp0: v3(), mp1: v3(), mp2: v3(), mp3: v3() };
+    function mapModifier(own) {
+      return makeDyno({ ...U, ...MAPU, ...own }, (i, o) => `
+        ${o.gsplat} = ${i.gsplat};
+        uint s = uint(${i.gsplat}.index);
+        float hw = dHash(s ^ 0x2545f491u), hx = dHash(s);
+        vec3 p = ${i.gsplat}.center;
+        p.y *= ${i.exag};
+        vec2 q = p.xz;
+        float dmin = min(min(distance(q, ${i.mp0}.xz), distance(q, ${i.mp1}.xz)), min(distance(q, ${i.mp2}.xz), distance(q, ${i.mp3}.xz)));
+        float nearPlace = mix(1.0, smoothstep(${i.fadeR}, ${i.fadeR} * 1.25, dmin), ${i.hole});   // only opens near the ground
+        float edge = min(min(p.x - ${i.boxMin}.x, ${i.boxMax}.x - p.x), min(p.z - ${i.boxMin}.z, ${i.boxMax}.z - p.z));
+        float inBox = smoothstep(0.0, 4000.0, edge);
+        float boxVis = (1.0 - ${i.inBox} * inBox) * (1.0 - ${i.outBox} * (1.0 - inBox));
+        vec3 v = p - ${i.cam};
+        float dist = length(v);
+        float r2 = dot(v.xz, v.xz);
+        p.y -= min(${i.curvK} * r2 * 0.5, 0.6 * sqrt(r2));
+        vec4 tc = touch(p, ${i.rayO}, ${i.rayD}, ${i.rippleAmt}, ${i.time});
+        p += tc.xyz;
+        float tw = 0.85 + 0.15 * sin(${i.time} * (0.3 + hx) + 6.2831 * hw);
+        ${o.gsplat}.center = p;
+        ${o.gsplat}.scales = min(${i.gsplat}.scales, vec3(dist * 0.02 * (0.7 + 0.6 * hx)));   // dots touch at any height (the map fades near the ground)
+        ${o.gsplat}.rgba = vec4(${i.gsplat}.rgba.rgb * tw * (1.0 + 0.5 * tc.w), ${i.gsplat}.rgba.a * ${i.mapAlpha} * nearPlace * boxVis);
+      `);
+    }
+    // A trained splat scene (a place's views fused into real Gaussian splats): shown as it is, only dissolving in and out
+    function trainedModifier(own) {
+      return makeDyno({ ...own }, (i, o) => `
+        ${o.gsplat} = ${i.gsplat};
+        float hw = dHash(uint(${i.gsplat}.index) ^ 0xc2b2ae35u);
+        ${o.gsplat}.rgba.a *= smoothstep(hw - 0.06, hw + 0.06, ${i.weight} * 1.12 - 0.06);
+      `);
+    }
+    const mapLayers = [];
+    let mapHoles = [];
+
+    // Memory dust: a field of motes that always surrounds you (wrapped around the camera), drifting,
+    // tinted by the memory, so moving always has depth.
+    const night = f1(0);   // how dark the memory you are in is (0 day .. 1 night)
+    const dustU = { box: f1(60), tint: v3(), amount: f1(params.dust) };
+    function dustModifier() {
+      return makeDyno({ ...U, ...dustU }, (i, o) => `
+        ${o.gsplat} = ${i.gsplat};
+        uint s = uint(${i.gsplat}.index);
+        vec3 h = vec3(dHash(s), dHash(s ^ 0x9e3779b9u), dHash(s ^ 0x85ebca6bu));
+        float B = ${i.box};
+        vec3 drift = (h - 0.5) * ${i.time} * 0.012 + vec3(0.0, ${i.time} * 0.004, 0.0);
+        vec3 rel = fract(${i.gsplat}.center + drift - ${i.cam} / B + 0.5) - 0.5;   // -0.5 .. 0.5
+        vec3 p = ${i.cam} + rel * B;
+        float edge = 1.0 - smoothstep(0.3, 0.5, max(max(abs(rel.x), abs(rel.y)), abs(rel.z)));
+        float near = smoothstep(0.004, 0.03, length(rel));
+        float tw = 0.5 + 0.5 * sin(${i.time} * (0.8 + h.x) + 6.2831 * h.y);
+        float dist = length(rel) * B;
+        ${o.gsplat}.center = p;
+        // small on screen however close they drift: at most ~2 px
+        ${o.gsplat}.scales = vec3(min(B * (0.0006 + 0.0008 * h.z), dist * 0.0016));
+        ${o.gsplat}.rgba = vec4(mix(vec3(1.0), ${i.tint}, 0.55) * (0.7 + 0.9 * tw), ${i.amount} * edge * near * (0.1 + 0.35 * tw));
+      `);
+    }
+    const dust = new SplatMesh({
+      constructSplats: (splats) => {
+        const c = new THREE.Vector3(), sc = new THREE.Vector3(1, 1, 1), q = new THREE.Quaternion(), col = new THREE.Color(1, 1, 1);
+        for (let k = 0; k < 24000; k++) { c.set(Math.random(), Math.random(), Math.random()); splats.pushSplat(c, sc, q, 1, col); }
+      },
+    });
+    dust.worldModifier = dustModifier();
+    dust.updateGenerator();
+    scene.add(dust);
+
+    // Memory terrain: a faint carpet of dots on the ground reaching to the horizon around you (wrapped
+    // like the dust), in the memory's colours, so beyond the scanned places there is still a world,
+    // and the curvature of space shows as a bending horizon.
+    const groundU = { gBox: f1(800), gTint: v3(), gTint2: v3(), gAmount: f1(0.6) };
+    function groundModifier() {
+      return makeDyno({ ...U, ...groundU, night }, (i, o) => `
+        ${o.gsplat} = ${i.gsplat};
+        uint s = uint(${i.gsplat}.index);
+        vec3 h = vec3(dHash(s), dHash(s ^ 0x9e3779b9u), dHash(s ^ 0x85ebca6bu));
+        float B = ${i.gBox};
+        vec2 rel = fract(${i.gsplat}.center.xz - ${i.cam}.xz / B + 0.5) - 0.5;
+        vec3 p = vec3(${i.cam}.x + rel.x * B, -1.0 - 0.004 * B * h.z, ${i.cam}.z + rel.y * B);
+        p = ${i.cam} + (p - ${i.cam}) * 1.25;                     // always behind the memory
+        vec3 v = p - ${i.cam};
+        float dist = length(v);
+        p.y -= ${i.curvK} * dot(v.xz, v.xz) * 0.5;
+        float rr = max(abs(rel.x), abs(rel.y));
+        float edgeF = 1.0 - smoothstep(0.3, 0.5, rr);
+        float t = ${i.time};
+        float lit = step(0.95, h.x) * (0.55 + 0.45 * sin(t * (0.6 + h.y) + 6.2831 * h.z));
+        // slow, world-anchored patches, like districts and fields
+        vec2 w = p.xz / (B * 0.07);
+        float patchN = 0.5 + 0.25 * sin(w.x * 1.7 + sin(w.y * 1.3)) + 0.25 * sin(w.y * 2.1 + sin(w.x * 0.9 + 1.7));
+        vec3 day = mix(${i.gTint2}, ${i.gTint}, clamp(0.3 * h.y + 0.7 * patchN, 0.0, 1.0)) * (0.55 + 0.6 * h.z) * (0.75 + 0.5 * patchN);
+        vec3 nightC = vec3(0.03, 0.045, 0.1) * (0.6 + h.z) + mix(vec3(1.0, 0.7, 0.4), vec3(0.7, 0.85, 1.0), step(0.7, h.y)) * lit * 1.4;
+        vec3 rgb = mix(day, nightC, ${i.night});
+        vec4 tc = touch(p, ${i.rayO}, ${i.rayD}, ${i.rippleAmt}, t);
+        ${o.gsplat}.center = p + tc.xyz;
+        ${o.gsplat}.scales = vec3(min(B * 0.0012, dist * 0.0024) * (0.6 + 0.8 * h.z) * (1.0 + 0.5 * lit * ${i.night}));
+        ${o.gsplat}.rgba = vec4(rgb * (1.0 + 0.5 * tc.w), ${i.gAmount} * edgeF * (0.35 + 0.4 * h.y + 0.5 * lit * ${i.night}));
+      `);
+    }
+    const ground = new SplatMesh({
+      constructSplats: (splats) => {
+        const c = new THREE.Vector3(), sc = new THREE.Vector3(1, 1, 1), q = new THREE.Quaternion(), col = new THREE.Color(1, 1, 1);
+        for (let k = 0; k < 70000; k++) { c.set(Math.random(), 0, Math.random()); splats.pushSplat(c, sc, q, 1, col); }
+      },
+    });
+    ground.worldModifier = groundModifier();
+    ground.updateGenerator();
+    scene.add(ground);
+
+    // ---------------------------------------------------------------- the world around (light clouds)
+    const worldMeshes = [];
+    const bubbles = [];   // fused rings of views you can stand in: centre (eye point) and how far you may walk
+    let bubbleIn = 0;     // 1 inside a place's fused cloud (the pictures give way to it)
+    let walkIn = 0;       // 1 at eye level in it (walk and look freely)
+    // ?splat=off shows a place's views as dots instead of its trained splat scene; ?splat=v1 loads <scene>-v1.ply
+    const SPLAT = new URLSearchParams(location.search).get("splat");
+    function addWorld(name, tf) {
+      if (tf.trained && SPLAT) tf = SPLAT === "off" ? { ...tf, url: null, trained: false } : { ...tf, url: tf.url.replace(/\.ply$/, `-${SPLAT}.ply`) };
+      const m = new SplatMesh({ url: tf.url ? `${BASE}${tf.url}` : `${BASE}clouds/lite/${name}.ply` });
+      const off = new THREE.Vector3().fromArray(liteIndex[name] || [0, 0, 0]);
+      m.quaternion.fromArray(tf.quaternion); m.scale.setScalar(tf.scale);
+      m.position.fromArray(tf.position).add(off.applyQuaternion(m.quaternion).multiplyScalar(tf.scale));
+      const bubble = name.endsWith("-bubble");   // a fused ring of views around a spot: at its true distance and full brightness
+      const own = { weight: f1(0.3), bright: f1(bubble ? 1 : params.worldGlow), push: f1(bubble ? 1 : 1.15), holeC: v3(), holeR: f1(0), aroundMul: f1(1), shimmer: f1(1), grow: f1(1) };
+      if (bubble) bubbles.push({ center: new THREE.Vector3().fromArray(tf.position).add(new THREE.Vector3(0, 1.5, 0)), walkR: 5 });   // the photo's eye point
+      const bub = world.scenes[name.replace(/-terrain$/, "-bubble")] || world.scenes[tf.holes?.[0]];   // or the ground another place's cloud stands on
+      if (name.endsWith("-terrain") && bub) { own.holeC.value.fromArray(bub.position); own.holeR.value = 80; }
+      m.worldModifier = tf.trained ? trainedModifier(own) : worldModifier(own);
+      m.updateGenerator();
+      scene.add(m);
+      const holes = (tf.holes || []).map((h) => world.scenes[h]?.position).filter(Boolean).map((q) => new THREE.Vector3().fromArray(q));   // clouds standing on this ground
+      worldMeshes.push({ mesh: m, own, name, bubble, trained: !!tf.trained, hole: own.holeR.value, holes });
+    }
+    function loadWorld() {
+      if (world.map) {
+        const wm = world.map;
+        const layers = [];   // the journey stays over the campus: the state map below it is never seen, and not loaded
+        const detailBox = layers.find((l) => l.detail)?.box;
+        for (const L of layers) {
+          const own = { mapAlpha: f1(1), boxMin: v3(), boxMax: v3(), inBox: f1(0), outBox: f1(0) };
+          const box = L.detail ? L.box : detailBox;
+          if (box) { own.boxMin.value.set(box[0], 0, box[1]); own.boxMax.value.set(box[2], 0, box[3]); }
+          else { own.boxMin.value.set(-1e9, 0, -1e9); own.boxMax.value.set(1e9, 0, 1e9); }
+          const m = new SplatMesh({ url: `${BASE}clouds/lite/${L.name}.ply` });
+          m.position.fromArray(L.position); m.quaternion.fromArray(L.quaternion); m.scale.setScalar(L.scale);
+          m.worldModifier = mapModifier(own);
+          m.updateGenerator();
+          scene.add(m);
+          mapLayers.push({ mesh: m, own, detail: !!L.detail, hasBox: !!box });
+        }
+        MAPU.fadeR.value = wm.fadeRadius || 11500;
+      }
+      const inJourney = new Set(journey.segments.map((sg) => sg.scene).filter(Boolean));
+      for (const name of world.order) if (!name.endsWith("-bubble") || inJourney.has(name.replace(/-bubble$/, ""))) addWorld(name, world.scenes[name]);   // only this journey's clouds
+      // the map opens around a place only once that place's own ground has arrived
+      if (world.map) mapHoles = journey.map.places.map((p) => ({ pos: p.world, mesh: worldMeshes.find((w) => w.name === `${p.scene}-terrain`)?.mesh }));
+      for (const seg of journey.segments) for (const half of seg.clouds || []) if (liteIndex[`bridge-${half}`]) addWorld(`bridge-${half}`, { position: [0, 0, 0], quaternion: [0, 0, 0, 1], scale: 1 });
+    }
+
+    // ---------------------------------------------------------------- the timeline
+    // titles per segment come from the journey; day: 1 in daylight, 0 at night, [from, to] when it changes along it
+    const SEGMENTS = {};
+    const entry = (seg, idx) => (manifest[seg] || []).find((r) => r.index === idx);
+    const slots = [], segRanges = [], firstSlotOf = {};
+    for (const seg of journey.segments) {
+      const start = slots.length, key = seg.kind === "video" ? seg.scene : seg.name;
+      if (seg.kind === "video" && !(seg.scene in firstSlotOf)) firstSlotOf[seg.scene] = start;
+      if (seg.kind === "video") {
+        const mk = `video-${seg.scene}`, first = seg.firstIndex || 1;
+        const at = (i) => (seg.indices ? seg.indices[i] : first + i);   // a segment may replay frames in another order (a dive backwards)
+        // hold: the share of a view's time it stays before crossfading to the next; cut: its last view cuts to the next
+        seg.frames.forEach((c, i) => slots.push({ cam: c, dur: 1 / seg.fps, hold: seg.cut && i === seg.frames.length - 1 ? 1 : seg.hold,
+          sources: entry(mk, at(i)) ? [{ key: `${mk}/${at(i)}`, w: 1 }] : [] }));
+      } else if (seg.kind === "gap") {   // a flight between memories: no pictures of its own, it dissolves its neighbours'
+        seg.frames.forEach((c, i) => slots.push({ cam: c, dur: 1 / seg.fps, sources: [], gap: true, gapI: i, gapN: seg.frames.length }));
+      } else {
+        const [hA, hB] = Object.keys(seg.halves);
+        const has = (h, i) => !!entry(`bridge-${h}`, i);
+        const both = seg.frames.map((c) => c.index).filter((i) => has(hA, i) && has(hB, i));
+        seg.frames.forEach((c) => {
+          const i = c.index;
+          let sources = [];
+          if (has(hA, i) && has(hB, i)) { const w = (both.indexOf(i) + 1) / (both.length + 1); sources = [{ key: `bridge-${hA}/${i}`, w: 1 - w }, { key: `bridge-${hB}/${i}`, w }]; }
+          else if (has(hA, i)) sources = [{ key: `bridge-${hA}/${i}`, w: 1 }];
+          else if (has(hB, i)) sources = [{ key: `bridge-${hB}/${i}`, w: 1 }];
+          slots.push({ cam: c, dur: 1 / seg.fps, sources });
+        });
+      }
+      const meta = SEGMENTS[key] || { title: seg.title, sub: seg.sub, color: seg.color, day: seg.day, scene: seg.scene, gap: seg.kind === "gap", name: seg.name };
+      if (seg.continues && segRanges.length) segRanges.at(-1).end = slots.length;   // same memory, slower
+      else segRanges.push({ start, end: slots.length, ...meta });
+    }
+    slots.forEach((s, i) => {   // a frame without a picture borrows its neighbours' (not a flight: there the memory lets go)
+      if (s.sources.length || s.gap) return;
+      let j = i - 1, k = i + 1;
+      while (j >= 0 && !slots[j].sources.length) j--;
+      while (k < slots.length && !slots[k].sources.length) k++;
+      if (j < 0 || k >= slots.length) return;
+      const w = (i - j) / (k - j);
+      s.sources = [...slots[j].sources.map((x) => ({ ...x, w: x.w * (1 - w) })), ...slots[k].sources.map((x) => ({ ...x, w: x.w * w }))];
+    });
+    if (journey.map) {   // arriving and leaving: a memory's first picture already gathers on the ground during the last steps of
+      const RAMP = [0.6, 0.3, 0.12];   // the descent onto it, dot by dot, and its last one lingers the same way on the way up
+      slots.forEach((s, i) => {
+        if (s.gap || !s.sources.length) return;
+        for (const dir of [-1, 1]) {
+          if (!slots[i + dir]?.gap) continue;
+          RAMP.forEach((r, j) => { const g = slots[i + dir * (j + 1)]; if (g?.gap && !g.sources.length) g.sources = s.sources.map((x) => ({ ...x, w: x.w * r })); });
+        }
+      });
+    }
+    const N = slots.length;
+    const keySlots = new Map();   // frame -> where it sits on the timeline (a dive replayed backwards: twice)
+    slots.forEach((s, j) => s.sources.forEach((x) => { if (x.w > 0.5 || !keySlots.has(x.key)) keySlots.set(x.key, [...(keySlots.get(x.key) || []), j]); }));
+    const segOf = (k) => segRanges.find((r) => k >= r.start && k < r.end) || segRanges.at(-1);
+
+    // ---------------------------------------------------------------- the map (for journeys that have one)
+    const mapEl = document.getElementById("map");
+    let updateMap = () => {};
+    if (journey.map) {
+      const pl = journey.map.places;
+      const all = [...journey.map.coast, ...(journey.map.bay || []), ...pl.map((p) => p.gps)];
+      const lat0 = all.reduce((a, p) => a + p[0], 0) / all.length, kx = Math.cos((lat0 * Math.PI) / 180);
+      const xs = all.map((p) => p[1] * kx), ys = all.map((p) => -p[0]);
+      const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+      const MW = 128, MH = (MW * (y1 - y0)) / (x1 - x0), pad = 6;
+      const P = (g) => [pad + ((g[1] * kx - x0) / (x1 - x0)) * (MW - 2 * pad), pad + ((-g[0] - y0) / (y1 - y0)) * (MH - 2 * pad)];
+      const line = (pts) => pts.map((g, i) => (i ? "L" : "M") + P(g).map((v) => v.toFixed(1)).join(" ")).join(" ");
+      const route = pl.map((p) => P(p.gps));
+      mapEl.innerHTML = `<svg viewBox="0 0 ${MW} ${MH}">
+        <path d="${line(journey.map.coast)}" fill="none" stroke="#9fb4d0" stroke-opacity="0.55" stroke-width="1.2"/>
+        <path d="${line(journey.map.bay || [])}" fill="none" stroke="#9fb4d0" stroke-opacity="0.4" stroke-width="1"/>
+        <path d="M${route.map((q) => q.map((v) => v.toFixed(1)).join(" ")).join(" L")}" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-dasharray="3 3"/>
+        ${pl.map((p, i) => `<circle cx="${route[i][0].toFixed(1)}" cy="${route[i][1].toFixed(1)}" r="3.2" fill="${p.color}"/>`).join("")}
+        <circle id="mapdot" r="4.2" fill="#fff" stroke="#000" stroke-opacity="0.5"/>
+      </svg><div class="when"></div>`;
+      // (the California inset says nothing at campus scale: the stations and the location bar say where you are)
+      const dot = mapEl.querySelector("#mapdot"), whenEl = mapEl.querySelector(".when");
+      // which place each slot belongs to; a flight blends from the place before to the place after
+      const sceneIdx = {};
+      journey.segments.forEach((sg) => { if (sg.kind === "video" && !(sg.scene in sceneIdx)) sceneIdx[sg.scene] = Object.keys(sceneIdx).length; });
+      const slotPlace = [];
+      for (const sg of journey.segments) sg.frames.forEach((_, i) => slotPlace.push(sg.kind === "video" ? { a: sceneIdx[sg.scene], b: sceneIdx[sg.scene], f: 0 } : { gap: true, i, n: sg.frames.length }));
+      slotPlace.forEach((sp, k) => {
+        if (!sp.gap) return;
+        const prev = slotPlace.slice(0, k).reverse().find((x) => !x.gap), next = slotPlace.slice(k).find((x) => !x.gap);
+        Object.assign(sp, { a: prev ? prev.a : 0, b: next ? next.a : 0 });
+      });
+      let lastWhen = "";
+      updateMap = (tt) => {
+        const k = Math.min(Math.floor(tt), slotPlace.length - 1), sp = slotPlace[k];
+        const f = sp.gap ? Math.min(1, (sp.i + 1 + (tt - k)) / (sp.n + 1)) : 0;
+        const e = f * f * (3 - 2 * f), pa = route[sp.a], pb = route[sp.b];
+        dot.setAttribute("cx", (pa[0] + (pb[0] - pa[0]) * e).toFixed(1));
+        dot.setAttribute("cy", (pa[1] + (pb[1] - pa[1]) * e).toFixed(1));
+        const w = pl[e < 0.5 ? sp.a : sp.b].sub;
+        if (w !== lastWhen) { whenEl.textContent = w; lastWhen = w; }
+      };
+    }
+
+    // ---------------------------------------------------------------- places on the map (choose a memory)
+    const placesEl = document.getElementById("places"), hintEl = document.getElementById("maphint");
+    const placeBtns = [];
+    // the lens of the glass (Chromium): near the rim it shows what lies a little further in, as a thick pane bends light
+    if (navigator.userAgentData?.brands?.some((b) => b.brand === "Chromium")) {
+      const W = 240, H = 64, c = document.createElement("canvas"); c.width = W; c.height = H;
+      const g = c.getContext("2d"), im = g.createImageData(W, H), R = H / 2;
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const cx = THREE.MathUtils.clamp(x + 0.5, R, W - R), cy = H / 2, dx = x + 0.5 - cx, dy = y + 0.5 - cy, d = Math.hypot(dx, dy) || 1;
+        const s = Math.pow(1 - THREE.MathUtils.smoothstep(R - d, 0, R * 0.55), 2);   // 1 at the rim, 0 in the middle
+        const o = 4 * (y * W + x);
+        im.data[o] = 128 - 127 * s * (dx / d); im.data[o + 1] = 128 - 127 * s * (dy / d); im.data[o + 2] = 128; im.data[o + 3] = 255;
+      }
+      g.putImageData(im, 0, 0);
+      document.getElementById("lgmap").setAttribute("href", c.toDataURL());
+      document.body.classList.add("refract");
+    }
+    const short = (sub) => (sub || "").split(" · ").slice(0, 2).join(" · ");   // "Tue 23 June · 19:11"
+    (journey.map?.places || []).forEach((pl, i) => {
+      if (!pl.world || !(pl.scene in firstSlotOf)) return;
+      const b = document.createElement("button");
+      b.className = "station glass";
+      b.innerHTML = `<i style="background:${pl.color};color:${pl.color}"></i><span><b>${pl.name}</b><small>${short(pl.sub)}</small></span><span class="pin"></span>`;
+      b.addEventListener("pointerdown", (e) => e.stopPropagation());
+      b.addEventListener("click", (e) => { e.stopPropagation(); travelTo(firstSlotOf[pl.scene]); });
+      placesEl.appendChild(b);
+      placeBtns.push({ b, pos: new THREE.Vector3().fromArray(pl.world), scene: pl.scene, x: 0, y: 0 });
+    });
+    const projV = new THREE.Vector3();
+    function updatePlaces(alt) {
+      // over the campus (well above the views of a memory) and over the map; not down in a memory or while looking around in it
+      const above = alt - (world.places?.[segOf(Math.min(Math.floor(t), N - 1)).scene]?.offset[1] ?? 30);
+      const show = placeBtns.length && (above > 160 || !!travel) && walkIn < 0.5;
+      const here = segOf(Math.min(Math.floor(t), N - 1)).scene;
+      const shown = [];
+      for (const pb of placeBtns) {
+        projV.copy(pb.pos); if (alt > 12000) projV.y *= MAPU.exag.value;   // on the (exaggerated) map surface
+        projV.project(camera);
+        const vis = show && projV.z < 1 && projV.z > -1 && Math.abs(projV.x) < 1.02 && Math.abs(projV.y) < 1.02;
+        pb.b.classList.toggle("on", vis);
+        pb.b.classList.toggle("here", pb.scene === here);
+        pb.b.style.pointerEvents = vis ? "auto" : "none";
+        if (!vis) continue;
+        shown.push({ pb, x: (projV.x * 0.5 + 0.5) * innerWidth, y: (-projV.y * 0.5 + 0.5) * innerHeight });
+      }
+      shown.sort((a, b) => b.y - a.y);
+      for (let i = 0; i < shown.length; i++)   // stations close together (on the map) stack upward
+        for (let j = 0; j < i; j++)
+          if (Math.abs(shown[i].x - shown[j].x) < 170 && Math.abs(shown[i].y - shown[j].y) < 46) shown[i].y = shown[j].y - 48;
+      for (const v of shown) {   // glide, never jump (the stacking changes as the view moves)
+        const pb = v.pb, k = pb.b.classList.contains("on") && pb.x ? 0.35 : 1;
+        pb.x += (v.x - pb.x) * k; pb.y += (v.y - pb.y) * k;
+        pb.b.style.transform = `translate(${(pb.x - pb.b.offsetWidth / 2).toFixed(1)}px, ${(pb.y - pb.b.offsetHeight - 20).toFixed(1)}px)`;
+      }
+      hintEl.style.opacity = shown.length && (t < 0.6 || t > N - 1.6) && !playing && !travel ? 0.75 : 0;   // at the view above campus
+      mapEl.style.opacity = alt > 12000 || !show ? 0 : 0.95;   // above, the real map has the labels; down in a memory, the memory alone
+    }
+    if (journey.map?.places) document.getElementById("help").insertAdjacentHTML("beforeend", " · <b>1–3</b> a memory · <b>M</b> back up");
+
+    const track = document.getElementById("track"), headEl = document.getElementById("head");
+    for (const r of segRanges) {
+      const div = document.createElement("div");
+      div.style.flex = `${r.end - r.start}`; div.style.background = r.color;
+      track.appendChild(div);
+    }
+    let captionSeg = null, captionTimer = 0;
+    // the location bar: where you are, crossfading when it changes (a flight across campus or the state has its own)
+    const locText = document.getElementById("loctext"), locDot = document.getElementById("locdot");
+    const placeOf = Object.fromEntries((journey.map?.places || []).map((p) => [p.scene, p]));
+    function locationOf(r) {
+      if (!r.gap) { const p = placeOf[r.scene]; return { name: p?.name || r.title, sub: short(p?.sub || r.sub), color: p?.color || r.color }; }
+      const above = /above$/.test(r.name || "");
+      return { name: above ? "Stanford" : "Across campus", sub: above ? r.sub || "" : "on the way", color: "#cfd6e4" };
+    }
+    function showCaption(r) {
+      const L = locationOf(r);
+      for (const old of locText.children) { old.classList.add("out"); setTimeout(() => old.remove(), 1200); }
+      const sp = document.createElement("span");
+      sp.className = "pre"; sp.innerHTML = `<b>${L.name}</b><small>${L.sub}</small>`;
+      locText.appendChild(sp);
+      requestAnimationFrame(() => requestAnimationFrame(() => sp.classList.remove("pre")));
+      locDot.style.background = L.color; locDot.style.color = L.color;
+    }
+    const helpEl = document.getElementById("help");
+    let helpTimer = setTimeout(() => helpEl.classList.add("quiet"), 9000);
+    addEventListener("keydown", (e) => { if (e.code === "KeyH") { helpEl.classList.toggle("quiet"); clearTimeout(helpTimer); } });
+
+    // ---------------------------------------------------------------- frames as dots
+    const DW = enc.width, DH = enc.height, LMIN = Math.log(enc.depthMin), LMAX = Math.log(enc.depthMax);
+    const loadImage = (src) => new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
+    function pixels(im, w, h) {
+      const c = document.createElement("canvas"); c.width = w; c.height = h;
+      const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(im, 0, 0, w, h);
+      return g.getImageData(0, 0, w, h).data;
+    }
+    const cache = new Map();
+    async function buildFrame(key) {
+      const [seg, idx] = key.split("/");
+      const row = entry(seg, Number(idx));
+      const [im, dm] = await Promise.all([loadImage(BASE + row.image), loadImage(BASE + row.depth)]);
+      // colours at twice the depth grid, but never finer than the picture itself (a full-resolution depth grid samples it 1:1)
+      const CW = Math.min(2 * DW, im.naturalWidth), CH = Math.round((CW * DH) / DW);
+      const col = pixels(im, CW, CH), dep = pixels(dm, DW, DH), sm = pixels(im, DW, DH);
+      const lum = new Float32Array(DW * DH);
+      for (let i = 0; i < DW * DH; i++) lum[i] = (0.299 * sm[4 * i] + 0.587 * sm[4 * i + 1] + 0.114 * sm[4 * i + 2]) / 255;
+      const detail = new Float32Array(DW * DH);
+      for (let y = 1; y < DH - 1; y++) for (let x = 1; x < DW - 1; x++) {
+        const i = y * DW + x, gx = lum[i + 1] - lum[i - 1], gy = lum[i + DW] - lum[i - DW];
+        detail[i] = Math.min(1, Math.sqrt(gx * gx + gy * gy) * 6);
+      }
+      const decode = (i) => { const code = dep[4 * i] * 256 + dep[4 * i + 1]; return code ? Math.exp(LMIN + (code / 65535) * (LMAX - LMIN)) : 0; };
+      // what the shot is about: depth at the middle of the picture (for focus); its colours (for the sky)
+      const mids = [];
+      for (let y = Math.floor(DH * 0.35); y < DH * 0.65; y += 3) for (let x = Math.floor(DW * 0.35); x < DW * 0.65; x += 3) { const d = decode(y * DW + x); if (d) mids.push(d); }
+      mids.sort((a, b) => a - b);
+      const focus = mids.length ? mids[mids.length >> 1] : (row.depthMedian || 50);
+      const avg = (y0, y1) => { const c = [0, 0, 0]; let n = 0; for (let y = y0; y < y1; y += 2) for (let x = 0; x < DW; x += 4) { const i = 4 * (y * DW + x); c[0] += sm[i]; c[1] += sm[i + 1]; c[2] += sm[i + 2]; n++; } return new THREE.Color().setRGB(c[0] / n / 255, c[1] / n / 255, c[2] / n / 255, THREE.SRGBColorSpace); };
+      const palette = { top: avg(0, Math.floor(DH * 0.22)), mid: avg(Math.floor(DH * 0.4), Math.floor(DH * 0.6)), bottom: avg(Math.floor(DH * 0.78), DH) };
+      let darkN = 0, lumSum = 0;
+      for (let i = 0; i < DW * DH; i += 7) { if (lum[i] < 0.06) darkN++; lumSum += lum[i]; }
+      const darkness = Math.min(1, Math.max(darkN / (DW * DH / 7) * 1.6, 1 - (lumSum / (DW * DH / 7)) / 0.18));
+      // how high-key the picture is: middle of its brightness distribution (lights in a dark street don't count)
+      const lumS = []; for (let i = 0; i < DW * DH; i += 13) lumS.push(lum[i]);
+      lumS.sort((a, b) => a - b);
+      const keyLum = lumS[lumS.length >> 1];
+
+      const { position, quaternion, intrinsics: K } = row.camera;
+      const R = new THREE.Matrix4().makeRotationFromQuaternion(new THREE.Quaternion().fromArray(quaternion));
+      const C = new THREE.Vector3().fromArray(position);
+      const sx = K.width / DW, sy = K.height / DH;
+      const shell = Math.max(3 * (row.depthMedian || 100), 50);
+      const center = new THREE.Vector3(), scales = new THREE.Vector3(), q = new THREE.Quaternion(), color = new THREE.Color(), ray = new THREE.Vector3();
+      const dens = params.density, adapt = params.detail;
+      let rnd = 0;
+      const rand = () => { let x = (rnd++ * 0x9e3779b1) >>> 0; x ^= x >>> 16; x = Math.imul(x, 0x7feb352d) >>> 0; x ^= x >>> 15; x = Math.imul(x, 0x846ca68b) >>> 0; x ^= x >>> 16; return x / 4294967296; };
+
+      // For the periphery: the picture (colour and log depth) averaged into ever coarser blocks, down
+      // to a single colour, so the further outside the picture a dot is, the more blurred what it shows.
+      function blocks(gw, gh) {
+        const c = new Float32Array(gw * gh * 4), n = new Float32Array(gw * gh), nd = new Float32Array(gw * gh);
+        for (let y = 0; y < DH; y += 2) for (let x = 0; x < DW; x += 2) {
+          const g = Math.min(gh - 1, Math.floor((y * gh) / DH)) * gw + Math.min(gw - 1, Math.floor((x * gw) / DW)), i = y * DW + x;
+          for (let ch = 0; ch < 3; ch++) c[4 * g + ch] += sm[4 * i + ch] / 255;
+          n[g]++;
+          const dd = decode(i);
+          if (dd) { c[4 * g + 3] += Math.log(Math.min(dd, shell)); nd[g]++; }
+        }
+        for (let g = 0; g < gw * gh; g++) {
+          for (let ch = 0; ch < 3; ch++) c[4 * g + ch] /= Math.max(1, n[g]);
+          c[4 * g + 3] = nd[g] ? c[4 * g + 3] / nd[g] : Math.log(shell);
+        }
+        return { gw, gh, c };
+      }
+      const levels = [blocks(64, 36), blocks(16, 9), blocks(4, 3), blocks(1, 1)];
+      const at = (G, u, v, out) => {   // bilinear, clamped to the picture; out = [r, g, b, log depth]
+        const fx = Math.min(Math.max(u * G.gw - 0.5, 0), G.gw - 1), fy = Math.min(Math.max(v * G.gh - 0.5, 0), G.gh - 1);
+        const x0 = Math.floor(fx), y0 = Math.floor(fy), x1 = Math.min(x0 + 1, G.gw - 1), y1 = Math.min(y0 + 1, G.gh - 1), ax = fx - x0, ay = fy - y0;
+        for (let ch = 0; ch < 4; ch++) {
+          const c = G.c, a = 4 * (y0 * G.gw + x0) + ch, b = 4 * (y0 * G.gw + x1) + ch, cc = 4 * (y1 * G.gw + x0) + ch, d = 4 * (y1 * G.gw + x1) + ch;
+          out[ch] = (c[a] * (1 - ax) + c[b] * ax) * (1 - ay) + (c[cc] * (1 - ax) + c[d] * ax) * ay;
+        }
+        return out;
+      };
+      const tmpA = [0, 0, 0, 0], tmpB = [0, 0, 0, 0];
+      const blurred = (u, v, L, out) => {   // L: 0 = 64x36 blocks ... 3 = one colour
+        const l0 = Math.min(2, Math.floor(L)), w = L - l0;
+        at(levels[l0], u, v, tmpA); at(levels[l0 + 1], u, v, tmpB);
+        for (let ch = 0; ch < 4; ch++) out[ch] = tmpA[ch] + (tmpB[ch] - tmpA[ch]) * w;
+        return out;
+      };
+      // the dots are made a slice at a time, handing the browser back every few milliseconds (a whole picture at once
+      // froze the view for up to a second mid-descent)
+      const splats = new PackedSplats({ maxSplats: DW * DH + 60000 });
+      let sliceStart = performance.now();
+      const breathe = async () => {   // (scheduler.yield: timers are throttled hard in a hidden page, which stalled the build)
+        if (performance.now() - sliceStart < 6) return;
+        await (globalThis.scheduler?.yield ? scheduler.yield() : new Promise((r) => setTimeout(r, 0)));
+        sliceStart = performance.now();
+      };
+      {
+          // a map journey's pictures sit on real terrain: their edges dissolve over a wider, ragged band (different for
+          // each picture) so a picture melts into the ground around it instead of showing a rectangle
+          const EDGE_W = journey.map ? 0.22 : 0.14, EDGE_THIN = journey.map ? 0.95 : 0.8, ph = 6.2831 * ((Number(idx) * 0.618) % 1);
+          const ragged = (u, v) => (journey.map ? 0.045 * (Math.sin(11 * u + 3 * v + ph) + Math.sin(13 * v - 5 * u + 2 * ph) + 0.6 * Math.sin(29 * u + 23 * v + 3 * ph)) : 0);
+          for (let y = 0; y < DH; y++) for (let x = 0; x < DW; x++) {
+            if (x === 0) await breathe();
+            const i = y * DW + x;
+            const u = (x + 0.5) / DW, v = (y + 0.5) / DH;
+            const border = Math.min(u, 1 - u, (v) * 0.5625 * 1.78, (1 - v) * 0.5625 * 1.78);
+            const edge = 1 - THREE.MathUtils.smoothstep(border + ragged(u, v), 0.0, EDGE_W);
+            const p = dens * (1 - adapt + adapt * (0.4 + 0.6 * Math.sqrt(detail[i]))) * (1 - EDGE_THIN * edge);
+            if (rand() > p) continue;
+            if (lum[i] < 0.035) continue;   // darkness gets no dots: what lies behind shows through
+            const raw = decode(i);
+            const d = raw ? Math.min(raw, shell) : shell;
+            const isSky = !raw || raw >= shell;
+            const px = (x + rand()) * sx, py = (y + rand()) * sy;
+            center.set((px - K.cx) / K.fx, -(py - K.cy) / K.fy, -1).applyMatrix4(R).multiplyScalar(d);
+            const ci = 4 * (Math.min(CH - 1, Math.floor((py / sy) * CH / DH)) * CW + Math.min(CW - 1, Math.floor((px / sx) * CW / DW)));
+            color.setRGB(col[ci] / 255, col[ci + 1] / 255, col[ci + 2] / 255);   // sRGB as is: Spark converts splat colours to linear itself
+            scales.setScalar(0.5 * d * sx / K.fx * Math.min(1.45, 1 / Math.sqrt(p)));
+            // rotation angle (0.1 + 0.8 edge) * pi, never zero so the axis (x = scene, y = sky) stays readable
+            const a = (0.1 + 0.8 * edge) * Math.PI / 2;
+            if (isSky) q.set(0, Math.sin(a), 0, Math.cos(a)); else q.set(Math.sin(a), 0, 0, Math.cos(a));
+            splats.pushSplat(center, scales, q, 1, color);
+          }
+
+          // The periphery: past its edges the picture goes on as dots for a while, continuing the
+          // colours at its borders, ever more blurred, sparser, dimmer and further away, over the
+          // same picture wrapped round you on the sky dome (so looking aside never finds a hole).
+          // Real places (the world clouds) sit in front of both wherever they exist. Dot sizes follow
+          // the picture's own pixel size, so a narrow lens gets finer dots.
+          const deg = Math.PI / 180, hx = Math.atan(K.width / 2 / K.fx), hy = Math.atan(K.height / 2 / K.fy);
+          const pxA = (2 * Math.tan(hx)) / Math.min(DW, 518);   // radians per depth pixel (the blurred periphery keeps 518-wide dots: finer would only multiply them)
+          const BAND = 16 * deg, farLog = Math.log(shell * 1.05);
+          const s = [0, 0, 0, 0], s2 = [0, 0, 0, 0];
+          const rand01 = () => { const r = rand(); return r < 0 ? r + 1 : r; };   // rand() spans -0.5..0.5 (the picture's dots were tuned with it)
+          const outside = (yaw, pitch) => {   // angle outside the picture (negative inside), and how far round to the back
+            const ox = Math.abs(yaw) - hx, oy = Math.abs(pitch) - hy;
+            return [ox > 0 || oy > 0 ? Math.hypot(Math.max(ox, 0), Math.max(oy, 0)) : Math.max(ox, oy), ox];
+          };
+          const periphery = (yaw, pitch, out, ox, scale) => {
+            const u = 0.5 + 0.5 * THREE.MathUtils.clamp(yaw / hx, -1, 1), v = 0.5 - 0.5 * THREE.MathUtils.clamp(pitch / hy, -1, 1);
+            // same blur and dimming as the backdrop on the dome (its mip level 1.5 + 20/rad ~ these blocks), so
+            // the dots are its texture, not spots on it
+            const L = THREE.MathUtils.clamp((1.5 + Math.max(out, 0) * 20 - 3) / 2, 0, 3);
+            blurred(u, v, L, s);
+            const wb = 0.5 * THREE.MathUtils.smoothstep(Math.max(0, ox) / (Math.PI - hx), 0.35, 1);   // behind you the two sides meet
+            if (wb > 0) { blurred(1 - u, v, L, s2); for (let ch = 0; ch < 4; ch++) s[ch] += (s2[ch] - s[ch]) * wb; }
+            const lum = 0.3 * s[0] + 0.59 * s[1] + 0.11 * s[2];
+            if (lum < 0.035) return;   // dark stays open, like in the picture
+            const fall = Math.exp(-Math.max(out, 0) / (40 * deg)), dim = 0.5 + 0.4 * fall, sat = 0.7 + 0.3 * fall;
+            color.setRGB((lum + (s[0] - lum) * sat) * dim, (lum + (s[1] - lum) * sat) * dim, (lum + (s[2] - lum) * sat) * dim);   // sRGB as is: Spark converts splat colours to linear itself
+            const d = Math.exp(s[3] + (farLog - s[3]) * THREE.MathUtils.smoothstep(out, 0, 25 * deg));
+            center.set(Math.cos(pitch) * Math.sin(yaw), Math.sin(pitch), -Math.cos(pitch) * Math.cos(yaw)).applyMatrix4(R).multiplyScalar(d);
+            scales.setScalar(scale * d);
+            const a = (0.1 + 0.8 * THREE.MathUtils.clamp(out / (90 * deg), 0, 1)) * Math.PI / 2;
+            q.set(0, 0, Math.sin(a), Math.cos(a));
+            splats.pushSplat(center, scales, q, 1, color);
+          };
+          // a band ~16 degrees wide: at the edge the dots are about the picture's own, outward they
+          // grow and thin out so they still just cover (drawn ~2.8x their scale)
+          const sizeAt = (out) => 0.7 * pxA * (1 + Math.max(out, 0) / (12 * deg));
+          const needAt = (out) => 1 / (17 * sizeAt(out) ** 2);   // dots per steradian
+          const W = 2 * (hx + BAND), H = Math.min(Math.PI, 2 * (hy + BAND)), nMax = needAt(0);
+          const cand = Math.round(nMax * W * H);
+          for (let n = 0; n < cand; n++) {
+            if ((n & 1023) === 0) await breathe();
+            const yaw = (rand01() - 0.5) * W, pitch = (rand01() - 0.5) * H;
+            const [out, ox] = outside(yaw, pitch);
+            if (out < -4 * deg || out > BAND) continue;   // (and a thin band inside, under the frayed edge)
+            const keep = (out < 0 ? 0.5 * (1 + out / (4 * deg)) : needAt(out) / nMax) * Math.cos(pitch);
+            if (rand01() > keep) continue;
+            periphery(yaw, pitch, out, ox, sizeAt(out));
+          }
+          // beyond it, all the way round: a thin sprinkle of small specks that fade in and out
+          for (let n = 0; n < 9000; n++) {
+            const z = 2 * rand01() - 1, yaw = (rand01() - 0.5) * 2 * Math.PI, pitch = Math.asin(z);
+            const [out, ox] = outside(yaw, pitch);
+            if (out < BAND * 0.75) continue;
+            periphery(yaw, pitch, out, ox, 0.6 * pxA);
+          }
+      }
+      const mesh = new SplatMesh({ packedSplats: splats });
+      mesh.position.copy(C);
+      const own = { origin: dyno.dynoVec3(C.clone()), presence: f1(0), fading: f1(0) };
+      mesh.objectModifier = frameModifier(own);
+      mesh.updateGenerator();
+      mesh.visible = false;
+      scene.add(mesh);
+      await mesh.initialized;
+      // the picture as a mipmapped texture for the wrapped-round backdrop on the sky dome
+      const tc = document.createElement("canvas"); tc.width = 512; tc.height = 288;
+      tc.getContext("2d").drawImage(im, 0, 0, tc.width, tc.height);
+      const tex = new THREE.CanvasTexture(tc);
+      tex.colorSpace = THREE.SRGBColorSpace; tex.minFilter = THREE.LinearMipmapLinearFilter; tex.generateMipmaps = true;
+      const toCam = new THREE.Matrix3().setFromMatrix4(R).transpose();
+      return { mesh, own, focus, palette, darkness, keyLum, tex, toCam, tan: new THREE.Vector2(K.width / 2 / K.fx, K.height / 2 / K.fy) };
+    }
+    let building = 0;
+    const failedAt = new Map();   // a frame whose files failed to load (e.g. the network changed) is tried again a bit later
+    function want(key) {
+      if (!cache.has(key) && !(performance.now() - (failedAt.get(key) ?? -Infinity) < 2000)) {
+        const item = { ready: false, presence: 0 };
+        building++;
+        item.promise = buildFrame(key).then((r) => {
+          if (cache.get(key) !== item) { scene.remove(r.mesh); r.mesh.dispose?.(); return; }
+          Object.assign(item, r, { ready: true });
+        }).catch((e) => {
+          console.warn("frame failed", key, e);
+          if (cache.get(key) === item) { cache.delete(key); failedAt.set(key, performance.now()); }
+        }).finally(() => building--);
+        cache.set(key, item);
+      }
+      return cache.get(key);
+    }
+    function rebuildAll() { for (const [, it] of cache) if (it.mesh) { scene.remove(it.mesh); it.mesh.dispose?.(); it.tex?.dispose(); } cache.clear(); }
+
+    // ---------------------------------------------------------------- moving through it
+    let t = 0, tTarget = 0, playing = false;
+    const qa = new THREE.Quaternion(), qb = new THREE.Quaternion();
+    const fovOf = (c) => THREE.MathUtils.radToDeg(2 * Math.atan(c.intrinsics.height / 2 / c.intrinsics.fy));
+    // the camera passes exactly through every view, on a smooth curve between them (centripetal Catmull-Rom: no
+    // overshoot where steps change size, as from the 400 m hop into a 10 m step of a descent), and turns smoothly too
+    const cpos = (i) => new THREE.Vector3().fromArray(slots[THREE.MathUtils.clamp(i, 0, N - 1)].cam.position);
+    const cfwd = (i) => new THREE.Vector3(0, 0, -1).applyQuaternion(new THREE.Quaternion().fromArray(slots[THREE.MathUtils.clamp(i, 0, N - 1)].cam.quaternion));
+    function catmull(p0, p1, p2, p3, f) {
+      const knot = (a, b) => Math.max(1e-4, Math.sqrt(a.distanceTo(b)));
+      const t1 = knot(p0, p1), t2 = t1 + knot(p1, p2), t3 = t2 + knot(p2, p3), u = t1 + (t2 - t1) * f;
+      const L = (a, b, ta, tb) => a.clone().multiplyScalar((tb - u) / (tb - ta)).add(b.clone().multiplyScalar((u - ta) / (tb - ta)));
+      const A1 = L(p0, p1, 0, t1), A2 = L(p1, p2, t1, t2), A3 = L(p2, p3, t2, t3);
+      return L(L(A1, A2, 0, t2), L(A2, A3, t1, t3), t1, t2);
+    }
+    function pathPose(tt) {
+      const k = Math.min(Math.floor(tt), N - 1), f = THREE.MathUtils.clamp(tt - k, 0, 1);
+      const a = slots[k].cam, b = slots[Math.min(k + 1, N - 1)].cam;
+      const tan = (c, w, fl) => c.intrinsics[w] / 2 / c.intrinsics[fl];
+      const pos = f > 0 && k < N - 1 ? catmull(cpos(k - 1), cpos(k), cpos(k + 1), cpos(k + 2), f) : cpos(k);
+      const quat = qa.fromArray(a.quaternion).clone().slerp(qb.fromArray(b.quaternion), f);
+      if (f > 0 && k < N - 1) {   // the look direction on a curve through the views' too, keeping the slerp's roll
+        const cr = (p0, p1, p2, p3) => 0.5 * ((2 * p1) + (-p0 + p2) * f + (2 * p0 - 5 * p1 + 4 * p2 - p3) * f * f + (-p0 + 3 * p1 - 3 * p2 + p3) * f * f * f);
+        const F = [cfwd(k - 1), cfwd(k), cfwd(k + 1), cfwd(k + 2)];
+        const want = new THREE.Vector3(cr(F[0].x, F[1].x, F[2].x, F[3].x), cr(F[0].y, F[1].y, F[2].y, F[3].y), cr(F[0].z, F[1].z, F[2].z, F[3].z)).normalize();
+        const have = new THREE.Vector3(0, 0, -1).applyQuaternion(quat);
+        quat.premultiply(new THREE.Quaternion().setFromUnitVectors(have, want));
+      }
+      return { pos, quat, fov: THREE.MathUtils.lerp(fovOf(a), fovOf(b), f),
+               tanX: THREE.MathUtils.lerp(tan(a, "width", "fx"), tan(b, "width", "fx"), f), tanY: THREE.MathUtils.lerp(tan(a, "height", "fy"), tan(b, "height", "fy"), f) };
+    }
+    let yawOff = 0, pitchOff = 0, dragging = false, lx = 0, ly = 0;
+    const mouse = new THREE.Vector2(0, 0), mouseSm = new THREE.Vector2(0, 0);
+    let lastMouseMove = 0;
+    const drift = new THREE.Vector3();
+    const el = renderer.domElement;
+    el.addEventListener("pointerdown", (e) => { dragging = true; lx = e.clientX; ly = e.clientY; el.setPointerCapture(e.pointerId); });
+    el.addEventListener("pointerup", () => { dragging = false; });
+    addEventListener("pointermove", (e) => {
+      mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+      lastMouseMove = performance.now();
+      if (!dragging) return;
+      yawOff -= (e.clientX - lx) * 0.004; pitchOff -= (e.clientY - ly) * 0.004;
+      pitchOff = THREE.MathUtils.clamp(pitchOff, -1.3, 1.3); lx = e.clientX; ly = e.clientY;
+    });
+    el.addEventListener("wheel", (e) => { e.preventDefault(); playing = false; tTarget = THREE.MathUtils.clamp(tTarget + e.deltaY * 0.012, 0, N - 1); }, { passive: false });
+    const held = new Set();
+    let tapStart = 0, tapDir = 0, tapFrom = 0;
+    addEventListener("keydown", (e) => {
+      if (e.target instanceof HTMLInputElement && e.target.type !== "range") return;
+      if (e.code === "Space") { playing = !playing; tTarget = t; e.preventDefault(); return; }
+      if (journey.map?.places) {
+        const n = Number(e.key);
+        if (n >= 1 && n <= journey.map.places.length) { travelTo(firstSlotOf[journey.map.places[n - 1].scene]); return; }
+        if (e.code === "KeyM") { travelTo(N - 1); return; }
+      }
+      if (e.code === "Home") { tTarget = 0; return; }
+      if (e.code === "End") { tTarget = N - 1; return; }
+      if (["ArrowLeft", "ArrowRight", "KeyW", "KeyA", "KeyS", "KeyD", "KeyQ", "KeyE", "ShiftLeft", "ShiftRight"].includes(e.code)) {
+        if (!held.has(e.code) && (e.code === "ArrowLeft" || e.code === "ArrowRight")) { playing = false; tapStart = performance.now(); tapDir = e.code === "ArrowRight" ? 1 : -1; tapFrom = tTarget; }
+        held.add(e.code); e.preventDefault();
+      }
+    });
+    addEventListener("keyup", (e) => {
+      held.delete(e.code);
+      if ((e.code === "ArrowLeft" || e.code === "ArrowRight") && performance.now() - tapStart < 180) tTarget = THREE.MathUtils.clamp(Math.round(tapFrom) + tapDir, 0, N - 1);
+    });
+    addEventListener("blur", () => held.clear());
+    document.getElementById("loc").addEventListener("pointerdown", (e) => {
+      const r = document.getElementById("timeline").getBoundingClientRect();
+      tTarget = THREE.MathUtils.clamp((e.clientX - r.left) / r.width, 0, 1) * (N - 1); playing = false;
+    });
+    function localScale() {
+      const k = Math.min(Math.floor(t), N - 2);
+      const a = new THREE.Vector3().fromArray(slots[k].cam.position), b = new THREE.Vector3().fromArray(slots[k + 1].cam.position);
+      return Math.max(0.5, a.distanceTo(b) * 3, Math.abs(a.y) * 0.15);
+    }
+    let travel = null;
+    function travelTo(slot) {
+      if (slot == null) return;
+      const to = pathPose(slot);
+      travel = { fromPos: camera.position.clone(), fromQuat: camera.quaternion.clone(), fromFov: camera.fov,
+                 toPos: to.pos.clone(), toQuat: to.quat.clone(), toFov: to.fov, slot, t0: performance.now() / 1000 };
+      const d = travel.fromPos.distanceTo(travel.toPos);
+      travel.dur = THREE.MathUtils.clamp(2.4 + 1.3 * Math.log10(1 + d / 1000), 2.5, 6.5);
+      playing = false; tTarget = t; yawOff = 0; pitchOff = 0; drift.set(0, 0, 0);
+      for (let j = slot; j < Math.min(N, slot + 3); j++) slots[j].sources.forEach((x) => want(x.key));   // the destination starts building now
+    }
+    function travelAlt(e) {
+      const h0 = Math.max(1, travel.fromPos.y), h1 = Math.max(1, travel.toPos.y);
+      const horiz = Math.hypot(travel.toPos.x - travel.fromPos.x, travel.toPos.z - travel.fromPos.z);
+      let y = Math.exp(Math.log(h0) * (1 - e) + Math.log(h1) * e);           // altitude by the same ratio each moment
+      const peak = 0.35 * horiz;                                              // long low hops arc up over the map
+      if (peak > y) y += (peak - y) * Math.pow(Math.sin(Math.PI * e), 0.8);
+      return y;
+    }
+    function travelPose() {
+      const u = Math.min(1, (performance.now() / 1000 - travel.t0) / travel.dur), e = u * u * (3 - 2 * u);
+      if (!travel.w) {   // ground covered in proportion to altitude: high up you cross the state, low down you hold still over the place
+        const n = 64, w = [0];
+        for (let j = 1; j <= n; j++) w.push(w[j - 1] + (travelAlt((j - 1) / n) + travelAlt(j / n)) / 2);
+        travel.w = w.map((v) => v / w[n]);
+      }
+      const x = e * 64, j = Math.min(63, Math.floor(x));
+      const P = travel.fromPos.clone().lerp(travel.toPos, THREE.MathUtils.lerp(travel.w[j], travel.w[j + 1], x - j));
+      P.y = travelAlt(e);
+      return { pos: P, quat: travel.fromQuat.clone().slerp(travel.toQuat, e), fov: THREE.MathUtils.lerp(travel.fromFov, travel.toFov, e), done: u >= 1 };
+    }
+    let offPath = 0, speedSm = 0;
+    const prevPos = new THREE.Vector3(), moveDir = new THREE.Vector3();
+    const raycaster = new THREE.Raycaster();
+    function step(dt) {
+      const shift = held.has("ShiftLeft") || held.has("ShiftRight") ? 3 : 1;
+      if (held.has("ArrowRight") || held.has("ArrowLeft")) {
+        const dir = (held.has("ArrowRight") ? 1 : 0) - (held.has("ArrowLeft") ? 1 : 0);
+        if (performance.now() - tapStart > 180) tTarget += dir * params.scrubSpeed * shift * dt;
+      } else if (playing) {
+        const k = Math.min(Math.floor(tTarget), N - 1);
+        const fk = tTarget - k, dur = THREE.MathUtils.lerp(slots[k].dur, slots[Math.min(k + 1, N - 1)].dur, fk * fk * (3 - 2 * fk));   // pace changes gently
+        tTarget += dt * params.playSpeed / dur;
+        if (tTarget >= N - 1) { tTarget = N - 1; playing = false; }
+      }
+      tTarget = THREE.MathUtils.clamp(tTarget, 0, N - 1);
+      const tPrev = t;
+      t += (tTarget - t) * Math.min(1, dt * (playing ? 30 : 6));     // glide, never jump
+      const tVel = Math.abs(t - tPrev) / Math.max(dt, 1e-3);           // frames per second
+
+      const mv = new THREE.Vector3((held.has("KeyD") ? 1 : 0) - (held.has("KeyA") ? 1 : 0), (held.has("KeyE") ? 1 : 0) - (held.has("KeyQ") ? 1 : 0), (held.has("KeyS") ? 1 : 0) - (held.has("KeyW") ? 1 : 0));
+      const inBubble = walkIn > 0.5;   // standing in a place's cloud: walk (at walking pace) and look freely, within its radius
+      if (mv.lengthSq()) drift.addScaledVector(mv.normalize(), (inBubble ? 1.4 : localScale()) * shift * dt);
+      else if (params.springBack && !inBubble) drift.multiplyScalar(Math.exp(-dt * 1.0));
+      if (params.springBack && !dragging && !inBubble) { const k = Math.exp(-dt * 1.8); yawOff *= k; pitchOff *= k; }
+      mouseSm.lerp(mouse, Math.min(1, dt * 3));
+
+      const p = pathPose(t);
+      offPath = Math.min(1, Math.hypot(yawOff, pitchOff) / 0.5 + drift.length() / (2 * localScale()));
+      const right = new THREE.Vector3(1, 0, 0).applyQuaternion(p.quat);
+      KEY.keyPos.value.copy(p.pos); KEY.keyR.value.copy(right);
+      KEY.keyU.value.set(0, 1, 0).applyQuaternion(p.quat); KEY.keyF.value.set(0, 0, -1).applyQuaternion(p.quat);
+      KEY.keyTanX.value = p.tanX; KEY.keyTanY.value = p.tanY;
+      const par = params.parallax * 0.06;
+      // when nothing is being touched, the view breathes very slightly
+      const tt = performance.now() / 1000, calm = held.size || dragging ? 0 : 1;
+      const swayY = calm * 0.012 * Math.sin(tt * 0.21), swayP = calm * 0.007 * Math.sin(tt * 0.33 + 1.3);
+      const look = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yawOff - mouseSm.x * par + swayY)
+        .multiply(new THREE.Quaternion().setFromAxisAngle(right, pitchOff + mouseSm.y * par * 0.6 + swayP));
+      camera.quaternion.copy(look).multiply(p.quat);
+      camera.position.copy(p.pos).add(drift.clone().applyQuaternion(camera.quaternion));
+      const bub = inBubble && drift.lengthSq() > 1e-4 && bubbles.find((b) => b.center.distanceTo(camera.position) < 40);   // only once you walk (on the path the views lead)
+      if (bub) {   // a soft wall at the bubble's radius, and back toward eye level
+        const d = camera.position.clone().sub(bub.center), dy = d.y; d.y = 0;
+        const over = d.length() - bub.walkR, fix = new THREE.Vector3();
+        if (over > 0) fix.add(d.normalize().multiplyScalar(-over * Math.min(1, dt * 4)));
+        if (Math.abs(dy) > 0.6) fix.y = -(dy - Math.sign(dy) * 0.6) * Math.min(1, dt * 4);
+        if (fix.lengthSq()) { drift.add(fix.applyQuaternion(camera.quaternion.clone().invert())); camera.position.copy(p.pos).add(drift.clone().applyQuaternion(camera.quaternion)); }
+      }
+      camera.fov = p.fov;
+      if (travel) {
+        const tp = travelPose();
+        camera.position.copy(tp.pos); camera.quaternion.copy(tp.quat); camera.fov = tp.fov;
+        if (tp.done) { t = tTarget = travel.slot; travel = null; }
+      }
+      bubbleIn = 0; walkIn = 0;   // below ~70 m over a place with one fused cloud, the camera flies through it; at eye level you can walk
+      for (const b of bubbles) {
+        const h = camera.position.y - b.center.y, dxz = Math.hypot(camera.position.x - b.center.x, camera.position.z - b.center.z);
+        const inside = (1 - THREE.MathUtils.smoothstep(h, 25, 45)) * (1 - THREE.MathUtils.smoothstep(dxz, 45, 70));   // from higher up it shows its seams
+        bubbleIn = Math.max(bubbleIn, inside);
+        walkIn = Math.max(walkIn, inside * (1 - THREE.MathUtils.smoothstep(h, 3, 6)));
+      }
+      if (slots[Math.min(Math.floor(t), N - 1)].sources.length && !travel)   // on the path its own views (and the cut into the photo) show; the cloud once you walk off it
+        bubbleIn *= THREE.MathUtils.smoothstep(drift.length(), 0.15, 0.8);   // walking (W A S D), not just looking around
+      camera.near = Math.max(0.02, Math.min(5, Math.abs(camera.position.y) / 800));
+      camera.far = Math.max(20000, Math.abs(camera.position.y) * 12);
+      camera.updateProjectionMatrix();
+
+      // motion through time: direction and speed for the stretch
+      moveDir.copy(camera.position).sub(prevPos);
+      const mlen = moveDir.length();
+      prevPos.copy(camera.position);
+      const fast = THREE.MathUtils.smoothstep(tVel, 4, 14);
+      speedSm += (fast - speedSm) * Math.min(1, dt * 4);
+      U.speed.value = speedSm;
+      if (mlen > 1e-6) U.moveDir.value.copy(moveDir).divideScalar(mlen);
+
+      // cursor ray for the touch; it calms down when the cursor rests
+      raycaster.setFromCamera(mouse, camera);
+      U.rayO.value.copy(raycaster.ray.origin); U.rayD.value.copy(raycaster.ray.direction);
+      const idle = (performance.now() - lastMouseMove) / 1000;
+      U.rippleAmt.value = params.ripple * (lastMouseMove ? THREE.MathUtils.clamp(1.3 - idle * 0.35, 0.25, 1) : 0);
+      U.cam.value.copy(camera.position);
+      // space bends more the higher you are
+      U.curvK.value = params.curvature / (90 + 3.5 * Math.max(0, camera.position.y));
+      return tVel;
+    }
+
+    // ---------------------------------------------------------------- what is on screen
+    // (until a picture is on screen, e.g. above the map, the sky keeps its dark starting colours)
+    const skyTarget = { top: skyU.top.value.clone(), horizon: skyU.horizon.value.clone(), bottom: skyU.bottom.value.clone() };
+    const bubbleSky = { top: new THREE.Color(0.22, 0.3, 0.46), horizon: new THREE.Color(0.36, 0.4, 0.44), bottom: new THREE.Color(0.14, 0.13, 0.1) };
+    const hazeTint = new THREE.Color(1, 1, 1), hazeTarget = new THREE.Color();
+    let focusSm = 50, nightSm = 0, keySm = 0.3;
+    function updateFrames(dt) {
+      const k = Math.min(Math.floor(t), N - 1), f = t - k;
+      const hold = slots[k].hold, g = hold == null ? THREE.MathUtils.smoothstep(f, 0.12, 0.88) : THREE.MathUtils.smoothstep(f, hold, 1);
+      const weights = new Map();
+      const add = (slot, w) => slot && slot.sources.forEach((s) => weights.set(s.key, (weights.get(s.key) || 0) + s.w * w));
+      if (!travel && !params.worldOnly && bubbleIn < 0.999) { add(slots[k], (1 - g) * (1 - bubbleIn)); add(slots[k + 1], g * (1 - bubbleIn)); }   // B: the world alone; in a bubble the pictures give way
+      for (const o of [0, 1, -1, 2, 3, -2, 4, 5, -3]) {
+        const j = k + o;
+        if (j >= 0 && j < N) slots[j].sources.forEach((s) => { if (!cache.has(s.key) && building < 2) want(s.key); });
+      }
+      // never a blank: a frame that is not built yet hands its weight to the closest one that is
+      let fallback = null, best = 0;
+      for (const [key, it] of cache) if (it.ready && it.presence > best) { best = it.presence; fallback = key; }
+      if (!fallback) for (let o = 1; o < 6 && !fallback; o++) for (const j of [k - o, k + o]) {
+        if (j < 0 || j >= N) continue;
+        for (const s of slots[j].sources) if (cache.get(s.key)?.ready) { fallback = s.key; break; }
+      }
+      const eff = new Map();
+      for (const [key, w] of weights) {
+        const target = cache.get(key)?.ready ? key : fallback;
+        if (target) eff.set(target, (eff.get(target) || 0) + w);
+      }
+      const pending = [...weights.keys()].some((key) => !cache.get(key)?.ready);
+
+      // presence: arrives quickly, leaves slowly (the afterimage)
+      const pal = { top: new THREE.Color(0, 0, 0), mid: new THREE.Color(0, 0, 0), bottom: new THREE.Color(0, 0, 0) };
+      let palW = 0, focusW = 0, focusAcc = 0, darkAcc = 0, keyAcc = 0;
+      for (const [key, it] of cache) {
+        if (!it.ready) continue;
+        const target = eff.get(key) || 0;
+        if (target >= it.presence) { it.presence += (target - it.presence) * Math.min(1, dt * 9); it.own.fading.value = 0; }
+        else {
+          // afterimages only linger for frames close in time; after a jump the old place lets go at once
+          const far = Math.min(...(keySlots.get(key) ?? [k]).map((j) => Math.abs(j - t))) > 3.5;
+          it.presence = Math.max(target, it.presence - dt / (far ? 0.15 : Math.max(0.05, params.afterimage)));
+          it.own.fading.value = target < it.presence - 0.02 ? 1 : 0;
+        }
+        it.own.presence.value = it.presence;
+        it.mesh.visible = it.presence > 0.01;
+        if (it.mesh.visible) it.mesh.updateVersion();
+        if (target > 0) {
+          for (const kk of ["top", "mid", "bottom"]) pal[kk].add(it.palette[kk].clone().multiplyScalar(target));
+          palW += target; focusAcc += it.focus * target; focusW += target; darkAcc += it.darkness * target; keyAcc += it.keyLum * target;
+        }
+      }
+      // drop what is far away in time and fully faded
+      const keep = new Set();
+      for (let j = Math.max(0, k - 6); j < Math.min(N, k + 9); j++) slots[j].sources.forEach((s) => keep.add(s.key));
+      for (const [key, it] of cache) if (it.ready && !keep.has(key) && it.presence <= 0.01) { scene.remove(it.mesh); it.mesh.dispose?.(); it.tex?.dispose(); cache.delete(key); }
+
+      // sky and dust take the memory's colours, deepened
+      if (palW > 0) {
+        for (const kk of ["top", "mid", "bottom"]) pal[kk].multiplyScalar(1 / palW);
+        skyTarget.top.copy(pal.top).multiplyScalar(0.55);
+        skyTarget.horizon.copy(pal.mid).lerp(pal.top, 0.5).multiplyScalar(0.5);
+        skyTarget.bottom.copy(pal.bottom).multiplyScalar(0.22);
+        dustU.tint.value.set(pal.mid.r, pal.mid.g, pal.mid.b);
+        groundU.gTint.value.set(pal.bottom.r, pal.bottom.g, pal.bottom.b).multiplyScalar(0.8);
+        groundU.gTint2.value.set(pal.mid.r, pal.mid.g, pal.mid.b).multiplyScalar(0.45);
+      }
+      if (bubbleIn > 0) {   // standing in a bubble: a plain day sky above what its views reach
+        skyTarget.top.lerp(bubbleSky.top, bubbleIn); skyTarget.horizon.lerp(bubbleSky.horizon, bubbleIn); skyTarget.bottom.lerp(bubbleSky.bottom, bubbleIn);
+      }
+      const ks = Math.min(1, dt * 1.5);
+      skyU.top.value.lerp(skyTarget.top, ks); skyU.horizon.value.lerp(skyTarget.horizon, ks); skyU.bottom.value.lerp(skyTarget.bottom, ks);
+      // the picture wrapped round you on the dome: the two most present frames
+      let fa = null, fb = null;
+      for (const [, it] of cache) {
+        if (!it.ready || it.presence <= 0.01) continue;
+        if (!fa || it.presence > fa.presence) { fb = fa; fa = it; } else if (!fb || it.presence > fb.presence) fb = it;
+      }
+      skyU.wA.value = fa ? fa.presence : 0; skyU.wB.value = fb ? fb.presence : 0;
+      if (fa) { skyU.picA.value = fa.tex; skyU.toCamA.value.copy(fa.toCam); skyU.tanA.value.copy(fa.tan); }
+      if (fb) { skyU.picB.value = fb.tex; skyU.toCamB.value.copy(fb.toCam); skyU.tanB.value.copy(fb.tan); }
+      skyU.wrapAmt.value = params.periphery;
+      if (focusW > 0) { focusSm += (focusAcc / focusW - focusSm) * Math.min(1, dt * 2); U.focusDist.value = focusSm; }
+
+      // the world: always all around the picture (KEY); inside the picture faint on the path, there as
+      // soon as you look or wander away (or while loading) (on the path the world stays out of the
+      // picture: its compressed city would sit in front of the video's own geometry)
+      const dark = palW > 0 ? darkAcc / palW : 0;
+      nightSm += (THREE.MathUtils.smoothstep(dark, 0.15, 0.55) - nightSm) * Math.min(1, dt * 1.2);
+      night.value = nightSm;
+      const offFade = THREE.MathUtils.smoothstep(offPath, 0.08, 0.75);
+      // while loading, the world fills the picture only if there is nothing at all to show yet (otherwise it would
+      // sit in front of the frame that is on screen, e.g. an orthophoto's tree crowns draped on the forest floor)
+      // in flight between memories the real terrain fills the whole view
+      const flying = !!slots[k]?.gap || !!travel;
+      // flight progress, continuous from the last picture of one memory to the first of the next
+      let fp = 0;
+      if (flying) fp = (slots[k].gapI + 1 + f) / (slots[k].gapN + 1);
+      else if (slots[k + 1]?.gap) fp = f / (slots[k + 1].gapN + 1);
+      const mistT = fp > 0 && journey.flightMist !== false ? Math.pow(Math.sin(Math.PI * Math.min(1, fp)), 1.6) : 0;   // gentle at both ends, thick halfway
+      finish.uniforms.mist.value += (mistT - finish.uniforms.mist.value) * Math.min(1, dt * 6);
+      const fade = Math.max(pending && !fallback ? 0.5 : 0, offFade, nightSm * params.nightCity, flying || params.worldOnly ? 1 : bubbleIn);
+      // high above a memory's ground (its aerial frames) the real terrain stays, beneath the picture too, with dots large
+      // enough to close up; the blurred periphery gives way to it. Down near the ground the picture takes over again.
+      const scene0 = segOf(k).scene, ground0 = scene0 && world.places?.[scene0] ? world.places[scene0].offset[1] : 0;
+      const under = journey.map ? THREE.MathUtils.smoothstep(camera.position.y - ground0, 60, 250) : 0;
+      KEY.under.value = under;
+      U.haloAmt.value = params.periphery * (1 - 0.7 * under);
+      pxAngle.value = 0.0022 * (0.65 + 0.35 * offFade) * (1 + 0.8 * under);   // finer while the memory itself is in view
+      KEY.around.value = params.worldAround;
+      // up where the map is, the ground around each place is as bright as the map's dots (no ring of darker ground), and
+      // above a memory's aerial pictures as bright as they are (no bright rectangle on a dim ground)
+      const glowUp = mapLayers.length ? Math.max(THREE.MathUtils.smoothstep(camera.position.y, 1500, 8000), under) : 0;
+      for (const wm of worldMeshes) {
+        wm.own.weight.value = Math.round((wm.bubble ? bubbleIn : fade) * 30) / 30; wm.own.bright.value = wm.bubble ? 1 : params.worldGlow + (1.06 - params.worldGlow) * glowUp;
+        if (wm.holes.length > 1) {   // the ground opens under the nearest of the clouds standing on it
+          const near = wm.holes.reduce((a, b) => (a.distanceToSquared(camera.position) <= b.distanceToSquared(camera.position) ? a : b));
+          wm.own.holeC.value.copy(near);
+        }
+        if (wm.hole) wm.own.holeR.value = wm.hole * bubbleIn;   // ... only while it shows
+        if (wm.bubble) { wm.own.aroundMul.value = bubbleIn; wm.own.shimmer.value = 1 - bubbleIn; wm.own.grow.value = 1 + 0.7 * bubbleIn; }   // a bubble only exists from inside
+        wm.mesh.visible = wm.bubble ? bubbleIn > 0.02 : fade > 0.02 || params.worldAround > 0.01;
+        if (wm.mesh.visible) wm.mesh.updateVersion();
+      }
+
+      // the vignette: a pale haze tinted by the memory in daylight, dark at night and around dark pictures (or fixed white / dark)
+      const tone = params.vignetteTone;
+      if (palW > 0) keySm += (keyAcc / palW - keySm) * Math.min(1, dt * 1.5);
+      const seg = segOf(k), dayV = Array.isArray(seg.day)
+        ? THREE.MathUtils.lerp(seg.day[0], seg.day[1], THREE.MathUtils.smoothstep((t - seg.start) / (seg.end - seg.start), 0.25, 0.85)) : seg.day ?? 1;
+      const lightT = tone === "white" ? 1 : tone === "dark" ? 0 : dayV * THREE.MathUtils.smoothstep(keySm, 0.1, 0.28);
+      finish.uniforms.vigLight.value += (lightT - finish.uniforms.vigLight.value) * Math.min(1, dt * 1.5);
+      // flying, the world is hard dreamy dots; landed in a place (its fused views or trained scene), it turns crisp: soft
+      // splats instead of hard discs (those are ~3x wider), a sharper picture, little glow, grain or haze
+      spark.falloff = bubbleIn;
+      bloom.strength = params.glow * (1 - 0.85 * bubbleIn);
+      finish.uniforms.grain.value = params.grain * (1 - 0.8 * bubbleIn);
+      finish.uniforms.vignette.value = params.vignette * (1 - 0.6 * bubbleIn);
+      const ratio = Math.min(devicePixelRatio, bubbleIn > 0.5 ? Math.max(params.resolution, 1.75) : params.resolution);
+      if (ratio !== renderer.getPixelRatio()) { renderer.setPixelRatio(ratio); composer.setPixelRatio(ratio); }
+      if (palW > 0) hazeTint.copy(pal.mid).multiplyScalar(1 / Math.max(pal.mid.r, pal.mid.g, pal.mid.b, 1e-3));
+      hazeTarget.setRGB(1, 0.97, 0.93).lerp(hazeTint, tone === "white" ? 0.08 : 0.3);
+      finish.uniforms.vigColor.value.lerp(hazeTarget, Math.min(1, dt * 1.5));
+      // dust lives in a box sized to the scene around you
+      dustU.box.value += (Math.max(8, localScale() * 18) - dustU.box.value) * Math.min(1, dt * 0.8);
+      const high = THREE.MathUtils.smoothstep(camera.position.y, 120, 700);
+      const alt = camera.position.y;
+      dustU.amount.value = params.dust * (1 - 0.75 * high) * (1 - THREE.MathUtils.smoothstep(alt, 3000, 20000)) * (1 - 0.8 * bubbleIn);   // little dust in a bubble (it reads as snow)
+      dust.updateVersion();
+      groundU.gBox.value += (Math.max(600, Math.abs(camera.position.y) * 30) - groundU.gBox.value) * Math.min(1, dt * 0.8);
+      groundU.gAmount.value = journey.map ? 0 : params.terrain;   // a journey with a real map does not need the made-up ground
+      if (mapLayers.length) {
+        MAPU.exag.value = 1 + 5 * THREE.MathUtils.smoothstep(alt, 8000, 300000);
+        MAPU.hole.value = 1 - THREE.MathUtils.smoothstep(alt, 25000, 60000);      // lower down each place's own finer ground takes over
+        [MAPU.mp0, MAPU.mp1, MAPU.mp2, MAPU.mp3].forEach((u, i) => {
+          const h = mapHoles[Math.min(i, mapHoles.length - 1)];
+          if (h?.mesh?.isInitialized) u.value.fromArray(h.pos); else u.value.set(1e9, 0, 1e9);
+        });
+        const base = THREE.MathUtils.smoothstep(alt, 1200, 6000);                  // gone near the ground (memories take over)
+        const detail = 1 - THREE.MathUtils.smoothstep(alt, 150000, 350000);        // the finer tile when low enough
+        for (const L of mapLayers) {
+          L.own.mapAlpha.value = base * (L.detail ? detail : 1);
+          L.own.inBox.value = !L.detail && L.hasBox ? detail : 0;
+          L.own.outBox.value = L.detail ? 1 : 0;
+          L.mesh.visible = L.own.mapAlpha.value > 0.01;
+          if (L.mesh.visible) L.mesh.updateVersion();
+        }
+      }
+      ground.visible = !journey.map && params.terrain > 0.01;
+      if (ground.visible) ground.updateVersion();
+
+      headEl.style.left = `${(100 * t) / (N - 1)}%`;
+      updateMap(t);
+      updatePlaces(camera.position.y);
+      const r = segOf(k);
+      const rk = r.gap ? (/above$/.test(r.name) ? "above" : "campus") : r.scene;   // the same place: no change
+      if (rk !== captionSeg) { captionSeg = rk; showCaption(r); }
+      statusEl.textContent = pending || (mapLayers.length && !mapLayers[0].mesh.isInitialized) ? "gathering…" : "";
+    }
+
+    // ---------------------------------------------------------------- go
+    const firstFrames = slots.slice(0, 3).flatMap((s) => s.sources.map((x) => want(x.key).promise));
+    Promise.race([Promise.all(firstFrames), new Promise((r) => setTimeout(r, 4000))]).then(loadWorld);
+    const clock = new THREE.Clock();
+    renderer.setAnimationLoop(() => {
+      const dt = Math.min(clock.getDelta(), 0.1);
+      const now = performance.now() / 1000;
+      U.time.value = now; skyU.time.value = now; finish.uniforms.time.value = now;
+      step(dt);
+      updateFrames(dt);
+      sky.position.copy(camera.position);
+      sky.scale.setScalar(camera.far * 0.9);
+      if (window.__noPost) renderer.render(scene, camera); else composer.render(dt);
+    });
+    window.memoryDream = { composer, slots, cache, params, U, KEY, MAPU, skyU, finish, camera, travelTo, firstSlotOf, mapLayers, dust, dustU, ground, worldMeshes, bubbles, sky, get bubbleIn() { return bubbleIn; }, get night() { return nightSm; }, get t() { return t; }, set t(v) { t = v; tTarget = v; }, play: (v = true) => (playing = v),
+      look: (yaw, pitch) => { yawOff = yaw; pitchOff = pitch; }, setMouse: (x, y) => { mouse.set(x, y); lastMouseMove = performance.now(); } };
+  </script>
+  <script type="module" src="unfold-edge.js"></script>
+</body>
+</html>
